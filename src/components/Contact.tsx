@@ -38,7 +38,7 @@ const Contact = () => {
     {
       icon: <HiLocationMarker className="w-6 h-6" />,
       title: 'Location',
-      content: 'San Francisco, CA',
+      content: 'Toronto, ON',
       link: null
     }
   ]

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
+import logo from '../assets/logo.png'
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -45,10 +46,11 @@ const Navigation = () => {
           <motion.a
             href="#home"
             onClick={(e) => scrollToSection(e, '#home')}
-            className="text-2xl font-bold text-gradient"
+            className="flex items-center gap-3"
             whileHover={{ scale: 1.05 }}
           >
-            GradientWorks
+            <img src={logo} alt="GradientWorks Logo" className="h-10 w-10 md:h-12 md:w-12" />
+            <span className="text-2xl font-bold text-gradient">GradientWorks</span>
           </motion.a>
 
           {/* Desktop Navigation */}

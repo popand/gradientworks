@@ -64,28 +64,67 @@ const Hero = () => {
             </button>
           </motion.div>
 
-          {/* Floating elements for visual interest */}
+          {/* Feature Cards */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
-            className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
+            className="mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto"
           >
             {[
-              { label: 'Software Development', icon: '💻' },
-              { label: 'AI Agents', icon: '🤖' },
-              { label: 'RAG Applications', icon: '🧠' },
-              { label: 'Cloud Solutions', icon: '☁️' },
+              {
+                label: 'Software Development',
+                icon: '💻',
+                gradient: 'from-blue-500 to-cyan-500',
+                description: 'Custom solutions built for your needs'
+              },
+              {
+                label: 'AI Agents',
+                icon: '🤖',
+                gradient: 'from-purple-500 to-pink-500',
+                description: 'Intelligent autonomous systems'
+              },
+              {
+                label: 'RAG Applications',
+                icon: '🧠',
+                gradient: 'from-rose-500 to-orange-500',
+                description: 'Knowledge-enhanced AI systems'
+              },
+              {
+                label: 'Cloud Solutions',
+                icon: '☁️',
+                gradient: 'from-teal-500 to-emerald-500',
+                description: 'Scalable infrastructure & DevOps'
+              },
             ].map((item, index) => (
               <motion.div
                 key={item.label}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 + index * 0.1 }}
-                className="bg-white/80 backdrop-blur-sm rounded-xl p-6 shadow-lg hover:shadow-xl transition-shadow"
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
+                className="group relative bg-white rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all cursor-pointer overflow-hidden"
               >
-                <div className="text-4xl mb-3">{item.icon}</div>
-                <div className="text-sm font-semibold text-gray-700">{item.label}</div>
+                {/* Gradient background on hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+
+                {/* Icon with gradient background */}
+                <div className={`relative inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${item.gradient} mb-4 shadow-md`}>
+                  <span className="text-3xl">{item.icon}</span>
+                </div>
+
+                {/* Content */}
+                <div className="relative">
+                  <h3 className="text-base font-bold text-gray-900 mb-2 group-hover:text-primary-700 transition-colors">
+                    {item.label}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {item.description}
+                  </p>
+                </div>
+
+                {/* Decorative corner element */}
+                <div className={`absolute -top-6 -right-6 w-24 h-24 bg-gradient-to-br ${item.gradient} rounded-full opacity-0 group-hover:opacity-20 blur-2xl transition-opacity duration-300`}></div>
               </motion.div>
             ))}
           </motion.div>
