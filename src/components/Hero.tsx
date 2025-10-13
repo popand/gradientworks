@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { HiArrowRight } from 'react-icons/hi'
+import { HiCommandLine, HiCpuChip, HiSparkles, HiCloud } from 'react-icons/hi2'
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -74,25 +75,25 @@ const Hero = () => {
             {[
               {
                 label: 'Software Development',
-                icon: '💻',
+                icon: HiCommandLine,
                 gradient: 'from-blue-500 to-cyan-500',
                 description: 'Custom solutions built for your needs'
               },
               {
                 label: 'AI Agents',
-                icon: '🤖',
+                icon: HiCpuChip,
                 gradient: 'from-purple-500 to-pink-500',
                 description: 'Intelligent autonomous systems'
               },
               {
                 label: 'RAG Applications',
-                icon: '🧠',
+                icon: HiSparkles,
                 gradient: 'from-rose-500 to-orange-500',
                 description: 'Knowledge-enhanced AI systems'
               },
               {
                 label: 'Cloud Solutions',
-                icon: '☁️',
+                icon: HiCloud,
                 gradient: 'from-teal-500 to-emerald-500',
                 description: 'Scalable infrastructure & DevOps'
               },
@@ -110,7 +111,7 @@ const Hero = () => {
 
                 {/* Icon with gradient background */}
                 <div className={`relative inline-flex items-center justify-center w-16 h-16 rounded-xl bg-gradient-to-br ${item.gradient} mb-4 shadow-md`}>
-                  <span className="text-3xl">{item.icon}</span>
+                  <item.icon className="w-8 h-8 text-white" />
                 </div>
 
                 {/* Content */}
