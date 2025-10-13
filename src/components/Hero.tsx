@@ -20,8 +20,8 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
             className="text-5xl md:text-7xl font-bold text-gray-900 mb-6"
           >
-            Welcome to{' '}
-            <span className="text-gradient">GradientWorks</span>
+            Software That Thinks.{' '}
+            <span className="text-gradient">Solutions That Scale.</span>
           </motion.h1>
 
           <motion.p
@@ -30,7 +30,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto"
           >
-            Expert consulting services bridging traditional software development with cutting-edge AI solutions
+            Full-stack development meets artificial intelligence
           </motion.p>
 
           <motion.p
@@ -39,8 +39,7 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="text-lg md:text-xl text-gray-500 mb-12 max-w-2xl mx-auto"
           >
-            From custom software development to advanced agentic AI systems and RAG applications,
-            we transform your vision into intelligent, scalable solutions
+            Stop choosing between traditional reliability and AI innovation. GradientWorks delivers both—from enterprise web applications to intelligent agents that learn and adapt
           </motion.p>
 
           <motion.div
@@ -53,7 +52,7 @@ const Hero = () => {
               onClick={() => scrollToSection('#contact')}
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-primary-600 to-accent-600 rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-1"
             >
-              Get Started
+              Book a Consultation
               <HiArrowRight className="ml-2" size={20} />
             </button>
 
