@@ -101,22 +101,6 @@ const Contact = () => {
                 </motion.div>
               ))}
             </div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="mt-12 p-6 bg-white rounded-xl shadow-lg"
-            >
-              <h4 className="text-lg font-bold text-gray-900 mb-3">Business Hours</h4>
-              <div className="space-y-2 text-gray-600">
-                <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                <p>Saturday - Sunday: Closed</p>
-              </div>
-              <p className="mt-4 text-sm text-gray-500">
-                For urgent matters outside business hours, please send an email and we'll respond as soon as possible.
-              </p>
-            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
