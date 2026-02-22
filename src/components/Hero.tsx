@@ -88,71 +88,99 @@ const Hero = () => {
             <div className="absolute bottom-0 right-[15%] w-[55%] h-[55%] rounded-full bg-white/15 blur-[120px]" />
 
             {/* Bento Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-3 relative z-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-2.5 relative z-10">
               {/* AI Agents — tall left card */}
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.6 }}
-                className="md:row-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-6 shadow-xl shadow-black/5 flex flex-col justify-between"
+                className="md:row-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
                 <div>
-                  <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-4">
-                    <HiCpuChip className="w-5 h-5" />
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
+                    <HiCpuChip className="w-4.5 h-4.5" />
                   </div>
-                  <h3 className="font-display text-lg font-bold text-base-950 mb-2 tracking-tight">
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
                     AI Agents
                   </h3>
-                  <p className="text-sm text-base-500 leading-relaxed mb-6">
-                    Intelligent autonomous systems that reason, plan, and execute
+                  <p className="text-sm text-base-500 leading-relaxed mb-4">
+                    Autonomous systems that reason, plan, and execute
                     complex tasks with minimal human intervention.
                   </p>
                   {/* Capability pills */}
-                  <div className="flex flex-wrap gap-2 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-3.5">
                     {['Planning', 'Reasoning', 'Tool Use', 'Memory'].map((tag) => (
                       <span
                         key={tag}
-                        className="px-3 py-1 text-[11px] font-medium text-base-600 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-600 bg-base-950/5 rounded-full"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                   {/* Mini chat mock */}
-                  <div className="space-y-2.5">
+                  <div className="space-y-2">
                     <div className="flex items-start gap-2">
                       <div className="w-5 h-5 rounded-full bg-base-200 flex-shrink-0 mt-0.5" />
-                      <div className="bg-base-100 rounded-xl rounded-tl-sm px-3 py-2 text-xs text-base-600">
+                      <div className="bg-base-100 rounded-xl rounded-tl-sm px-3 py-1.5 text-xs text-base-600">
                         Analyze Q3 revenue trends
                       </div>
                     </div>
                     <div className="flex items-start gap-2 justify-end">
-                      <div className="bg-base-950 rounded-xl rounded-tr-sm px-3 py-2 text-xs text-white">
+                      <div className="bg-base-950 rounded-xl rounded-tr-sm px-3 py-1.5 text-xs text-white">
                         Found 3 insights. Generating report...
                       </div>
                       <div className="w-5 h-5 rounded-full bg-base-950 flex-shrink-0 mt-0.5 flex items-center justify-center">
                         <HiCpuChip className="w-2.5 h-2.5 text-white" />
                       </div>
                     </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-5 h-5 rounded-full bg-base-200 flex-shrink-0 mt-0.5" />
+                      <div className="bg-base-100 rounded-xl rounded-tl-sm px-3 py-1.5 text-xs text-base-600">
+                        Cross-reference with competitor data
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2 justify-end">
+                      <div className="bg-base-950 rounded-xl rounded-tr-sm px-3 py-1.5 text-xs text-white">
+                        Querying 4 sources. Patterns identified.
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-base-950 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                        <HiCpuChip className="w-2.5 h-2.5 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Agent activity */}
+                  <div className="mt-4 space-y-1.5">
+                    <div className="text-[10px] font-semibold text-base-400 uppercase tracking-wider">Agent Activity</div>
+                    <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-[10px] text-base-600">Data retrieval complete</span>
+                      <span className="text-[10px] text-base-400 ml-auto">2s ago</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                      <span className="text-[10px] text-base-600">Generating analysis</span>
+                      <span className="text-[10px] text-base-400 ml-auto">now</span>
+                    </div>
                   </div>
                 </div>
                 {/* Decorative: network graph */}
-                <div className="mt-6">
+                <div className="mt-4">
                   <svg
-                    viewBox="0 0 220 56"
-                    className="w-full h-14"
+                    viewBox="0 0 220 50"
+                    className="w-full h-12"
                     fill="none"
                   >
-                    <line x1="24" y1="28" x2="80" y2="14" stroke="#d4d4d4" strokeWidth="1" />
-                    <line x1="80" y1="14" x2="140" y2="42" stroke="#d4d4d4" strokeWidth="1" />
-                    <line x1="140" y1="42" x2="196" y2="22" stroke="#d4d4d4" strokeWidth="1" />
-                    <line x1="24" y1="28" x2="140" y2="42" stroke="#e5e5e5" strokeWidth="1" />
-                    <line x1="80" y1="14" x2="196" y2="22" stroke="#e5e5e5" strokeWidth="1" />
-                    <circle cx="24" cy="28" r="5" fill="#0a0a0a" />
-                    <circle cx="80" cy="14" r="3.5" fill="#0a0a0a" opacity="0.5" />
-                    <circle cx="140" cy="42" r="6" fill="#0a0a0a" />
-                    <circle cx="196" cy="22" r="4" fill="#0a0a0a" opacity="0.7" />
-                    <circle cx="110" cy="28" r="2.5" fill="#0a0a0a" opacity="0.25" />
+                    <line x1="24" y1="25" x2="80" y2="12" stroke="#d4d4d4" strokeWidth="1" />
+                    <line x1="80" y1="12" x2="140" y2="38" stroke="#d4d4d4" strokeWidth="1" />
+                    <line x1="140" y1="38" x2="196" y2="20" stroke="#d4d4d4" strokeWidth="1" />
+                    <line x1="24" y1="25" x2="140" y2="38" stroke="#e5e5e5" strokeWidth="1" />
+                    <line x1="80" y1="12" x2="196" y2="20" stroke="#e5e5e5" strokeWidth="1" />
+                    <circle cx="24" cy="25" r="5" fill="#0a0a0a" />
+                    <circle cx="80" cy="12" r="3.5" fill="#0a0a0a" opacity="0.5" />
+                    <circle cx="140" cy="38" r="6" fill="#0a0a0a" />
+                    <circle cx="196" cy="20" r="4" fill="#0a0a0a" opacity="0.7" />
+                    <circle cx="110" cy="25" r="2.5" fill="#0a0a0a" opacity="0.25" />
                   </svg>
                 </div>
               </motion.div>
@@ -162,26 +190,38 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.7 }}
-                className="md:col-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-6 shadow-xl shadow-black/5"
+                className="md:col-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5"
               >
-                <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-4">
-                  <HiCommandLine className="w-5 h-5" />
+                <div className="flex items-start justify-between mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center">
+                    <HiCommandLine className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="flex gap-1.5">
+                    {['React', 'Node', 'TypeScript', 'AWS'].map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="font-display text-lg font-bold text-base-950 mb-2 tracking-tight">
+                <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
                   Full Stack Development
                 </h3>
-                <p className="text-sm text-base-500 leading-relaxed mb-5">
+                <p className="text-sm text-base-500 leading-relaxed mb-4">
                   Custom web & mobile applications built with modern frameworks
                   and best practices.
                 </p>
                 {/* Decorative: mini terminal */}
-                <div className="bg-base-950 rounded-xl p-4">
-                  <div className="flex items-center gap-1.5 mb-3">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#ff5f57]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#febc2e]" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#28c840]" />
+                <div className="bg-base-950 rounded-xl p-3.5">
+                  <div className="flex items-center gap-1.5 mb-2.5">
+                    <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+                    <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
+                    <span className="w-2 h-2 rounded-full bg-[#28c840]" />
                   </div>
-                  <div className="font-mono text-[11px] md:text-xs leading-relaxed space-y-1">
+                  <div className="font-mono text-[11px] md:text-xs leading-relaxed space-y-0.5">
                     <div>
                       <span className="text-violet-400">const </span>
                       <span className="text-emerald-400">solution</span>
@@ -212,26 +252,46 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.8 }}
-                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-6 shadow-xl shadow-black/5"
+                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
-                <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-4">
-                  <HiSparkles className="w-5 h-5" />
+                <div>
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
+                    <HiSparkles className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                    RAG Systems
+                  </h3>
+                  <p className="text-sm text-base-500 leading-relaxed mb-3">
+                    Knowledge-enhanced AI powered by your proprietary data.
+                  </p>
+                  {/* Source type pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {['PDFs', 'APIs', 'Databases', 'Docs'].map((src) => (
+                      <span
+                        key={src}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                      >
+                        {src}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="font-display text-lg font-bold text-base-950 mb-2 tracking-tight">
-                  RAG Systems
-                </h3>
-                <p className="text-sm text-base-500 leading-relaxed mb-5">
-                  Knowledge-enhanced AI powered by your proprietary data.
-                </p>
-                {/* Decorative: stacked documents */}
-                <div className="relative h-12 ml-1">
-                  <div className="absolute left-0 bottom-0 w-16 h-10 rounded-lg border border-base-200 bg-base-50/80" />
-                  <div className="absolute left-2.5 bottom-1.5 w-16 h-10 rounded-lg border border-base-200 bg-base-100/90" />
-                  <div className="absolute left-5 bottom-3 w-16 h-10 rounded-lg border border-base-200 bg-white flex items-center justify-center shadow-sm">
-                    <div className="space-y-1.5 px-2">
-                      <div className="w-10 h-[3px] bg-base-200 rounded-full" />
-                      <div className="w-7 h-[3px] bg-base-200 rounded-full" />
-                    </div>
+                {/* Retrieval pipeline */}
+                <div className="flex items-center gap-1.5">
+                  <div className="flex-1 bg-base-100 rounded-lg px-2.5 py-2 text-center">
+                    <div className="text-[10px] font-semibold text-base-600">Ingest</div>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-base-300 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <div className="flex-1 bg-base-100 rounded-lg px-2.5 py-2 text-center">
+                    <div className="text-[10px] font-semibold text-base-600">Retrieve</div>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-base-300 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <div className="flex-1 bg-base-950 rounded-lg px-2.5 py-2 text-center">
+                    <div className="text-[10px] font-semibold text-white">Generate</div>
                   </div>
                 </div>
               </motion.div>
@@ -241,29 +301,52 @@ const Hero = () => {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.9 }}
-                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-6 shadow-xl shadow-black/5"
+                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
-                <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-4">
-                  <HiCloud className="w-5 h-5" />
+                <div>
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
+                    <HiCloud className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                    Cloud Native
+                  </h3>
+                  <p className="text-sm text-base-500 leading-relaxed mb-3">
+                    Scalable infrastructure & modern DevOps practices.
+                  </p>
+                  {/* Platform pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {['AWS', 'Docker', 'K8s', 'CI/CD'].map((p) => (
+                      <span
+                        key={p}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                      >
+                        {p}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-                <h3 className="font-display text-lg font-bold text-base-950 mb-2 tracking-tight">
-                  Cloud Native
-                </h3>
-                <p className="text-sm text-base-500 leading-relaxed mb-5">
-                  Scalable infrastructure & modern DevOps practices.
-                </p>
-                {/* Decorative: connected nodes */}
-                <div className="flex items-center gap-2">
-                  <div className="w-9 h-9 rounded-lg bg-base-50 border border-base-200 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-emerald-400" />
+                {/* Status indicators */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span className="text-[10px] font-medium text-base-600">Production</span>
+                    </div>
+                    <span className="text-[10px] text-base-400">99.9%</span>
                   </div>
-                  <div className="flex-1 border-t border-dashed border-base-300" />
-                  <div className="w-9 h-9 rounded-lg bg-base-50 border border-base-200 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-sky-400" />
+                  <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-sky-400" />
+                      <span className="text-[10px] font-medium text-base-600">Staging</span>
+                    </div>
+                    <span className="text-[10px] text-base-400">Active</span>
                   </div>
-                  <div className="flex-1 border-t border-dashed border-base-300" />
-                  <div className="w-9 h-9 rounded-lg bg-base-50 border border-base-200 flex items-center justify-center">
-                    <div className="w-3 h-3 rounded-full bg-violet-400" />
+                  <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-violet-400" />
+                      <span className="text-[10px] font-medium text-base-600">CI Pipeline</span>
+                    </div>
+                    <span className="text-[10px] text-base-400">Passing</span>
                   </div>
                 </div>
               </motion.div>
