@@ -153,14 +153,34 @@ const Hero = () => {
                   <div className="mt-4 space-y-1.5">
                     <div className="text-[10px] font-semibold text-base-400 uppercase tracking-wider">Agent Activity</div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                       <span className="text-[10px] text-base-600">Data retrieval complete</span>
                       <span className="text-[10px] text-base-400 ml-auto">2s ago</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span className="text-[10px] text-base-600">Cross-referenced 4 sources</span>
+                      <span className="text-[10px] text-base-400 ml-auto">1s ago</span>
                     </div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                       <span className="text-[10px] text-base-600">Generating analysis</span>
                       <span className="text-[10px] text-base-400 ml-auto">now</span>
+                    </div>
+                  </div>
+                  {/* Performance stats */}
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
+                      <div className="text-sm font-bold text-base-950">1.2s</div>
+                      <div className="text-[9px] text-base-400">Avg Response</div>
+                    </div>
+                    <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
+                      <div className="text-sm font-bold text-base-950">12</div>
+                      <div className="text-[9px] text-base-400">Tasks Done</div>
+                    </div>
+                    <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
+                      <div className="text-sm font-bold text-base-950">98%</div>
+                      <div className="text-[9px] text-base-400">Accuracy</div>
                     </div>
                   </div>
                 </div>
@@ -265,7 +285,7 @@ const Hero = () => {
                     Knowledge-enhanced AI powered by your proprietary data.
                   </p>
                   {/* Source type pills */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
+                  <div className="flex flex-wrap gap-1.5 mb-3">
                     {['PDFs', 'APIs', 'Databases', 'Docs'].map((src) => (
                       <span
                         key={src}
@@ -274,6 +294,23 @@ const Hero = () => {
                         {src}
                       </span>
                     ))}
+                  </div>
+                  {/* Knowledge base stats */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[10px] text-base-500">Indexed</span>
+                        <span className="text-[10px] font-semibold text-base-700">2.4M chunks</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-base-100 rounded-full overflow-hidden">
+                        <div className="h-full w-[85%] bg-base-950 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60 mb-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="text-[10px] text-base-600">Semantic search ready</span>
+                    <span className="text-[10px] text-base-400 ml-auto">142ms</span>
                   </div>
                 </div>
                 {/* Retrieval pipeline */}
