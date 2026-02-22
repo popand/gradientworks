@@ -5,151 +5,392 @@ import { HiCommandLine, HiCpuChip, HiSparkles, HiCloud } from 'react-icons/hi2'
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.querySelector(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
   }
 
-  const features = [
-    {
-      label: 'Software Development',
-      icon: HiCommandLine,
-      description: 'Custom solutions built for your needs',
-      color: 'from-primary-400 to-primary-600',
-      glow: 'group-hover:shadow-primary-500/20',
-    },
-    {
-      label: 'AI Agents',
-      icon: HiCpuChip,
-      description: 'Intelligent autonomous systems',
-      color: 'from-accent-400 to-accent-600',
-      glow: 'group-hover:shadow-accent-500/20',
-    },
-    {
-      label: 'RAG Applications',
-      icon: HiSparkles,
-      description: 'Knowledge-enhanced AI systems',
-      color: 'from-primary-300 to-accent-400',
-      glow: 'group-hover:shadow-accent-400/20',
-    },
-    {
-      label: 'Cloud Solutions',
-      icon: HiCloud,
-      description: 'Scalable infrastructure & DevOps',
-      color: 'from-primary-500 to-primary-300',
-      glow: 'group-hover:shadow-primary-400/20',
-    },
-  ]
-
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated gradient orbs */}
-      <div className="absolute inset-0">
-        <div className="orb-1 absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-primary-500/15 blur-[140px]" />
-        <div className="orb-2 absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-accent-500/12 blur-[140px]" />
-        <div className="orb-3 absolute top-[30%] left-[40%] w-[30%] h-[30%] rounded-full bg-primary-400/8 blur-[120px]" />
-      </div>
-
-      {/* Dot grid overlay */}
-      <div className="dot-grid absolute inset-0" />
-
-      {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-32 md:py-40">
-        <div className="text-center max-w-5xl mx-auto">
+    <section id="home" className="pt-32 md:pt-40 pb-16 md:pb-24">
+      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
+        {/* Centered content */}
+        <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-sm text-base-500 mb-8"
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-base-100 text-sm text-base-500 mb-8 font-medium"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
             Software Development & AI Consulting
           </motion.div>
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-800 tracking-tight leading-[0.95] mb-8"
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[0.95] text-base-950 mb-8"
           >
-            <span className="text-white">Software That</span>
+            Build Intelligent
             <br />
-            <span className="text-gradient">Thinks.</span>
-            <span className="text-white"> Solutions</span>
+            <em>Software.</em> Scale With
             <br />
-            <span className="text-white">That </span>
-            <span className="text-gradient">Scale.</span>
+            <em>Confidence.</em>
           </motion.h1>
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.25 }}
-            className="text-lg md:text-xl text-base-500 mb-12 max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl text-base-500 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
-            Stop choosing between traditional reliability and AI innovation.
-            GradientWorks delivers both — from enterprise applications to intelligent
-            agents that learn and adapt.
+            Full-stack development meets artificial intelligence.
+            From enterprise applications to intelligent agents that learn and adapt.
           </motion.p>
 
-          {/* CTAs */}
+          {/* Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <button
               onClick={() => scrollToSection('#contact')}
-              className="group inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-white bg-gradient-to-r from-primary-600 to-accent-600 rounded-xl hover:from-primary-500 hover:to-accent-500 transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 hover:-translate-y-0.5"
+              className="group inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-all duration-200"
             >
               Book a Consultation
-              <HiArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
+              <HiArrowRight
+                className="ml-2 group-hover:translate-x-1 transition-transform"
+                size={18}
+              />
             </button>
             <button
               onClick={() => scrollToSection('#services')}
-              className="inline-flex items-center justify-center px-7 py-3.5 text-base font-semibold text-white glass rounded-xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-0.5"
+              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-base-700 border-2 border-base-200 rounded-full hover:border-base-400 hover:bg-base-50 transition-all duration-200"
             >
               Explore Services
             </button>
           </motion.div>
-
-          {/* Feature cards */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto"
-          >
-            {features.map((item, index) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.7 + index * 0.08 }}
-                whileHover={{ y: -4, transition: { duration: 0.2 } }}
-                className={`group glass rounded-2xl p-5 cursor-pointer transition-all duration-300 hover:shadow-xl ${item.glow}`}
-              >
-                <div className={`inline-flex items-center justify-center w-11 h-11 rounded-xl bg-gradient-to-br ${item.color} mb-3.5 shadow-lg`}>
-                  <item.icon className="w-5.5 h-5.5 text-white" />
-                </div>
-                <h3 className="text-sm font-semibold text-white mb-1.5 tracking-tight">
-                  {item.label}
-                </h3>
-                <p className="text-xs text-base-500 leading-relaxed">
-                  {item.description}
-                </p>
-              </motion.div>
-            ))}
-          </motion.div>
         </div>
-      </div>
 
-      {/* Bottom fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-base-950 to-transparent" />
+        {/* Bento grid on gradient */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-20 md:mt-28"
+        >
+          <div className="hero-gradient rounded-[2rem] p-3 sm:p-4 relative overflow-hidden">
+            {/* Gradient depth layers */}
+            <div className="absolute top-0 left-[25%] w-[45%] h-[45%] rounded-full bg-white/20 blur-[100px]" />
+            <div className="absolute bottom-0 right-[15%] w-[55%] h-[55%] rounded-full bg-white/15 blur-[120px]" />
+
+            {/* Bento Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-2.5 relative z-10">
+              {/* AI Agents — tall left card */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="md:row-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
+                    <HiCpuChip className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                    AI Agents
+                  </h3>
+                  <p className="text-sm text-base-500 leading-relaxed mb-4">
+                    Autonomous systems that reason, plan, and execute
+                    complex tasks with minimal human intervention.
+                  </p>
+                  {/* Capability pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-3.5">
+                    {['Planning', 'Reasoning', 'Tool Use', 'Memory'].map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-600 bg-base-950/5 rounded-full"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Mini chat mock */}
+                  <div className="space-y-2">
+                    <div className="flex items-start gap-2">
+                      <div className="w-5 h-5 rounded-full bg-base-200 flex-shrink-0 mt-0.5" />
+                      <div className="bg-base-100 rounded-xl rounded-tl-sm px-3 py-1.5 text-xs text-base-600">
+                        Analyze Q3 revenue trends
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2 justify-end">
+                      <div className="bg-base-950 rounded-xl rounded-tr-sm px-3 py-1.5 text-xs text-white">
+                        Found 3 insights. Generating report...
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-base-950 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                        <HiCpuChip className="w-2.5 h-2.5 text-white" />
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2">
+                      <div className="w-5 h-5 rounded-full bg-base-200 flex-shrink-0 mt-0.5" />
+                      <div className="bg-base-100 rounded-xl rounded-tl-sm px-3 py-1.5 text-xs text-base-600">
+                        Cross-reference with competitor data
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-2 justify-end">
+                      <div className="bg-base-950 rounded-xl rounded-tr-sm px-3 py-1.5 text-xs text-white">
+                        Querying 4 sources. Patterns identified.
+                      </div>
+                      <div className="w-5 h-5 rounded-full bg-base-950 flex-shrink-0 mt-0.5 flex items-center justify-center">
+                        <HiCpuChip className="w-2.5 h-2.5 text-white" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Agent activity */}
+                  <div className="mt-4 space-y-1.5">
+                    <div className="text-[10px] font-semibold text-base-400 uppercase tracking-wider">Agent Activity</div>
+                    <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span className="text-[10px] text-base-600">Data retrieval complete</span>
+                      <span className="text-[10px] text-base-400 ml-auto">2s ago</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                      <span className="text-[10px] text-base-600">Cross-referenced 4 sources</span>
+                      <span className="text-[10px] text-base-400 ml-auto">1s ago</span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                      <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                      <span className="text-[10px] text-base-600">Generating analysis</span>
+                      <span className="text-[10px] text-base-400 ml-auto">now</span>
+                    </div>
+                  </div>
+                  {/* Performance stats */}
+                  <div className="mt-4 grid grid-cols-3 gap-2">
+                    <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
+                      <div className="text-sm font-bold text-base-950">1.2s</div>
+                      <div className="text-[9px] text-base-400">Avg Response</div>
+                    </div>
+                    <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
+                      <div className="text-sm font-bold text-base-950">12</div>
+                      <div className="text-[9px] text-base-400">Tasks Done</div>
+                    </div>
+                    <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
+                      <div className="text-sm font-bold text-base-950">98%</div>
+                      <div className="text-[9px] text-base-400">Accuracy</div>
+                    </div>
+                  </div>
+                </div>
+                {/* Decorative: network graph */}
+                <div className="mt-4">
+                  <svg
+                    viewBox="0 0 220 50"
+                    className="w-full h-12"
+                    fill="none"
+                  >
+                    <line x1="24" y1="25" x2="80" y2="12" stroke="#d4d4d4" strokeWidth="1" />
+                    <line x1="80" y1="12" x2="140" y2="38" stroke="#d4d4d4" strokeWidth="1" />
+                    <line x1="140" y1="38" x2="196" y2="20" stroke="#d4d4d4" strokeWidth="1" />
+                    <line x1="24" y1="25" x2="140" y2="38" stroke="#e5e5e5" strokeWidth="1" />
+                    <line x1="80" y1="12" x2="196" y2="20" stroke="#e5e5e5" strokeWidth="1" />
+                    <circle cx="24" cy="25" r="5" fill="#0a0a0a" />
+                    <circle cx="80" cy="12" r="3.5" fill="#0a0a0a" opacity="0.5" />
+                    <circle cx="140" cy="38" r="6" fill="#0a0a0a" />
+                    <circle cx="196" cy="20" r="4" fill="#0a0a0a" opacity="0.7" />
+                    <circle cx="110" cy="25" r="2.5" fill="#0a0a0a" opacity="0.25" />
+                  </svg>
+                </div>
+              </motion.div>
+
+              {/* Full Stack — wide top-right card */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                className="md:col-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5"
+              >
+                <div className="flex items-start justify-between mb-3">
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center">
+                    <HiCommandLine className="w-4.5 h-4.5" />
+                  </div>
+                  <div className="flex gap-1.5">
+                    {['React', 'Node', 'TypeScript', 'AWS'].map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                  Full Stack Development
+                </h3>
+                <p className="text-sm text-base-500 leading-relaxed mb-4">
+                  Custom web & mobile applications built with modern frameworks
+                  and best practices.
+                </p>
+                {/* Decorative: mini terminal */}
+                <div className="bg-base-950 rounded-xl p-3.5">
+                  <div className="flex items-center gap-1.5 mb-2.5">
+                    <span className="w-2 h-2 rounded-full bg-[#ff5f57]" />
+                    <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
+                    <span className="w-2 h-2 rounded-full bg-[#28c840]" />
+                  </div>
+                  <div className="font-mono text-[11px] md:text-xs leading-relaxed space-y-0.5">
+                    <div>
+                      <span className="text-violet-400">const </span>
+                      <span className="text-emerald-400">solution</span>
+                      <span className="text-base-500"> = </span>
+                      <span className="text-amber-300">await</span>
+                      <span className="text-sky-400"> buildApp</span>
+                      <span className="text-base-400">({"{"}</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-base-400">stack: </span>
+                      <span className="text-amber-200">'enterprise'</span>
+                      <span className="text-base-500">,</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-base-400">scale: </span>
+                      <span className="text-emerald-400">Infinity</span>
+                    </div>
+                    <div>
+                      <span className="text-base-400">{"}"})</span>
+                      <span className="text-base-600"> // ships tomorrow</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* RAG Systems — bottom-center */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.8 }}
+                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
+                    <HiSparkles className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                    RAG Systems
+                  </h3>
+                  <p className="text-sm text-base-500 leading-relaxed mb-3">
+                    Knowledge-enhanced AI powered by your proprietary data.
+                  </p>
+                  {/* Source type pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-3">
+                    {['PDFs', 'APIs', 'Databases', 'Docs'].map((src) => (
+                      <span
+                        key={src}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                      >
+                        {src}
+                      </span>
+                    ))}
+                  </div>
+                  {/* Knowledge base stats */}
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="text-[10px] text-base-500">Indexed</span>
+                        <span className="text-[10px] font-semibold text-base-700">2.4M chunks</span>
+                      </div>
+                      <div className="w-full h-1.5 bg-base-100 rounded-full overflow-hidden">
+                        <div className="h-full w-[85%] bg-base-950 rounded-full" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60 mb-3">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                    <span className="text-[10px] text-base-600">Semantic search ready</span>
+                    <span className="text-[10px] text-base-400 ml-auto">142ms</span>
+                  </div>
+                </div>
+                {/* Retrieval pipeline */}
+                <div className="flex items-center gap-1.5">
+                  <div className="flex-1 bg-base-100 rounded-lg px-2.5 py-2 text-center">
+                    <div className="text-[10px] font-semibold text-base-600">Ingest</div>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-base-300 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <div className="flex-1 bg-base-100 rounded-lg px-2.5 py-2 text-center">
+                    <div className="text-[10px] font-semibold text-base-600">Retrieve</div>
+                  </div>
+                  <svg className="w-3.5 h-3.5 text-base-300 flex-shrink-0" viewBox="0 0 16 16" fill="none">
+                    <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <div className="flex-1 bg-base-950 rounded-lg px-2.5 py-2 text-center">
+                    <div className="text-[10px] font-semibold text-white">Generate</div>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Cloud Native — bottom-right */}
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.9 }}
+                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
+              >
+                <div>
+                  <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
+                    <HiCloud className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                    Cloud Native
+                  </h3>
+                  <p className="text-sm text-base-500 leading-relaxed mb-3">
+                    Scalable infrastructure & modern DevOps practices.
+                  </p>
+                  {/* Platform pills */}
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {['AWS', 'Docker', 'K8s', 'CI/CD'].map((p) => (
+                      <span
+                        key={p}
+                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                      >
+                        {p}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                {/* Status indicators */}
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                      <span className="text-[10px] font-medium text-base-600">Production</span>
+                    </div>
+                    <span className="text-[10px] text-base-400">99.9%</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-sky-400" />
+                      <span className="text-[10px] font-medium text-base-600">Staging</span>
+                    </div>
+                    <span className="text-[10px] text-base-400">Active</span>
+                  </div>
+                  <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-violet-400" />
+                      <span className="text-[10px] font-medium text-base-600">CI Pipeline</span>
+                    </div>
+                    <span className="text-[10px] text-base-400">Passing</span>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     </section>
   )
 }

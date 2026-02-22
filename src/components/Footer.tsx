@@ -10,6 +10,7 @@ const Footer = () => {
       { name: 'Software Development', href: '#services' },
       { name: 'AI Agents', href: '#services' },
       { name: 'RAG Applications', href: '#services' },
+      { name: 'Ontology Engineering', href: '#services' },
       { name: 'Cloud Solutions', href: '#services' },
     ],
     company: [
@@ -26,45 +27,48 @@ const Footer = () => {
     { icon: <FaTwitter size={18} />, href: '#', label: 'Twitter' },
   ]
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const scrollToSection = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault()
     const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
+    if (element) element.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <footer className="relative border-t border-white/5">
-      {/* Gradient line at top */}
-      <div className="line-gradient" />
-
+    <footer className="bg-base-50 border-t border-base-200">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-14">
           {/* Brand */}
           <div className="md:col-span-5">
-            <a href="#home" onClick={(e) => scrollToSection(e, '#home')} className="inline-flex items-center gap-2.5 mb-5">
+            <a
+              href="#home"
+              onClick={(e) => scrollToSection(e, '#home')}
+              className="inline-flex items-center gap-2.5 mb-5"
+            >
               <img src={logo} alt="GradientWorks" className="h-8 w-8" />
-              <span className="text-lg font-display font-bold text-gradient tracking-tight">
+              <span className="text-lg font-display font-bold text-base-950 tracking-tight">
                 GradientWorks
               </span>
             </a>
-            <p className="text-base-600 text-sm leading-relaxed mb-5 max-w-sm">
-              Expert consulting services for software development and agentic AI solutions.
-              Bridging traditional engineering with cutting-edge AI innovation.
+            <p className="text-base-500 text-sm leading-relaxed mb-5 max-w-sm">
+              Expert consulting services for software development and agentic AI
+              solutions. Bridging traditional engineering with cutting-edge AI
+              innovation.
             </p>
             <a
               href="mailto:contact@gradientworks.ca"
-              className="inline-flex items-center gap-2 text-sm text-base-500 hover:text-primary-400 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-base-400 hover:text-base-950 transition-colors"
             >
               <HiMail size={16} />
               contact@gradientworks.ca
             </a>
           </div>
 
-          {/* Services Links */}
+          {/* Services */}
           <div className="md:col-span-3 md:col-start-7">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-500 mb-4">
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-400 mb-4">
               Services
             </h4>
             <ul className="space-y-2.5">
@@ -73,7 +77,7 @@ const Footer = () => {
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className="text-sm text-base-600 hover:text-white transition-colors"
+                    className="text-sm text-base-500 hover:text-base-950 transition-colors"
                   >
                     {link.name}
                   </a>
@@ -82,9 +86,9 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Company Links */}
+          {/* Company */}
           <div className="md:col-span-2">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-500 mb-4">
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-400 mb-4">
               Company
             </h4>
             <ul className="space-y-2.5">
@@ -93,7 +97,7 @@ const Footer = () => {
                   <a
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.href)}
-                    className="text-sm text-base-600 hover:text-white transition-colors"
+                    className="text-sm text-base-500 hover:text-base-950 transition-colors"
                   >
                     {link.name}
                   </a>
@@ -103,18 +107,18 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-base-700">
+        {/* Bottom */}
+        <div className="border-t border-base-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-base-400">
             &copy; {currentYear} GradientWorks. All rights reserved.
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {socialLinks.map((social) => (
               <a
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="w-8 h-8 rounded-lg bg-white/4 border border-white/6 flex items-center justify-center text-base-600 hover:text-white hover:bg-white/8 transition-all duration-200"
+                className="w-9 h-9 rounded-full border border-base-200 flex items-center justify-center text-base-400 hover:text-base-950 hover:border-base-400 transition-all duration-200"
               >
                 {social.icon}
               </a>
