@@ -10,6 +10,7 @@ const Footer = () => {
       { name: 'Software Development', href: '#services' },
       { name: 'AI Agents', href: '#services' },
       { name: 'RAG Applications', href: '#services' },
+      { name: 'Ontology Engineering', href: '#services' },
       { name: 'Cloud Solutions', href: '#services' },
     ],
     company: [

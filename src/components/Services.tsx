@@ -10,6 +10,7 @@ import {
   HiLightningBolt,
   HiDatabase,
   HiSparkles,
+  HiGlobeAlt,
 } from 'react-icons/hi'
 
 interface ServiceItem {
@@ -54,13 +55,19 @@ const Services = () => {
       icon: <HiChip className="w-5 h-5" />,
       title: 'AI Agent Development',
       description:
-        'Intelligent autonomous agents that can reason, plan, and execute complex tasks with minimal human intervention.',
+        'Intelligent autonomous agents grounded in domain ontologies, enabling structured reasoning, planning, and execution of complex tasks with minimal human intervention.',
     },
     {
       icon: <HiDatabase className="w-5 h-5" />,
       title: 'RAG Applications',
       description:
-        'Retrieval-Augmented Generation systems that combine LLMs with your proprietary knowledge base for accurate responses.',
+        'Retrieval-Augmented Generation systems enhanced with ontology-driven knowledge graphs, combining LLMs with your proprietary data for contextually precise, structured responses.',
+    },
+    {
+      icon: <HiGlobeAlt className="w-5 h-5" />,
+      title: 'Ontology Engineering',
+      description:
+        'Structured knowledge modeling that defines the concepts, relationships, and rules within your domain — enabling machines to reason over your data with precision.',
     },
     {
       icon: <HiLightningBolt className="w-5 h-5" />,
@@ -159,7 +166,7 @@ const Services = () => {
               Agentic AI & Advanced Capabilities
             </h3>
           </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {aiServices.map((service, index) => (
               <ServiceCard
                 key={service.title}

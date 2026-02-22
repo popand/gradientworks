@@ -51,7 +51,7 @@ const WhyUs = () => {
     {
       scenario: 'Data-Rich Organization',
       solution:
-        'RAG applications to unlock insights from your proprietary knowledge base',
+        'Ontology-enhanced RAG applications to unlock structured insights from your proprietary knowledge base',
     },
     {
       scenario: 'Process-Heavy Business',
