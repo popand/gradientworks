@@ -79,3 +79,16 @@ body {
 .input-clean::placeholder {
   color: var(--color-base-400);
 }
+
+/* Honeypot field — visually removed but still present in the DOM for bots */
+.sr-only-honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

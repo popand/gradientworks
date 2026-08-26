@@ -1,6 +1,8 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
-import { HiMail, HiLocationMarker, HiArrowRight } from 'react-icons/hi'
+import { HiMail, HiLocationMarker, HiArrowRight, HiCheckCircle } from 'react-icons/hi'
+
+type SubmitStatus = 'idle' | 'sending' | 'sent' | 'error'
 
 const Contact = () => {
   const ref = useRef(null)
@@ -10,18 +12,46 @@ const Contact = () => {
     email: '',
     company: '',
     message: '',
+    website: '', // honeypot — hidden from real users
   })
+  const [status, setStatus] = useState<SubmitStatus>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    const mailtoLink = `mailto:contact@gradientworks.ca?subject=Inquiry from ${formData.name}&body=Name: ${formData.name}%0D%0AEmail: ${formData.email}%0D%0ACompany: ${formData.company}%0D%0A%0D%0AMessage:%0D%0A${formData.message}`
-    window.location.href = mailtoLink
+    if (status === 'sending') return
+
+    setStatus('sending')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      const result = await response.json().catch(() => ({}))
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Something went wrong. Please try again.')
+      }
+
+      setStatus('sent')
+      setFormData({ name: '', email: '', company: '', message: '', website: '' })
+    } catch (err) {
+      setStatus('error')
+      setErrorMessage(
+        err instanceof Error ? err.message : 'Something went wrong. Please try again.'
+      )
+    }
   }
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
+    if (status === 'error' || status === 'sent') setStatus('idle')
   }
 
   const contactInfo = [
@@ -117,6 +147,19 @@ const Contact = () => {
                 Send Us a Message
               </h3>
               <form onSubmit={handleSubmit} className="space-y-5">
+                {/* Honeypot — hidden from users, catches naive bots */}
+                <div aria-hidden="true" className="sr-only-honeypot">
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleChange}
+                  />
+                </div>
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label
@@ -192,14 +235,29 @@ const Contact = () => {
                 </div>
                 <button
                   type="submit"
-                  className="group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors"
+                  disabled={status === 'sending'}
+                  className="group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
-                  Send Message
-                  <HiArrowRight
-                    className="ml-2 group-hover:translate-x-1 transition-transform"
-                    size={18}
-                  />
+                  {status === 'sending' ? 'Sending…' : 'Send Message'}
+                  {status !== 'sending' && (
+                    <HiArrowRight
+                      className="ml-2 group-hover:translate-x-1 transition-transform"
+                      size={18}
+                    />
+                  )}
                 </button>
+
+                <div aria-live="polite" className="min-h-[1.25rem]">
+                  {status === 'sent' && (
+                    <p className="flex items-center gap-2 text-sm font-medium text-emerald-600">
+                      <HiCheckCircle size={18} />
+                      Thanks — your message is on its way. We'll be in touch shortly.
+                    </p>
+                  )}
+                  {status === 'error' && (
+                    <p className="text-sm font-medium text-red-600">{errorMessage}</p>
+                  )}
+                </div>
               </form>
             </div>
           </motion.div>
