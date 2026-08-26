@@ -64,55 +64,44 @@ environment, not from `.env.local`.
 
 ---
 
-## Session handoff — current state
+## DNS state — complete and verified
 
-### DNS in Namecheap (all saved, verified live via dig)
+Verified against Namecheap's authoritative nameserver (dns2.registrar-servers.com).
 
-| Type | Host | Value | Priority | Status |
-|------|------|-------|----------|--------|
-| TXT  | `resend._domainkey` | `p=MIGf...QIDAQAB` (DKIM) | — | live, Resend-verified |
-| TXT  | `send` | `v=spf1 include:amazonses.com ~all` | — | live |
-| MX   | `send` | `feedback-smtp.us-east-1.amazonses.com` | 10 | live |
-| MX   | `@` | `mx1.privateemail.com` | 10 | live (restored) |
-| MX   | `@` | `mx2.privateemail.com` | 10 | live (restored) |
-| CNAME| `autodiscover` | `privateemail.com` | — | live (restored) |
-
-Mail Settings was switched from "Private Email" to **Custom MX**. Inbound mail to
-contact@gradientworks.ca is UNAFFECTED — both privateemail MX records are live.
-
-### Still to restore (removed by the Custom MX switch)
-
-These are mail-client auto-configuration records. Mail delivery works without them;
-only auto-setup of new mail clients is affected.
-
+### Resend sending (all verified)
 | Type | Host | Value |
 |------|------|-------|
+| TXT | `resend._domainkey` | DKIM public key |
+| TXT | `send` | `v=spf1 include:amazonses.com ~all` |
+| MX | `send` | `feedback-smtp.us-east-1.amazonses.com` (10) |
+
+### Inbound mail — Namecheap Private Email (restored after Custom MX switch)
+| Type | Host | Value |
+|------|------|-------|
+| MX | `@` | `mx1.privateemail.com` (10) |
+| MX | `@` | `mx2.privateemail.com` (10) |
+| CNAME | `autodiscover` | `privateemail.com` |
 | CNAME | `autoconfig` | `privateemail.com` |
 | CNAME | `mail` | `privateemail.com` |
-| SRV | `_autodiscover._tcp` | priority 0, weight 0, port 443, target `privateemail.com` |
+| SRV | `_autodiscover._tcp` | 0 0 443 `privateemail.com` |
 
-Original values backed up during the session; the table above IS the backup.
+Mail Settings is set to **Custom MX** (was "Private Email"). The preset previously
+injected the CNAME/SRV records automatically; under Custom MX they are explicit
+host records, so do not delete them.
 
-### Resend domain status
+Resend domain `00823e6a-141b-4cec-8c05-05d4f001f907`: **verified**.
+End-to-end send confirmed (`last_event: delivered`).
 
-Domain id: `00823e6a-141b-4cec-8c05-05d4f001f907`
+## Remaining work
 
-- DKIM: **verified**
-- SPF TXT (`send`): pending
-- SPF MX (`send`): pending
-
-All three records resolve correctly in public DNS. Resend had not flipped the SPF
-pair to verified as of the end of the session — re-run and give it time:
-
-```bash
-resend domains verify 00823e6a-141b-4cec-8c05-05d4f001f907
-resend domains get 00823e6a-141b-4cec-8c05-05d4f001f907
-```
-
-### Once verified
-
-```bash
-vercel --prod          # deploy (code is committed on feature/resend-contact-form)
-```
-
-Then submit the live form and confirm the email arrives at contact@gradientworks.ca.
+1. **Deploy.** The live site at www.gradientworks.ca is a build from ~184 days ago:
+   `/api/contact` returns 404 and the bundle still uses `mailto:`. The new code is on
+   `feature/resend-contact-form` and needs merging to main + a production deploy.
+2. **Preview env vars** are unset (Vercel CLI rejects Preview-scoped vars on the
+   production branch). Add via the dashboard for working preview deploys.
+3. **GitHub Pages workflow** (`.github/workflows/deploy.yml`) still deploys on every
+   push to main, where `/api` does not exist. Delete it.
+4. **No root SPF or DMARC.** Neither existed before this work. Worth adding for
+   deliverability now that the domain sends mail:
+   - TXT `@` -> `v=spf1 include:spf.privateemail.com include:amazonses.com ~all`
+   - TXT `_dmarc` -> `v=DMARC1; p=none; rua=mailto:contact@gradientworks.ca`
