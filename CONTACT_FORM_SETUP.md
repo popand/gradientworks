@@ -61,3 +61,58 @@ environment, not from `.env.local`.
   deploys to Pages on every push to main, where `/api/contact` does not exist and
   the form will fail. Delete the workflow or point the domain solely at Vercel.
 - **No rate limiting.** Consider Vercel Firewall or a token bucket if spam appears.
+
+---
+
+## Session handoff — current state
+
+### DNS in Namecheap (all saved, verified live via dig)
+
+| Type | Host | Value | Priority | Status |
+|------|------|-------|----------|--------|
+| TXT  | `resend._domainkey` | `p=MIGf...QIDAQAB` (DKIM) | — | live, Resend-verified |
+| TXT  | `send` | `v=spf1 include:amazonses.com ~all` | — | live |
+| MX   | `send` | `feedback-smtp.us-east-1.amazonses.com` | 10 | live |
+| MX   | `@` | `mx1.privateemail.com` | 10 | live (restored) |
+| MX   | `@` | `mx2.privateemail.com` | 10 | live (restored) |
+| CNAME| `autodiscover` | `privateemail.com` | — | live (restored) |
+
+Mail Settings was switched from "Private Email" to **Custom MX**. Inbound mail to
+contact@gradientworks.ca is UNAFFECTED — both privateemail MX records are live.
+
+### Still to restore (removed by the Custom MX switch)
+
+These are mail-client auto-configuration records. Mail delivery works without them;
+only auto-setup of new mail clients is affected.
+
+| Type | Host | Value |
+|------|------|-------|
+| CNAME | `autoconfig` | `privateemail.com` |
+| CNAME | `mail` | `privateemail.com` |
+| SRV | `_autodiscover._tcp` | priority 0, weight 0, port 443, target `privateemail.com` |
+
+Original values backed up during the session; the table above IS the backup.
+
+### Resend domain status
+
+Domain id: `00823e6a-141b-4cec-8c05-05d4f001f907`
+
+- DKIM: **verified**
+- SPF TXT (`send`): pending
+- SPF MX (`send`): pending
+
+All three records resolve correctly in public DNS. Resend had not flipped the SPF
+pair to verified as of the end of the session — re-run and give it time:
+
+```bash
+resend domains verify 00823e6a-141b-4cec-8c05-05d4f001f907
+resend domains get 00823e6a-141b-4cec-8c05-05d4f001f907
+```
+
+### Once verified
+
+```bash
+vercel --prod          # deploy (code is committed on feature/resend-contact-form)
+```
+
+Then submit the live form and confirm the email arrives at contact@gradientworks.ca.
