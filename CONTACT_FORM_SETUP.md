@@ -92,16 +92,32 @@ host records, so do not delete them.
 Resend domain `00823e6a-141b-4cec-8c05-05d4f001f907`: **verified**.
 End-to-end send confirmed (`last_event: delivered`).
 
+### Authentication (SPF / DKIM / DMARC)
+| Type | Host | Value |
+|------|------|-------|
+| TXT | `@` | `v=spf1 include:spf.privateemail.com include:amazonses.com ~all` |
+| TXT | `_dmarc` | `v=DMARC1; p=none; rua=mailto:contact@gradientworks.ca` |
+
+The root SPF authorizes BOTH senders: Private Email (your mailboxes) and Amazon SES
+(which Resend sends through). Uses 5 of the 10 permitted DNS lookups.
+
+Note `include:spf.privateemail.com` — NOT `spf.efwd.registrar-servers.com`. The latter
+is for Namecheap Email Forwarding; this domain uses Private Email mailbox hosting
+(mx1/mx2.privateemail.com).
+
+DMARC is at `p=none` (monitor only) — it reports without affecting delivery. Once
+aggregate reports look clean for a few weeks, consider `p=quarantine`.
+
+## Deployment
+
+The Vercel project is Git-connected: **pushing to main auto-deploys**. No `vercel --prod`
+needed. Verified live at https://www.gradientworks.ca:
+- `GET /api/contact` -> 405
+- `POST` with empty body -> 400 with validation message
+- Real submission -> 200, `last_event: delivered`
+
 ## Remaining work
 
-1. **Deploy.** The live site at www.gradientworks.ca is a build from ~184 days ago:
-   `/api/contact` returns 404 and the bundle still uses `mailto:`. The new code is on
-   `feature/resend-contact-form` and needs merging to main + a production deploy.
-2. **Preview env vars** are unset (Vercel CLI rejects Preview-scoped vars on the
-   production branch). Add via the dashboard for working preview deploys.
-3. **GitHub Pages workflow** (`.github/workflows/deploy.yml`) still deploys on every
-   push to main, where `/api` does not exist. Delete it.
-4. **No root SPF or DMARC.** Neither existed before this work. Worth adding for
-   deliverability now that the domain sends mail:
-   - TXT `@` -> `v=spf1 include:spf.privateemail.com include:amazonses.com ~all`
-   - TXT `_dmarc` -> `v=DMARC1; p=none; rua=mailto:contact@gradientworks.ca`
+1. **Preview env vars** are unset (the Vercel CLI rejects Preview-scoped vars on the
+   production branch). Add via the dashboard for working preview deploys. Production
+   and Development are set.
