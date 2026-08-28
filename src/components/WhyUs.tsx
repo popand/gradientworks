@@ -101,7 +101,7 @@ const WhyUs = () => {
                 <span className="font-display text-4xl font-black text-base-200">
                   {item.number}
                 </span>
-                <span className="px-3 py-1 text-[11px] font-semibold tracking-wide uppercase text-base-500 bg-base-100 rounded-full">
+                <span className="px-3 py-1 text-micro font-semibold tracking-wide uppercase text-base-500 bg-base-100 rounded-full">
                   {item.tag}
                 </span>
               </div>
