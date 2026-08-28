@@ -14,8 +14,20 @@
   --color-base-900: #171717;
   --color-base-950: #0a0a0a;
 
-  --font-family-display: 'Playfair Display', Georgia, serif;
-  --font-family-sans: 'Figtree', system-ui, sans-serif;
+  /* Status roles. The 700 steps are for text, verified against both light
+     grounds (white and base-50); success-400 is for marks on base-950 panels. */
+  --color-success-400: #34d399;
+  --color-success-700: #047857;
+  --color-danger-700: #b91c1c;
+
+  /* Tailwind v4 resolves font utilities from --font-*, not --font-family-*.
+     These generate font-display and font-sans. */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Figtree', system-ui, sans-serif;
+
+  /* One step below text-xs, for the Hero card micro-labels. */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.45;
 }
 
 html {
@@ -23,15 +35,11 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
   color: var(--color-base-950);
-}
-
-.font-display {
-  font-family: var(--font-family-display);
 }
 
 /* Hero gradient — lime → emerald → cyan → indigo → violet */
@@ -39,16 +47,14 @@ body {
   background: linear-gradient(135deg, #d9f99d 0%, #6ee7b7 25%, #67e8f9 50%, #a5b4fc 75%, #d8b4fe 100%);
 }
 
-/* Floating badge animations */
-@keyframes float-gentle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+/* Reduced motion: MotionConfig drops the transforms, and this guarantees the
+   scroll-revealed sections are visible even if their reveal never fires. */
+@media (prefers-reduced-motion: reduce) {
+  section [style*="opacity"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
-
-.float-1 { animation: float-gentle 4s ease-in-out infinite; }
-.float-2 { animation: float-gentle 5s ease-in-out infinite 0.5s; }
-.float-3 { animation: float-gentle 4.5s ease-in-out infinite 1s; }
-.float-4 { animation: float-gentle 5.5s ease-in-out infinite 1.5s; }
 
 /* Selection */
 ::selection {
