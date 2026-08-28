@@ -20,7 +20,7 @@ const Hero = () => {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-base-100 text-sm text-base-500 mb-8 font-medium"
           >
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-success-400" />
             Software Development & AI Consulting
           </motion.div>
 
@@ -56,22 +56,24 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <button
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               onClick={() => scrollToSection('#contact')}
-              className="group inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-all duration-200"
+              className="group inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors duration-200"
             >
               Book a Consultation
               <HiArrowRight
                 className="ml-2 group-hover:translate-x-1 transition-transform"
                 size={18}
               />
-            </button>
-            <button
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.96 }}
               onClick={() => scrollToSection('#services')}
-              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-base-700 border-2 border-base-200 rounded-full hover:border-base-400 hover:bg-base-50 transition-all duration-200"
+              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-base-700 border-2 border-base-200 rounded-full hover:border-base-400 hover:bg-base-50 transition-colors duration-200"
             >
               Explore Services
-            </button>
+            </motion.button>
           </motion.div>
         </div>
 
@@ -88,6 +90,7 @@ const Hero = () => {
             <div className="absolute bottom-0 right-[15%] w-[55%] h-[55%] rounded-full bg-white/15 blur-[120px]" />
 
             {/* Bento Grid */}
+            <h2 className="sr-only">What we build</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-2.5 relative z-10">
               {/* AI Agents — tall left card */}
               <motion.div
@@ -112,7 +115,7 @@ const Hero = () => {
                     {['Planning', 'Reasoning', 'Tool Use', 'Memory'].map((tag) => (
                       <span
                         key={tag}
-                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-600 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-600 bg-base-950/5 rounded-full"
                       >
                         {tag}
                       </span>
@@ -128,7 +131,7 @@ const Hero = () => {
                     </div>
                     <div className="flex items-start gap-2 justify-end">
                       <div className="bg-base-950 rounded-xl rounded-tr-sm px-3 py-1.5 text-xs text-white">
-                        Found 3 insights. Generating report...
+                        Found 3 insights. Generating report…
                       </div>
                       <div className="w-5 h-5 rounded-full bg-base-950 flex-shrink-0 mt-0.5 flex items-center justify-center">
                         <HiCpuChip className="w-2.5 h-2.5 text-white" />
@@ -151,36 +154,36 @@ const Hero = () => {
                   </div>
                   {/* Agent activity */}
                   <div className="mt-4 space-y-1.5">
-                    <div className="text-[10px] font-semibold text-base-400 uppercase tracking-wider">Agent Activity</div>
+                    <div className="text-micro font-semibold text-base-500 uppercase tracking-wider">Agent Activity</div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      <span className="text-[10px] text-base-600">Data retrieval complete</span>
-                      <span className="text-[10px] text-base-400 ml-auto">2s ago</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-success-400" />
+                      <span className="text-micro text-base-600">Data retrieval complete</span>
+                      <span className="text-micro text-base-500 ml-auto">2s ago</span>
                     </div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
-                      <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                      <span className="text-[10px] text-base-600">Cross-referenced 4 sources</span>
-                      <span className="text-[10px] text-base-400 ml-auto">1s ago</span>
+                      <div className="w-1.5 h-1.5 rounded-full bg-success-400" />
+                      <span className="text-micro text-base-600">Cross-referenced 4 sources</span>
+                      <span className="text-micro text-base-500 ml-auto">1s ago</span>
                     </div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
-                      <span className="text-[10px] text-base-600">Generating analysis</span>
-                      <span className="text-[10px] text-base-400 ml-auto">now</span>
+                      <span className="text-micro text-base-600">Generating analysis</span>
+                      <span className="text-micro text-base-500 ml-auto">now</span>
                     </div>
                   </div>
                   {/* Performance stats */}
                   <div className="mt-4 grid grid-cols-3 gap-2">
                     <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
                       <div className="text-sm font-bold text-base-950">1.2s</div>
-                      <div className="text-[9px] text-base-400">Avg Response</div>
+                      <div className="text-micro text-base-500">Avg Response</div>
                     </div>
                     <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
                       <div className="text-sm font-bold text-base-950">12</div>
-                      <div className="text-[9px] text-base-400">Tasks Done</div>
+                      <div className="text-micro text-base-500">Tasks Done</div>
                     </div>
                     <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
                       <div className="text-sm font-bold text-base-950">98%</div>
-                      <div className="text-[9px] text-base-400">Accuracy</div>
+                      <div className="text-micro text-base-500">Accuracy</div>
                     </div>
                   </div>
                 </div>
@@ -191,16 +194,16 @@ const Hero = () => {
                     className="w-full h-12"
                     fill="none"
                   >
-                    <line x1="24" y1="25" x2="80" y2="12" stroke="#d4d4d4" strokeWidth="1" />
-                    <line x1="80" y1="12" x2="140" y2="38" stroke="#d4d4d4" strokeWidth="1" />
-                    <line x1="140" y1="38" x2="196" y2="20" stroke="#d4d4d4" strokeWidth="1" />
-                    <line x1="24" y1="25" x2="140" y2="38" stroke="#e5e5e5" strokeWidth="1" />
-                    <line x1="80" y1="12" x2="196" y2="20" stroke="#e5e5e5" strokeWidth="1" />
-                    <circle cx="24" cy="25" r="5" fill="#0a0a0a" />
-                    <circle cx="80" cy="12" r="3.5" fill="#0a0a0a" opacity="0.5" />
-                    <circle cx="140" cy="38" r="6" fill="#0a0a0a" />
-                    <circle cx="196" cy="20" r="4" fill="#0a0a0a" opacity="0.7" />
-                    <circle cx="110" cy="25" r="2.5" fill="#0a0a0a" opacity="0.25" />
+                    <line x1="24" y1="25" x2="80" y2="12" stroke="var(--color-base-300)" strokeWidth="1" />
+                    <line x1="80" y1="12" x2="140" y2="38" stroke="var(--color-base-300)" strokeWidth="1" />
+                    <line x1="140" y1="38" x2="196" y2="20" stroke="var(--color-base-300)" strokeWidth="1" />
+                    <line x1="24" y1="25" x2="140" y2="38" stroke="var(--color-base-200)" strokeWidth="1" />
+                    <line x1="80" y1="12" x2="196" y2="20" stroke="var(--color-base-200)" strokeWidth="1" />
+                    <circle cx="24" cy="25" r="5" fill="var(--color-base-950)" />
+                    <circle cx="80" cy="12" r="3.5" fill="var(--color-base-950)" opacity="0.5" />
+                    <circle cx="140" cy="38" r="6" fill="var(--color-base-950)" />
+                    <circle cx="196" cy="20" r="4" fill="var(--color-base-950)" opacity="0.7" />
+                    <circle cx="110" cy="25" r="2.5" fill="var(--color-base-950)" opacity="0.25" />
                   </svg>
                 </div>
               </motion.div>
@@ -216,11 +219,11 @@ const Hero = () => {
                   <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center">
                     <HiCommandLine className="w-4.5 h-4.5" />
                   </div>
-                  <div className="flex gap-1.5">
+                  <div className="flex flex-wrap gap-1.5 justify-end">
                     {['React', 'Node', 'TypeScript', 'AWS'].map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-500 bg-base-950/5 rounded-full"
                       >
                         {tech}
                       </span>
@@ -241,26 +244,26 @@ const Hero = () => {
                     <span className="w-2 h-2 rounded-full bg-[#febc2e]" />
                     <span className="w-2 h-2 rounded-full bg-[#28c840]" />
                   </div>
-                  <div className="font-mono text-[11px] md:text-xs leading-relaxed space-y-0.5">
+                  <div className="font-mono text-micro md:text-xs leading-relaxed space-y-0.5">
                     <div>
                       <span className="text-violet-400">const </span>
                       <span className="text-emerald-400">solution</span>
                       <span className="text-base-500"> = </span>
                       <span className="text-amber-300">await</span>
                       <span className="text-sky-400"> buildApp</span>
-                      <span className="text-base-400">({"{"}</span>
+                      <span className="text-base-500">({"{"}</span>
                     </div>
                     <div className="pl-4">
-                      <span className="text-base-400">stack: </span>
+                      <span className="text-base-500">stack: </span>
                       <span className="text-amber-200">'enterprise'</span>
                       <span className="text-base-500">,</span>
                     </div>
                     <div className="pl-4">
-                      <span className="text-base-400">scale: </span>
+                      <span className="text-base-500">scale: </span>
                       <span className="text-emerald-400">Infinity</span>
                     </div>
                     <div>
-                      <span className="text-base-400">{"}"})</span>
+                      <span className="text-base-500">{"}"})</span>
                       <span className="text-base-600"> // ships tomorrow</span>
                     </div>
                   </div>
@@ -289,7 +292,7 @@ const Hero = () => {
                     {['PDFs', 'APIs', 'Databases', 'Docs'].map((src) => (
                       <span
                         key={src}
-                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-500 bg-base-950/5 rounded-full"
                       >
                         {src}
                       </span>
@@ -299,8 +302,8 @@ const Hero = () => {
                   <div className="flex items-center gap-3 mb-3">
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-[10px] text-base-500">Indexed</span>
-                        <span className="text-[10px] font-semibold text-base-700">2.4M chunks</span>
+                        <span className="text-micro text-base-500">Indexed</span>
+                        <span className="text-micro font-semibold text-base-700">2.4M chunks</span>
                       </div>
                       <div className="w-full h-1.5 bg-base-100 rounded-full overflow-hidden">
                         <div className="h-full w-[85%] bg-base-950 rounded-full" />
@@ -308,27 +311,27 @@ const Hero = () => {
                     </div>
                   </div>
                   <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60 mb-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span className="text-[10px] text-base-600">Semantic search ready</span>
-                    <span className="text-[10px] text-base-400 ml-auto">142ms</span>
+                    <div className="w-1.5 h-1.5 rounded-full bg-success-400" />
+                    <span className="text-micro text-base-600">Semantic search ready</span>
+                    <span className="text-micro text-base-500 ml-auto">142ms</span>
                   </div>
                 </div>
                 {/* Retrieval pipeline */}
                 <div className="flex items-center gap-1.5">
                   <div className="flex-1 bg-base-100 rounded-lg px-2.5 py-2 text-center">
-                    <div className="text-[10px] font-semibold text-base-600">Ingest</div>
+                    <div className="text-micro font-semibold text-base-600">Ingest</div>
                   </div>
                   <svg className="w-3.5 h-3.5 text-base-300 flex-shrink-0" viewBox="0 0 16 16" fill="none">
                     <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   <div className="flex-1 bg-base-100 rounded-lg px-2.5 py-2 text-center">
-                    <div className="text-[10px] font-semibold text-base-600">Retrieve</div>
+                    <div className="text-micro font-semibold text-base-600">Retrieve</div>
                   </div>
                   <svg className="w-3.5 h-3.5 text-base-300 flex-shrink-0" viewBox="0 0 16 16" fill="none">
                     <path d="M6 3l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                   <div className="flex-1 bg-base-950 rounded-lg px-2.5 py-2 text-center">
-                    <div className="text-[10px] font-semibold text-white">Generate</div>
+                    <div className="text-micro font-semibold text-white">Generate</div>
                   </div>
                 </div>
               </motion.div>
@@ -355,7 +358,7 @@ const Hero = () => {
                     {['AWS', 'Docker', 'K8s', 'CI/CD'].map((p) => (
                       <span
                         key={p}
-                        className="px-2.5 py-0.5 text-[10px] font-medium text-base-500 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-500 bg-base-950/5 rounded-full"
                       >
                         {p}
                       </span>
@@ -366,24 +369,24 @@ const Hero = () => {
                 <div className="space-y-1.5">
                   <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                     <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                      <span className="text-[10px] font-medium text-base-600">Production</span>
+                      <div className="w-2 h-2 rounded-full bg-success-400" />
+                      <span className="text-micro font-medium text-base-600">Production</span>
                     </div>
-                    <span className="text-[10px] text-base-400">99.9%</span>
+                    <span className="text-micro text-base-500">99.9%</span>
                   </div>
                   <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-sky-400" />
-                      <span className="text-[10px] font-medium text-base-600">Staging</span>
+                      <span className="text-micro font-medium text-base-600">Staging</span>
                     </div>
-                    <span className="text-[10px] text-base-400">Active</span>
+                    <span className="text-micro text-base-500">Active</span>
                   </div>
                   <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-violet-400" />
-                      <span className="text-[10px] font-medium text-base-600">CI Pipeline</span>
+                      <span className="text-micro font-medium text-base-600">CI Pipeline</span>
                     </div>
-                    <span className="text-[10px] text-base-400">Passing</span>
+                    <span className="text-micro text-base-500">Passing</span>
                   </div>
                 </div>
               </motion.div>

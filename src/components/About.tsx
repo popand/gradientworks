@@ -45,7 +45,7 @@ const About = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-base-400 mb-4">
+          <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             Who We Are
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
@@ -103,7 +103,7 @@ const About = () => {
                     <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
                       <path
                         d="M1 4L3.5 6.5L9 1"
-                        stroke="#0a0a0a"
+                        stroke="var(--color-base-950)"
                         strokeWidth="1.5"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -128,7 +128,7 @@ const About = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.5 + index * 0.08 }}
               whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg transition-all duration-300"
+              className="bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg transition-[border-color,box-shadow] duration-300"
             >
               <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-5">
                 {feature.icon}

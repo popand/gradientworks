@@ -76,7 +76,7 @@ const WhyUs = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-base-400 mb-4">
+          <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             The Difference
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
@@ -95,7 +95,7 @@ const WhyUs = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.07 }}
               whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg transition-all duration-300"
+              className="bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg transition-[border-color,box-shadow] duration-300"
             >
               <div className="flex items-start justify-between mb-5">
                 <span className="font-display text-4xl font-black text-base-200">
@@ -135,7 +135,7 @@ const WhyUs = () => {
                 className="bg-white/5 border border-white/8 rounded-2xl p-5 hover:bg-white/8 transition-colors duration-200"
               >
                 <div className="flex items-start gap-3">
-                  <HiCheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                  <HiCheckCircle className="w-5 h-5 text-success-400 flex-shrink-0 mt-0.5" />
                   <div>
                     <h4 className="text-sm font-bold text-white mb-1">
                       {useCase.scenario}
@@ -175,7 +175,7 @@ const WhyUs = () => {
                 <div className="font-display text-3xl md:text-4xl font-black text-base-950 mb-1">
                   {stat.value}
                 </div>
-                <div className="text-sm text-base-400">{stat.label}</div>
+                <div className="text-sm text-base-500">{stat.label}</div>
               </motion.div>
             ))}
           </div>

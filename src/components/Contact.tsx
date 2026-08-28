@@ -79,7 +79,7 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-base-400 mb-4">
+          <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             Get Started
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
@@ -114,7 +114,7 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <p className="text-xs text-base-400 uppercase tracking-wider mb-0.5">
+                    <p className="text-xs text-base-500 uppercase tracking-wider mb-0.5">
                       {info.title}
                     </p>
                     {info.link ? (
@@ -172,10 +172,11 @@ const Contact = () => {
                       type="text"
                       id="name"
                       name="name"
+                      autoComplete="name"
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl input-clean text-sm"
+                      className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm"
                       placeholder="Your name"
                     />
                   </div>
@@ -190,10 +191,11 @@ const Contact = () => {
                       type="email"
                       id="email"
                       name="email"
+                      autoComplete="email"
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl input-clean text-sm"
+                      className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -209,9 +211,10 @@ const Contact = () => {
                     type="text"
                     id="company"
                     name="company"
+                    autoComplete="organization"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl input-clean text-sm"
+                    className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm"
                     placeholder="Your company name"
                   />
                 </div>
@@ -229,12 +232,13 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl input-clean text-sm resize-none"
-                    placeholder="Tell us about your project..."
+                    className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm resize-none"
+                    placeholder="Tell us about your project…"
                   />
                 </div>
-                <button
+                <motion.button
                   type="submit"
+                  whileTap={{ scale: 0.96 }}
                   disabled={status === 'sending'}
                   className="group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
@@ -245,17 +249,17 @@ const Contact = () => {
                       size={18}
                     />
                   )}
-                </button>
+                </motion.button>
 
-                <div aria-live="polite" className="min-h-[1.25rem]">
+                <div aria-live="polite" role="status" className="min-h-[1.25rem]">
                   {status === 'sent' && (
-                    <p className="flex items-center gap-2 text-sm font-medium text-emerald-600">
+                    <p className="flex items-center gap-2 text-sm font-medium text-success-700">
                       <HiCheckCircle size={18} />
                       Thanks — your message is on its way. We'll be in touch shortly.
                     </p>
                   )}
                   {status === 'error' && (
-                    <p className="text-sm font-medium text-red-600">{errorMessage}</p>
+                    <p className="text-sm font-medium text-danger-700">{errorMessage}</p>
                   )}
                 </div>
               </form>
