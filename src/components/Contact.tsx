@@ -74,8 +74,8 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -92,8 +92,8 @@ const Contact = () => {
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Left — info */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-2"
           >
@@ -105,8 +105,8 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.title}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, transform: 'translateX(-12px)' }}
+                  animate={isInView ? { opacity: 1, transform: 'translateX(0px)' } : {}}
                   transition={{ duration: 0.4, delay: 0.25 + index * 0.07 }}
                   className="flex items-center gap-4"
                 >
@@ -137,8 +137,8 @@ const Contact = () => {
 
           {/* Right — form */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="lg:col-span-3"
           >

@@ -40,8 +40,8 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -59,8 +59,8 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-20">
           {/* Mission */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
             <h3 className="font-display text-2xl font-bold text-base-950 mb-6 tracking-tight">
@@ -82,8 +82,8 @@ const About = () => {
 
           {/* Checklist card */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="bg-base-950 rounded-3xl p-8 md:p-10"
           >
@@ -94,8 +94,8 @@ const About = () => {
               {checklistItems.map((item, index) => (
                 <motion.li
                   key={index}
-                  initial={{ opacity: 0, x: 16 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, transform: 'translateX(16px)' }}
+                  animate={isInView ? { opacity: 1, transform: 'translateX(0px)' } : {}}
                   transition={{ duration: 0.4, delay: 0.4 + index * 0.07 }}
                   className="flex items-start gap-3"
                 >
@@ -124,11 +124,10 @@ const About = () => {
           {features.map((feature, index) => (
             <motion.div
               key={feature.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, transform: 'translateY(20px)' }}
+              animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
               transition={{ duration: 0.5, delay: 0.5 + index * 0.08 }}
-              whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg transition-[border-color,box-shadow] duration-300"
+              className="card-lift bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg"
             >
               <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-5">
                 {feature.icon}

@@ -15,8 +15,8 @@ const Hero = () => {
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, transform: 'translateY(16px)' }}
+            animate={{ opacity: 1, transform: 'translateY(0px)' }}
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-base-100 text-sm text-base-500 mb-8 font-medium"
           >
@@ -26,8 +26,8 @@ const Hero = () => {
 
           {/* Headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={{ opacity: 1, transform: 'translateY(0px)' }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[0.95] text-base-950 mb-8"
           >
@@ -40,8 +40,8 @@ const Hero = () => {
 
           {/* Subtitle */}
           <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, transform: 'translateY(16px)' }}
+            animate={{ opacity: 1, transform: 'translateY(0px)' }}
             transition={{ duration: 0.6, delay: 0.25 }}
             className="text-lg md:text-xl text-base-500 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
@@ -51,8 +51,8 @@ const Hero = () => {
 
           {/* Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, transform: 'translateY(16px)' }}
+            animate={{ opacity: 1, transform: 'translateY(0px)' }}
             transition={{ duration: 0.6, delay: 0.35 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
@@ -79,8 +79,8 @@ const Hero = () => {
 
         {/* Bento grid on gradient */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, transform: 'translateY(40px)' }}
+          animate={{ opacity: 1, transform: 'translateY(0px)' }}
           transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="mt-20 md:mt-28"
         >
@@ -94,8 +94,8 @@ const Hero = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 md:grid-rows-2 gap-2.5 relative z-10">
               {/* AI Agents — tall left card */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, transform: 'translateY(16px)' }}
+                animate={{ opacity: 1, transform: 'translateY(0px)' }}
                 transition={{ duration: 0.5, delay: 0.6 }}
                 className="md:row-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
@@ -210,8 +210,8 @@ const Hero = () => {
 
               {/* Full Stack — wide top-right card */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, transform: 'translateY(16px)' }}
+                animate={{ opacity: 1, transform: 'translateY(0px)' }}
                 transition={{ duration: 0.5, delay: 0.7 }}
                 className="md:col-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5"
               >
@@ -272,8 +272,8 @@ const Hero = () => {
 
               {/* RAG Systems — bottom-center */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, transform: 'translateY(16px)' }}
+                animate={{ opacity: 1, transform: 'translateY(0px)' }}
                 transition={{ duration: 0.5, delay: 0.8 }}
                 className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
@@ -338,8 +338,8 @@ const Hero = () => {
 
               {/* Cloud Native — bottom-right */}
               <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, transform: 'translateY(16px)' }}
+                animate={{ opacity: 1, transform: 'translateY(0px)' }}
                 transition={{ duration: 0.5, delay: 0.9 }}
                 className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >

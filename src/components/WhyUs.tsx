@@ -71,8 +71,8 @@ const WhyUs = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
@@ -91,11 +91,10 @@ const WhyUs = () => {
           {differentiators.map((item, index) => (
             <motion.div
               key={item.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              initial={{ opacity: 0, transform: 'translateY(20px)' }}
+              animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
               transition={{ duration: 0.5, delay: 0.1 + index * 0.07 }}
-              whileHover={{ y: -3, transition: { duration: 0.2 } }}
-              className="bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg transition-[border-color,box-shadow] duration-300"
+              className="card-lift bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg"
             >
               <div className="flex items-start justify-between mb-5">
                 <span className="font-display text-4xl font-black text-base-200">
@@ -117,8 +116,8 @@ const WhyUs = () => {
 
         {/* Use Cases — dark panel */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6, delay: 0.45 }}
           className="bg-base-950 rounded-3xl p-8 md:p-12 mb-20"
         >
@@ -129,8 +128,8 @@ const WhyUs = () => {
             {useCases.map((useCase, index) => (
               <motion.div
                 key={useCase.scenario}
-                initial={{ opacity: 0, x: -12 }}
-                animate={isInView ? { opacity: 1, x: 0 } : {}}
+                initial={{ opacity: 0, transform: 'translateX(-12px)' }}
+                animate={isInView ? { opacity: 1, transform: 'translateX(0px)' } : {}}
                 transition={{ duration: 0.4, delay: 0.55 + index * 0.07 }}
                 className="bg-white/5 border border-white/8 rounded-2xl p-5 hover:bg-white/8 transition-colors duration-200"
               >
@@ -152,8 +151,8 @@ const WhyUs = () => {
 
         {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
           className="text-center"
         >
@@ -168,8 +167,8 @@ const WhyUs = () => {
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={isInView ? { opacity: 1, scale: 1 } : {}}
+                initial={{ opacity: 0, transform: 'scale(0.9)' }}
+                animate={isInView ? { opacity: 1, transform: 'scale(1)' } : {}}
                 transition={{ duration: 0.4, delay: 0.8 + index * 0.07 }}
               >
                 <div className="font-display text-3xl md:text-4xl font-black text-base-950 mb-1">
