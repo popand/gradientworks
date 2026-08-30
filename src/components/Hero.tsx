@@ -13,22 +13,11 @@ const Hero = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Centered content */}
         <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, transform: 'translateY(16px)' }}
-            animate={{ opacity: 1, transform: 'translateY(0px)' }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-base-100 text-sm text-base-600 mb-8 font-medium"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-success-400" />
-            Software Development & AI Consulting
-          </motion.div>
-
           {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, transform: 'translateY(24px)' }}
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[0.95] text-base-950 mb-8"
           >
             Build Intelligent
@@ -42,7 +31,7 @@ const Hero = () => {
           <motion.p
             initial={{ opacity: 0, transform: 'translateY(16px)' }}
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
-            transition={{ duration: 0.6, delay: 0.25 }}
+            transition={{ duration: 0.6, delay: 0.15 }}
             className="text-lg md:text-xl text-base-500 mb-10 max-w-2xl mx-auto leading-relaxed"
           >
             Full-stack development meets artificial intelligence.
@@ -53,7 +42,7 @@ const Hero = () => {
           <motion.div
             initial={{ opacity: 0, transform: 'translateY(16px)' }}
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
-            transition={{ duration: 0.6, delay: 0.35 }}
+            transition={{ duration: 0.6, delay: 0.25 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <motion.button
@@ -81,7 +70,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, transform: 'translateY(40px)' }}
           animate={{ opacity: 1, transform: 'translateY(0px)' }}
-          transition={{ duration: 0.9, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
           className="mt-20 md:mt-28"
         >
           <div className="hero-gradient rounded-[2rem] p-3 sm:p-4 relative overflow-hidden">
