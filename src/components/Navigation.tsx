@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
 import logo from '../assets/logo.png'
+import IconSwap from './IconSwap'
 import { EASE_OUT } from '../motion'
 
 const Navigation = () => {
@@ -124,7 +125,9 @@ const Navigation = () => {
             aria-controls="mobile-menu"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            <IconSwap swapKey={isMobileMenuOpen ? 'close' : 'open'}>
+              {isMobileMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
+            </IconSwap>
           </button>
         </div>
       </div>

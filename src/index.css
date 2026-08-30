@@ -90,6 +90,12 @@ body {
   .animate-pulse {
     animation: none;
   }
+
+  /* The submit spinner: the "Sending…" label already carries the state, so the
+     rotation is redundant motion rather than the only signal. */
+  .animate-spin {
+    animation: none;
+  }
 }
 
 /* Selection */

@@ -1,8 +1,25 @@
-import { motion, useInView } from 'framer-motion'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { HiMail, HiLocationMarker, HiArrowRight, HiCheckCircle } from 'react-icons/hi'
+import IconSwap from './IconSwap'
+import { EASE_OUT } from '../motion'
 
 type SubmitStatus = 'idle' | 'sending' | 'sent' | 'error'
+
+/** Indeterminate progress for the submit button. The spin is CSS so it keeps
+ *  running off the main thread while the request is in flight; index.css stops
+ *  it under reduced motion, where the "Sending…" label carries the state. */
+const Spinner = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="animate-spin">
+    <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="2" opacity="0.25" />
+    <path
+      d="M16 9a7 7 0 0 0-7-7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+)
 
 const Contact = () => {
   const ref = useRef(null)
@@ -243,24 +260,52 @@ const Contact = () => {
                   className="group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === 'sending' ? 'Sending…' : 'Send Message'}
-                  {status !== 'sending' && (
-                    <HiArrowRight
-                      className="ml-2 group-hover:translate-x-1 transition-transform"
-                      size={18}
-                    />
-                  )}
+                  <IconSwap
+                    swapKey={status === 'sending' ? 'spinner' : 'arrow'}
+                    className="ml-2"
+                  >
+                    {status === 'sending' ? (
+                      <Spinner />
+                    ) : (
+                      <HiArrowRight
+                        className="group-hover:translate-x-1 transition-transform"
+                        size={18}
+                      />
+                    )}
+                  </IconSwap>
                 </motion.button>
 
+                {/* The live region itself must stay mounted and unanimated —
+                    animating it is a common way to lose the announcement. Only
+                    its child transitions. */}
                 <div aria-live="polite" role="status" className="min-h-[1.25rem]">
-                  {status === 'sent' && (
-                    <p className="flex items-center gap-2 text-sm font-medium text-success-700">
-                      <HiCheckCircle size={18} />
-                      Thanks — your message is on its way. We'll be in touch shortly.
-                    </p>
-                  )}
-                  {status === 'error' && (
-                    <p className="text-sm font-medium text-danger-700">{errorMessage}</p>
-                  )}
+                  <AnimatePresence mode="wait">
+                    {status === 'sent' && (
+                      <motion.p
+                        key="sent"
+                        initial={{ opacity: 0, transform: 'translateY(-4px)' }}
+                        animate={{ opacity: 1, transform: 'translateY(0px)' }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25, ease: EASE_OUT }}
+                        className="flex items-center gap-2 text-sm font-medium text-success-700"
+                      >
+                        <HiCheckCircle size={18} />
+                        Thanks — your message is on its way. We'll be in touch shortly.
+                      </motion.p>
+                    )}
+                    {status === 'error' && (
+                      <motion.p
+                        key="error"
+                        initial={{ opacity: 0, transform: 'translateY(-4px)' }}
+                        animate={{ opacity: 1, transform: 'translateY(0px)' }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25, ease: EASE_OUT }}
+                        className="text-sm font-medium text-danger-700"
+                      >
+                        {errorMessage}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
               </form>
             </div>
