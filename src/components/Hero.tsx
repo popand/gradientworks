@@ -18,7 +18,7 @@ const Hero = () => {
             initial={{ opacity: 0, transform: 'translateY(16px)' }}
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-base-100 text-sm text-base-500 mb-8 font-medium"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-base-100 text-sm text-base-600 mb-8 font-medium"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-success-400" />
             Software Development & AI Consulting
@@ -106,7 +106,7 @@ const Hero = () => {
                   <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
                     AI Agents
                   </h3>
-                  <p className="text-sm text-base-500 leading-relaxed mb-4">
+                  <p className="text-sm text-base-600 leading-relaxed mb-4">
                     Autonomous systems that reason, plan, and execute
                     complex tasks with minimal human intervention.
                   </p>
@@ -154,36 +154,36 @@ const Hero = () => {
                   </div>
                   {/* Agent activity */}
                   <div className="mt-4 space-y-1.5">
-                    <div className="text-micro font-semibold text-base-500 uppercase tracking-wider">Agent Activity</div>
+                    <div className="text-micro font-semibold text-base-600 uppercase tracking-wider">Agent Activity</div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                       <div className="w-1.5 h-1.5 rounded-full bg-success-400" />
                       <span className="text-micro text-base-600">Data retrieval complete</span>
-                      <span className="text-micro text-base-500 ml-auto">2s ago</span>
+                      <span className="text-micro text-base-600 ml-auto">2s ago</span>
                     </div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                       <div className="w-1.5 h-1.5 rounded-full bg-success-400" />
                       <span className="text-micro text-base-600">Cross-referenced 4 sources</span>
-                      <span className="text-micro text-base-500 ml-auto">1s ago</span>
+                      <span className="text-micro text-base-600 ml-auto">1s ago</span>
                     </div>
                     <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                       <div className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
                       <span className="text-micro text-base-600">Generating analysis</span>
-                      <span className="text-micro text-base-500 ml-auto">now</span>
+                      <span className="text-micro text-base-600 ml-auto">now</span>
                     </div>
                   </div>
                   {/* Performance stats */}
                   <div className="mt-4 grid grid-cols-3 gap-2">
                     <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
                       <div className="text-sm font-bold text-base-950">1.2s</div>
-                      <div className="text-micro text-base-500">Avg Response</div>
+                      <div className="text-micro text-base-600">Avg Response</div>
                     </div>
                     <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
                       <div className="text-sm font-bold text-base-950">12</div>
-                      <div className="text-micro text-base-500">Tasks Done</div>
+                      <div className="text-micro text-base-600">Tasks Done</div>
                     </div>
                     <div className="bg-base-50 rounded-lg px-2 py-2 text-center border border-base-200/60">
                       <div className="text-sm font-bold text-base-950">98%</div>
-                      <div className="text-micro text-base-500">Accuracy</div>
+                      <div className="text-micro text-base-600">Accuracy</div>
                     </div>
                   </div>
                 </div>
@@ -223,7 +223,7 @@ const Hero = () => {
                     {['React', 'Node', 'TypeScript', 'AWS'].map((tech) => (
                       <span
                         key={tech}
-                        className="px-2.5 py-0.5 text-micro font-medium text-base-500 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-600 bg-base-950/5 rounded-full"
                       >
                         {tech}
                       </span>
@@ -233,7 +233,7 @@ const Hero = () => {
                 <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
                   Full Stack Development
                 </h3>
-                <p className="text-sm text-base-500 leading-relaxed mb-4">
+                <p className="text-sm text-base-600 leading-relaxed mb-4">
                   Custom web & mobile applications built with modern frameworks
                   and best practices.
                 </p>
@@ -248,23 +248,23 @@ const Hero = () => {
                     <div>
                       <span className="text-violet-400">const </span>
                       <span className="text-emerald-400">solution</span>
-                      <span className="text-base-500"> = </span>
+                      <span className="text-base-400"> = </span>
                       <span className="text-amber-300">await</span>
                       <span className="text-sky-400"> buildApp</span>
-                      <span className="text-base-500">({"{"}</span>
+                      <span className="text-base-400">({"{"}</span>
                     </div>
                     <div className="pl-4">
-                      <span className="text-base-500">stack: </span>
+                      <span className="text-base-400">stack: </span>
                       <span className="text-amber-200">'enterprise'</span>
-                      <span className="text-base-500">,</span>
+                      <span className="text-base-400">,</span>
                     </div>
                     <div className="pl-4">
-                      <span className="text-base-500">scale: </span>
+                      <span className="text-base-400">scale: </span>
                       <span className="text-emerald-400">Infinity</span>
                     </div>
                     <div>
-                      <span className="text-base-500">{"}"})</span>
-                      <span className="text-base-600"> // ships tomorrow</span>
+                      <span className="text-base-400">{"}"})</span>
+                      <span className="text-base-400"> // ships tomorrow</span>
                     </div>
                   </div>
                 </div>
@@ -284,7 +284,7 @@ const Hero = () => {
                   <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
                     RAG Systems
                   </h3>
-                  <p className="text-sm text-base-500 leading-relaxed mb-3">
+                  <p className="text-sm text-base-600 leading-relaxed mb-3">
                     Knowledge-enhanced AI powered by your proprietary data.
                   </p>
                   {/* Source type pills */}
@@ -292,7 +292,7 @@ const Hero = () => {
                     {['PDFs', 'APIs', 'Databases', 'Docs'].map((src) => (
                       <span
                         key={src}
-                        className="px-2.5 py-0.5 text-micro font-medium text-base-500 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-600 bg-base-950/5 rounded-full"
                       >
                         {src}
                       </span>
@@ -302,7 +302,7 @@ const Hero = () => {
                   <div className="flex items-center gap-3 mb-3">
                     <div className="flex-1">
                       <div className="flex items-center justify-between mb-1">
-                        <span className="text-micro text-base-500">Indexed</span>
+                        <span className="text-micro text-base-600">Indexed</span>
                         <span className="text-micro font-semibold text-base-700">2.4M chunks</span>
                       </div>
                       <div className="w-full h-1.5 bg-base-100 rounded-full overflow-hidden">
@@ -313,7 +313,7 @@ const Hero = () => {
                   <div className="flex items-center gap-2 bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60 mb-3">
                     <div className="w-1.5 h-1.5 rounded-full bg-success-400" />
                     <span className="text-micro text-base-600">Semantic search ready</span>
-                    <span className="text-micro text-base-500 ml-auto">142ms</span>
+                    <span className="text-micro text-base-600 ml-auto">142ms</span>
                   </div>
                 </div>
                 {/* Retrieval pipeline */}
@@ -350,7 +350,7 @@ const Hero = () => {
                   <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
                     Cloud Native
                   </h3>
-                  <p className="text-sm text-base-500 leading-relaxed mb-3">
+                  <p className="text-sm text-base-600 leading-relaxed mb-3">
                     Scalable infrastructure & modern DevOps practices.
                   </p>
                   {/* Platform pills */}
@@ -358,7 +358,7 @@ const Hero = () => {
                     {['AWS', 'Docker', 'K8s', 'CI/CD'].map((p) => (
                       <span
                         key={p}
-                        className="px-2.5 py-0.5 text-micro font-medium text-base-500 bg-base-950/5 rounded-full"
+                        className="px-2.5 py-0.5 text-micro font-medium text-base-600 bg-base-950/5 rounded-full"
                       >
                         {p}
                       </span>
@@ -372,21 +372,21 @@ const Hero = () => {
                       <div className="w-2 h-2 rounded-full bg-success-400" />
                       <span className="text-micro font-medium text-base-600">Production</span>
                     </div>
-                    <span className="text-micro text-base-500">99.9%</span>
+                    <span className="text-micro text-base-600">99.9%</span>
                   </div>
                   <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-sky-400" />
                       <span className="text-micro font-medium text-base-600">Staging</span>
                     </div>
-                    <span className="text-micro text-base-500">Active</span>
+                    <span className="text-micro text-base-600">Active</span>
                   </div>
                   <div className="flex items-center justify-between bg-base-50 rounded-lg px-3 py-1.5 border border-base-200/60">
                     <div className="flex items-center gap-2">
                       <div className="w-2 h-2 rounded-full bg-violet-400" />
                       <span className="text-micro font-medium text-base-600">CI Pipeline</span>
                     </div>
-                    <span className="text-micro text-base-500">Passing</span>
+                    <span className="text-micro text-base-600">Passing</span>
                   </div>
                 </div>
               </motion.div>
