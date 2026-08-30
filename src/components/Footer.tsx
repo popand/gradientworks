@@ -59,7 +59,7 @@ const Footer = () => {
             </p>
             <a
               href="mailto:contact@gradientworks.ca"
-              className="inline-flex items-center gap-2 text-sm text-base-400 hover:text-base-950 transition-colors"
+              className="inline-flex items-center gap-2 text-sm text-base-500 hover:text-base-950 transition-colors"
             >
               <HiMail size={16} />
               contact@gradientworks.ca
@@ -68,7 +68,7 @@ const Footer = () => {
 
           {/* Services */}
           <div className="md:col-span-3 md:col-start-7">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-400 mb-4">
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-500 mb-4">
               Services
             </h4>
             <ul className="space-y-2.5">
@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* Company */}
           <div className="md:col-span-2">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-400 mb-4">
+            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-500 mb-4">
               Company
             </h4>
             <ul className="space-y-2.5">
@@ -109,7 +109,7 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t border-base-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-base-400">
+          <p className="text-xs text-base-500">
             &copy; {currentYear} GradientWorks. All rights reserved.
           </p>
           <div className="flex items-center gap-3">
@@ -118,7 +118,7 @@ const Footer = () => {
                 key={social.label}
                 href={social.href}
                 aria-label={social.label}
-                className="w-9 h-9 rounded-full border border-base-200 flex items-center justify-center text-base-400 hover:text-base-950 hover:border-base-400 transition-all duration-200"
+                className="w-9 h-9 rounded-full border border-base-200 flex items-center justify-center text-base-500 hover:text-base-950 hover:border-base-400 transition-colors duration-200"
               >
                 {social.icon}
               </a>

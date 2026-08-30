@@ -14,8 +14,24 @@
   --color-base-900: #171717;
   --color-base-950: #0a0a0a;
 
-  --font-family-display: 'Playfair Display', Georgia, serif;
-  --font-family-sans: 'Figtree', system-ui, sans-serif;
+  /* Status roles. The 700 steps are for text, verified against both light
+     grounds (white and base-50); success-400 is for marks on base-950 panels. */
+  --color-success-400: #34d399;
+  --color-success-700: #047857;
+  --color-danger-700: #b91c1c;
+
+  /* Tailwind v4 resolves font utilities from --font-*, not --font-family-*.
+     These generate font-display and font-sans. */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Figtree', system-ui, sans-serif;
+
+  /* One step below text-xs, for the Hero card micro-labels. */
+  --text-micro: 0.6875rem;
+  --text-micro--line-height: 1.45;
+
+  /* Motion. --ease-out is the curve already used across the section reveals;
+     it lives here so CSS and JS share one value instead of four copies. */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 html {
@@ -23,15 +39,37 @@ html {
 }
 
 body {
-  font-family: var(--font-family-sans);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #ffffff;
   color: var(--color-base-950);
 }
 
-.font-display {
-  font-family: var(--font-family-display);
+/* Card hover lift. CSS rather than Motion's whileHover: hover fires dozens of
+   times a session, so it wants the cheapest interruptible path, and only a
+   media query can keep a tap on a touch screen from leaving the card stuck in
+   its hover state. */
+.card-lift {
+  transition:
+    transform 0.16s var(--ease-out),
+    border-color 0.16s var(--ease-out),
+    box-shadow 0.16s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .card-lift:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-lift {
+    transition: border-color 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
+  }
+  .card-lift:hover {
+    transform: none;
+  }
 }
 
 /* Hero gradient — lime → emerald → cyan → indigo → violet */
@@ -39,16 +77,26 @@ body {
   background: linear-gradient(135deg, #d9f99d 0%, #6ee7b7 25%, #67e8f9 50%, #a5b4fc 75%, #d8b4fe 100%);
 }
 
-/* Floating badge animations */
-@keyframes float-gentle {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
+/* Reduced motion: MotionConfig drops the transforms, and this guarantees the
+   scroll-revealed sections are visible even if their reveal never fires.
+   MotionConfig does not reach CSS animations, so stop those here too — the
+   dot keeps its colour, which is what carries the meaning. */
+@media (prefers-reduced-motion: reduce) {
+  section [style*="opacity"] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
 
-.float-1 { animation: float-gentle 4s ease-in-out infinite; }
-.float-2 { animation: float-gentle 5s ease-in-out infinite 0.5s; }
-.float-3 { animation: float-gentle 4.5s ease-in-out infinite 1s; }
-.float-4 { animation: float-gentle 5.5s ease-in-out infinite 1.5s; }
+  .animate-pulse {
+    animation: none;
+  }
+
+  /* The submit spinner: the "Sending…" label already carries the state, so the
+     rotation is redundant motion rather than the only signal. */
+  .animate-spin {
+    animation: none;
+  }
+}
 
 /* Selection */
 ::selection {
@@ -67,7 +115,7 @@ body {
   background: #ffffff;
   border: 1px solid var(--color-base-200);
   color: var(--color-base-950);
-  transition: all 0.2s ease;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .input-clean:focus {

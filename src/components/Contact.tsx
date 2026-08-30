@@ -1,8 +1,25 @@
-import { motion, useInView } from 'framer-motion'
+import { AnimatePresence, motion, useInView } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { HiMail, HiLocationMarker, HiArrowRight, HiCheckCircle } from 'react-icons/hi'
+import IconSwap from './IconSwap'
+import { EASE_OUT } from '../motion'
 
 type SubmitStatus = 'idle' | 'sending' | 'sent' | 'error'
+
+/** Indeterminate progress for the submit button. The spin is CSS so it keeps
+ *  running off the main thread while the request is in flight; index.css stops
+ *  it under reduced motion, where the "Sending…" label carries the state. */
+const Spinner = () => (
+  <svg width="18" height="18" viewBox="0 0 18 18" fill="none" className="animate-spin">
+    <circle cx="9" cy="9" r="7" stroke="currentColor" strokeWidth="2" opacity="0.25" />
+    <path
+      d="M16 9a7 7 0 0 0-7-7"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+)
 
 const Contact = () => {
   const ref = useRef(null)
@@ -74,12 +91,12 @@ const Contact = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-base-400 mb-4">
+          <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             Get Started
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
@@ -92,8 +109,8 @@ const Contact = () => {
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
           {/* Left — info */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
             className="lg:col-span-2"
           >
@@ -105,8 +122,8 @@ const Contact = () => {
               {contactInfo.map((info, index) => (
                 <motion.div
                   key={info.title}
-                  initial={{ opacity: 0, x: -12 }}
-                  animate={isInView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, transform: 'translateX(-12px)' }}
+                  animate={isInView ? { opacity: 1, transform: 'translateX(0px)' } : {}}
                   transition={{ duration: 0.4, delay: 0.25 + index * 0.07 }}
                   className="flex items-center gap-4"
                 >
@@ -114,7 +131,7 @@ const Contact = () => {
                     {info.icon}
                   </div>
                   <div>
-                    <p className="text-xs text-base-400 uppercase tracking-wider mb-0.5">
+                    <p className="text-xs text-base-500 uppercase tracking-wider mb-0.5">
                       {info.title}
                     </p>
                     {info.link ? (
@@ -137,8 +154,8 @@ const Contact = () => {
 
           {/* Right — form */}
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            initial={{ opacity: 0, transform: 'translateY(24px)' }}
+            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
             className="lg:col-span-3"
           >
@@ -172,10 +189,11 @@ const Contact = () => {
                       type="text"
                       id="name"
                       name="name"
+                      autoComplete="name"
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl input-clean text-sm"
+                      className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm"
                       placeholder="Your name"
                     />
                   </div>
@@ -190,10 +208,11 @@ const Contact = () => {
                       type="email"
                       id="email"
                       name="email"
+                      autoComplete="email"
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl input-clean text-sm"
+                      className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm"
                       placeholder="your@email.com"
                     />
                   </div>
@@ -209,9 +228,10 @@ const Contact = () => {
                     type="text"
                     id="company"
                     name="company"
+                    autoComplete="organization"
                     value={formData.company}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl input-clean text-sm"
+                    className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm"
                     placeholder="Your company name"
                   />
                 </div>
@@ -229,34 +249,63 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-xl input-clean text-sm resize-none"
-                    placeholder="Tell us about your project..."
+                    className="w-full px-4 py-3 rounded-xl input-clean text-base sm:text-sm resize-none"
+                    placeholder="Tell us about your project…"
                   />
                 </div>
-                <button
+                <motion.button
                   type="submit"
+                  whileTap={{ scale: 0.96 }}
                   disabled={status === 'sending'}
                   className="group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === 'sending' ? 'Sending…' : 'Send Message'}
-                  {status !== 'sending' && (
-                    <HiArrowRight
-                      className="ml-2 group-hover:translate-x-1 transition-transform"
-                      size={18}
-                    />
-                  )}
-                </button>
+                  <IconSwap
+                    swapKey={status === 'sending' ? 'spinner' : 'arrow'}
+                    className="ml-2"
+                  >
+                    {status === 'sending' ? (
+                      <Spinner />
+                    ) : (
+                      <HiArrowRight
+                        className="group-hover:translate-x-1 transition-transform"
+                        size={18}
+                      />
+                    )}
+                  </IconSwap>
+                </motion.button>
 
-                <div aria-live="polite" className="min-h-[1.25rem]">
-                  {status === 'sent' && (
-                    <p className="flex items-center gap-2 text-sm font-medium text-emerald-600">
-                      <HiCheckCircle size={18} />
-                      Thanks — your message is on its way. We'll be in touch shortly.
-                    </p>
-                  )}
-                  {status === 'error' && (
-                    <p className="text-sm font-medium text-red-600">{errorMessage}</p>
-                  )}
+                {/* The live region itself must stay mounted and unanimated —
+                    animating it is a common way to lose the announcement. Only
+                    its child transitions. */}
+                <div aria-live="polite" role="status" className="min-h-[1.25rem]">
+                  <AnimatePresence mode="wait">
+                    {status === 'sent' && (
+                      <motion.p
+                        key="sent"
+                        initial={{ opacity: 0, transform: 'translateY(-4px)' }}
+                        animate={{ opacity: 1, transform: 'translateY(0px)' }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25, ease: EASE_OUT }}
+                        className="flex items-center gap-2 text-sm font-medium text-success-700"
+                      >
+                        <HiCheckCircle size={18} />
+                        Thanks — your message is on its way. We'll be in touch shortly.
+                      </motion.p>
+                    )}
+                    {status === 'error' && (
+                      <motion.p
+                        key="error"
+                        initial={{ opacity: 0, transform: 'translateY(-4px)' }}
+                        animate={{ opacity: 1, transform: 'translateY(0px)' }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.25, ease: EASE_OUT }}
+                        className="text-sm font-medium text-danger-700"
+                      >
+                        {errorMessage}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
                 </div>
               </form>
             </div>

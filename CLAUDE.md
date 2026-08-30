@@ -48,19 +48,33 @@ All sections use smooth scrolling navigation via CSS `scroll-behavior: smooth` a
 **Important:** This project uses Tailwind CSS v4, which has significant API changes from v3:
 
 - Color tokens are defined as CSS variables in `src/index.css` using `@theme` directive
-- Colors: `--color-primary-{50-900}` and `--color-accent-{50-900}` (blue/purple gradient scheme)
-- Custom utilities: `.text-gradient` and `.bg-gradient-primary` use these CSS variables
+- **Neutrals**: `--color-base-{50-950}` (11 steps). This is the only neutral ramp.
+- **Status**: `--color-success-{400,700}` and `--color-danger-{400,700}`. The `700`
+  steps are for text (verified against both white and `base-50`); the `400` steps
+  are for marks on `base-950` panels.
+- **Fonts**: `--font-display` (Playfair Display) and `--font-sans` (Figtree).
+  Tailwind v4 resolves font utilities from the `--font-*` namespace, **not**
+  `--font-family-*`. Using the wrong prefix silently produces no utility.
+- **Type**: `--text-micro` (11px), one step below `text-xs`, for dense card labels.
 - PostCSS plugin: `@tailwindcss/postcss` (not the old `tailwindcss` plugin)
-- No `tailwind.config.js` theme extension needed - define everything in CSS
+- There is no `tailwind.config.js`. Tailwind v4 ignores that file unless
+  `index.css` opts in via `@config`, so define everything in the `@theme` block.
+
+There are no `--color-primary-*` or `--color-accent-*` tokens, and no
+`.text-gradient` / `.bg-gradient-primary` utilities.
 
 ### Animation Patterns
 
 Uses Framer Motion throughout with consistent patterns:
 
-1. **Section entry animations**: `useInView` hook with `margin: "-100px"` for scroll-triggered reveals
-2. **Staggered children**: Sequential delays (0.1s increments) for list items
-3. **Hover states**: `whileHover` with scale/translate transforms
+1. **Section entry animations**: `useInView` hook with `margin: "-80px"` for scroll-triggered reveals
+2. **Staggered children**: Sequential delays (0.07s increments) for list items;
+   the mobile nav menu uses 0.05s so it opens faster than a section reveals
+3. **Hover states**: `whileHover={{ y: -3 }}` on cards; `whileTap={{ scale: 0.96 }}` on buttons
 4. **Initial load**: Hero uses immediate animation, other sections wait for scroll
+5. **Reduced motion**: `App.tsx` wraps the tree in `<MotionConfig reducedMotion="user">`,
+   with a CSS backstop in `index.css` so revealed content is visible even if a
+   reveal never fires. Keep new motion inside that contract.
 
 ### Component Conventions
 
@@ -95,7 +109,7 @@ These appear in:
 ## Common Customization Points
 
 ### Color Scheme
-Edit `src/index.css` `@theme` section (lines 4-28) to change primary/accent colors.
+Edit the `@theme` block in `src/index.css` to change the base, success, or danger ramps.
 
 ### Services Content
 Two main categories in `src/components/Services.tsx`:

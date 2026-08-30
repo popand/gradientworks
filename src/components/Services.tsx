@@ -91,11 +91,10 @@ const Services = () => {
     delay: number
   }) => (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      initial={{ opacity: 0, transform: 'translateY(20px)' }}
+      animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
       transition={{ duration: 0.5, delay }}
-      whileHover={{ y: -3, transition: { duration: 0.2 } }}
-      className="bg-white rounded-2xl p-6 border border-base-200 hover:border-base-300 hover:shadow-lg transition-all duration-300"
+      className="card-lift bg-white rounded-2xl p-6 border border-base-200 hover:border-base-300 hover:shadow-lg"
     >
       <div className="w-10 h-10 rounded-xl bg-base-100 text-base-700 flex items-center justify-center mb-4">
         {service.icon}
@@ -114,12 +113,12 @@ const Services = () => {
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6 }}
           className="text-center mb-20"
         >
-          <p className="text-sm font-semibold tracking-widest uppercase text-base-400 mb-4">
+          <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             What We Do
           </p>
           <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
@@ -179,8 +178,8 @@ const Services = () => {
 
         {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          initial={{ opacity: 0, transform: 'translateY(24px)' }}
+          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
           transition={{ duration: 0.6, delay: 0.85 }}
           className="bg-base-950 rounded-3xl p-10 md:p-14 text-center"
         >
@@ -191,7 +190,8 @@ const Services = () => {
             Let's discuss how our expertise can help you achieve your goals with
             the perfect blend of software and AI solutions.
           </p>
-          <button
+          <motion.button
+            whileTap={{ scale: 0.96 }}
             onClick={() => {
               const el = document.querySelector('#contact')
               if (el) el.scrollIntoView({ behavior: 'smooth' })
@@ -199,7 +199,7 @@ const Services = () => {
             className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-base-950 bg-white rounded-full hover:bg-base-100 transition-colors"
           >
             Start a Conversation
-          </button>
+          </motion.button>
         </motion.div>
       </div>
     </section>
