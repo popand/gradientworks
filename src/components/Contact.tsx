@@ -99,7 +99,7 @@ const Contact = () => {
           <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             Get Started
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-heading text-base-950 leading-[1.05]">
             Let's build something
             <br />
             <em>extraordinary.</em>
@@ -160,7 +160,7 @@ const Contact = () => {
             className="lg:col-span-3"
           >
             <div className="bg-base-50 rounded-3xl p-7 md:p-9 border border-base-200">
-              <h3 className="font-display text-xl font-bold text-base-950 mb-7 tracking-tight">
+              <h3 className="font-display text-xl font-bold text-base-950 mb-7 tracking-title">
                 Send Us a Message
               </h3>
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -253,11 +253,10 @@ const Contact = () => {
                     placeholder="Tell us about your project…"
                   />
                 </div>
-                <motion.button
+                <button
                   type="submit"
-                  whileTap={{ scale: 0.96 }}
                   disabled={status === 'sending'}
-                  className="group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="press group w-full inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === 'sending' ? 'Sending…' : 'Send Message'}
                   <IconSwap
@@ -268,12 +267,12 @@ const Contact = () => {
                       <Spinner />
                     ) : (
                       <HiArrowRight
-                        className="group-hover:translate-x-1 transition-transform"
+                        className="group-hover:translate-x-1 transition-transform duration-200 ease-[var(--ease-out)]"
                         size={18}
                       />
                     )}
                   </IconSwap>
-                </motion.button>
+                </button>
 
                 {/* The live region itself must stay mounted and unanimated —
                     animating it is a common way to lose the announcement. Only

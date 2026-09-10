@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { HiMenu, HiX } from 'react-icons/hi'
 import logo from '../assets/logo.png'
 import IconSwap from './IconSwap'
-import { EASE_OUT } from '../motion'
+import { EASE_OUT, scrollToSection } from '../motion'
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -54,16 +54,13 @@ const Navigation = () => {
     { name: 'Contact', href: '#contact' },
   ]
 
-  const scrollToSection = (
+  const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
     href: string
   ) => {
     e.preventDefault()
-    const el = document.querySelector(href)
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' })
-      setIsMobileMenuOpen(false)
-    }
+    scrollToSection(href)
+    setIsMobileMenuOpen(false)
   }
 
   return (
@@ -71,10 +68,14 @@ const Navigation = () => {
       initial={{ transform: 'translateY(-100%)' }}
       animate={{ transform: 'translateY(0%)' }}
       transition={{ duration: 0.4, ease: EASE_OUT }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
+      /* One persistent material rather than a bar that materialises at 20px:
+         chrome that appears and disappears reads as two different objects.
+         Only the edge treatment changes on scroll. 0.72 alpha is low enough
+         that the blur does real work — at 0.9 it was nearly wasted. */
+      className={`nav-material fixed top-0 left-0 right-0 z-50 bg-white/72 backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-300 ${
         isScrolled || isMobileMenuOpen
-          ? 'bg-white/90 backdrop-blur-md shadow-[0_1px_0_0_rgba(0,0,0,0.04)]'
-          : 'bg-transparent'
+          ? 'shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
+          : 'shadow-none'
       }`}
     >
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -82,7 +83,7 @@ const Navigation = () => {
           {/* Logo */}
           <a
             href="#home"
-            onClick={(e) => scrollToSection(e, '#home')}
+            onClick={(e) => handleNavClick(e, '#home')}
             className="flex items-center gap-2.5"
           >
             <img src={logo} alt="GradientWorks" className="h-8 w-8" />
@@ -97,7 +98,7 @@ const Navigation = () => {
               <a
                 key={item.name}
                 href={item.href}
-                onClick={(e) => scrollToSection(e, item.href)}
+                onClick={(e) => handleNavClick(e, item.href)}
                 className="text-sm text-base-500 hover:text-base-950 transition-colors font-medium"
               >
                 {item.name}
@@ -107,13 +108,12 @@ const Navigation = () => {
 
           {/* CTA */}
           <div className="hidden md:block">
-            <motion.button
-              whileTap={{ scale: 0.96 }}
-              onClick={(e) => scrollToSection(e, '#contact')}
-              className="px-6 py-2.5 text-sm font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors"
+            <button
+              onClick={(e) => handleNavClick(e, '#contact')}
+              className="press px-6 py-2.5 text-sm font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors"
             >
               Let's Talk
-            </motion.button>
+            </button>
           </div>
 
           {/* Mobile toggle */}
@@ -135,7 +135,15 @@ const Navigation = () => {
       {/* Mobile menu. The panel slides on a transform rather than animating
           height, so no frame costs a layout pass. The outer div is a clipping
           mask starting below the header bar, so the panel is masked on the way
-          out instead of painting over the logo. */}
+          out instead of painting over the logo.
+
+          Springs, not durations: this is the one dismissible surface on the
+          site, so a double-tap has to be able to reverse it mid-flight. A
+          spring animates from the live on-screen value, so the reversal starts
+          where the panel actually is instead of jumping. bounce 0 because the
+          panel was tapped open, not thrown — overshoot on a menu reads wrong.
+          Both channels share one spring so opacity can't finish 70ms before
+          the transform the way the old 0.15s/0.22s pair did. */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -144,14 +152,14 @@ const Navigation = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.15, ease: EASE_OUT }}
+            transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
             className="md:hidden absolute inset-x-0 top-full overflow-hidden"
           >
             <motion.div
               initial={{ transform: 'translateY(-100%)' }}
               animate={{ transform: 'translateY(0%)' }}
               exit={{ transform: 'translateY(-100%)' }}
-              transition={{ duration: 0.22, ease: EASE_OUT }}
+              transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
               className="bg-white border-t border-base-100 shadow-lg shadow-black/5"
             >
             <div className="px-5 py-6 space-y-1">
@@ -159,10 +167,10 @@ const Navigation = () => {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  onClick={(e) => scrollToSection(e, item.href)}
+                  onClick={(e) => handleNavClick(e, item.href)}
                   initial={{ opacity: 0, transform: 'translateX(-12px)' }}
                   animate={{ opacity: 1, transform: 'translateX(0px)' }}
-                  transition={{ duration: 0.18, delay: 0.06 + i * 0.03, ease: EASE_OUT }}
+                  transition={{ duration: 0.18, delay: 0.04 + i * 0.02, ease: EASE_OUT }}
                   className="block px-4 py-3 text-base-600 hover:text-base-950 hover:bg-base-50 rounded-xl transition-colors font-medium"
                 >
                   {item.name}
@@ -173,12 +181,11 @@ const Navigation = () => {
                 animate={{ opacity: 1, transform: 'translateX(0px)' }}
                 transition={{
                   duration: 0.18,
-                  delay: 0.06 + navItems.length * 0.03,
+                  delay: 0.04 + navItems.length * 0.02,
                   ease: EASE_OUT,
                 }}
-                whileTap={{ scale: 0.96 }}
-                onClick={(e) => scrollToSection(e, '#contact')}
-                className="w-full mt-3 px-6 py-3 text-sm font-semibold text-white bg-base-950 rounded-full"
+                onClick={(e) => handleNavClick(e, '#contact')}
+                className="press w-full mt-3 px-6 py-3 text-sm font-semibold text-white bg-base-950 rounded-full"
               >
                 Let's Talk
               </motion.button>

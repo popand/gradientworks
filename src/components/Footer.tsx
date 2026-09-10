@@ -1,6 +1,7 @@
 import { HiMail } from 'react-icons/hi'
 import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import logo from '../assets/logo.png'
+import { scrollToSection } from '../motion'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -27,13 +28,12 @@ const Footer = () => {
     { icon: <FaTwitter size={18} />, href: '#', label: 'Twitter' },
   ]
 
-  const scrollToSection = (
+  const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement>,
     href: string
   ) => {
     e.preventDefault()
-    const element = document.querySelector(href)
-    if (element) element.scrollIntoView({ behavior: 'smooth' })
+    scrollToSection(href)
   }
 
   return (
@@ -44,7 +44,7 @@ const Footer = () => {
           <div className="md:col-span-5">
             <a
               href="#home"
-              onClick={(e) => scrollToSection(e, '#home')}
+              onClick={(e) => handleNavClick(e, '#home')}
               className="inline-flex items-center gap-2.5 mb-5"
             >
               <img src={logo} alt="GradientWorks" className="h-8 w-8" />
@@ -76,7 +76,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    onClick={(e) => scrollToSection(e, link.href)}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="text-sm text-base-500 hover:text-base-950 transition-colors"
                   >
                     {link.name}
@@ -96,7 +96,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <a
                     href={link.href}
-                    onClick={(e) => scrollToSection(e, link.href)}
+                    onClick={(e) => handleNavClick(e, link.href)}
                     className="text-sm text-base-500 hover:text-base-950 transition-colors"
                   >
                     {link.name}
