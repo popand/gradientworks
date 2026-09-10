@@ -48,7 +48,7 @@ const About = () => {
           <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             Who We Are
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-heading text-base-950 leading-[1.05]">
             We bridge the gap between
             <br />
             <em>software & intelligence.</em>
@@ -63,7 +63,7 @@ const About = () => {
             animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
             transition={{ duration: 0.6, delay: 0.15 }}
           >
-            <h3 className="font-display text-2xl font-bold text-base-950 mb-6 tracking-tight">
+            <h3 className="font-display text-2xl font-bold text-base-950 mb-6 tracking-heading">
               Our Mission
             </h3>
             <p className="text-base-500 text-lg leading-relaxed mb-5">
@@ -87,7 +87,7 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="bg-base-950 rounded-3xl p-8 md:p-10"
           >
-            <h3 className="font-display text-xl font-bold text-white mb-8 tracking-tight">
+            <h3 className="font-display text-xl font-bold text-white mb-8 tracking-title">
               Why Choose Us
             </h3>
             <ul className="space-y-5">
@@ -132,7 +132,7 @@ const About = () => {
               <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-5">
                 {feature.icon}
               </div>
-              <h4 className="font-display text-lg font-bold text-base-950 mb-2 tracking-tight">
+              <h4 className="font-display text-lg font-bold text-base-950 mb-2 tracking-title">
                 {feature.title}
               </h4>
               <p className="text-base-500 text-sm leading-relaxed">

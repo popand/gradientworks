@@ -79,7 +79,7 @@ const WhyUs = () => {
           <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
             The Difference
           </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-base-950 leading-[1.05]">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-heading text-base-950 leading-[1.05]">
             Why choose
             <br />
             <em>GradientWorks?</em>
@@ -104,7 +104,7 @@ const WhyUs = () => {
                   {item.tag}
                 </span>
               </div>
-              <h3 className="font-display text-xl font-bold text-base-950 mb-2 tracking-tight">
+              <h3 className="font-display text-xl font-bold text-base-950 mb-2 tracking-title">
                 {item.title}
               </h3>
               <p className="text-base-500 text-sm leading-relaxed">
@@ -121,7 +121,7 @@ const WhyUs = () => {
           transition={{ duration: 0.6, delay: 0.45 }}
           className="bg-base-950 rounded-3xl p-8 md:p-12 mb-20"
         >
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-10 tracking-tight text-center">
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-10 tracking-heading text-center">
             Perfect Solutions For Every Scenario
           </h3>
           <div className="grid md:grid-cols-2 gap-4">
@@ -156,7 +156,7 @@ const WhyUs = () => {
           transition={{ duration: 0.6, delay: 0.7 }}
           className="text-center"
         >
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-base-950 mb-4 tracking-tight">
+          <h3 className="font-display text-2xl md:text-3xl font-bold text-base-950 mb-4 tracking-heading">
             Your Success Is Our Mission
           </h3>
           <p className="text-base-500 mb-12 max-w-xl mx-auto">
