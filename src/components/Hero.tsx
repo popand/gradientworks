@@ -1,13 +1,9 @@
 import { motion } from 'framer-motion'
 import { HiArrowRight } from 'react-icons/hi'
 import { HiCommandLine, HiCpuChip, HiSparkles, HiCloud } from 'react-icons/hi2'
+import { EASE_OUT, scrollToSection } from '../motion'
 
 const Hero = () => {
-  const scrollToSection = (sectionId: string) => {
-    const element = document.querySelector(sectionId)
-    if (element) element.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section id="home" className="pt-32 md:pt-40 pb-16 md:pb-24">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
@@ -17,8 +13,8 @@ const Hero = () => {
           <motion.h1
             initial={{ opacity: 0, transform: 'translateY(24px)' }}
             animate={{ opacity: 1, transform: 'translateY(0px)' }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-tight leading-[0.95] text-base-950 mb-8"
+            transition={{ duration: 0.7, ease: EASE_OUT }}
+            className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black tracking-display leading-[0.95] text-base-950 mb-8"
           >
             Build Intelligent
             <br />
@@ -45,24 +41,22 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.25 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <motion.button
-              whileTap={{ scale: 0.96 }}
+            <button
               onClick={() => scrollToSection('#contact')}
-              className="group inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors duration-200"
+              className="press group inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors duration-200"
             >
               Book a Consultation
               <HiArrowRight
-                className="ml-2 group-hover:translate-x-1 transition-transform"
+                className="ml-2 group-hover:translate-x-1 transition-transform duration-200 ease-[var(--ease-out)]"
                 size={18}
               />
-            </motion.button>
-            <motion.button
-              whileTap={{ scale: 0.96 }}
+            </button>
+            <button
               onClick={() => scrollToSection('#services')}
-              className="inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-base-700 border-2 border-base-200 rounded-full hover:border-base-400 hover:bg-base-50 transition-colors duration-200"
+              className="press inline-flex items-center justify-center px-8 py-3.5 text-base font-semibold text-base-700 border-2 border-base-200 rounded-full hover:border-base-400 hover:bg-base-50 transition-colors duration-200"
             >
               Explore Services
-            </motion.button>
+            </button>
           </motion.div>
         </div>
 
@@ -70,7 +64,7 @@ const Hero = () => {
         <motion.div
           initial={{ opacity: 0, transform: 'translateY(40px)' }}
           animate={{ opacity: 1, transform: 'translateY(0px)' }}
-          transition={{ duration: 0.9, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.6, delay: 0.3, ease: EASE_OUT }}
           className="mt-20 md:mt-28"
         >
           <div className="hero-gradient rounded-[2rem] p-3 sm:p-4 relative overflow-hidden">
@@ -85,14 +79,14 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, transform: 'translateY(16px)' }}
                 animate={{ opacity: 1, transform: 'translateY(0px)' }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="md:row-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
+                transition={{ duration: 0.4, delay: 0.4 }}
+                className="md:row-span-2 card-material bg-white/95 border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
                     <HiCpuChip className="w-4.5 h-4.5" />
                   </div>
-                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-title">
                     AI Agents
                   </h3>
                   <p className="text-sm text-base-600 leading-relaxed mb-4">
@@ -201,8 +195,8 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, transform: 'translateY(16px)' }}
                 animate={{ opacity: 1, transform: 'translateY(0px)' }}
-                transition={{ duration: 0.5, delay: 0.7 }}
-                className="md:col-span-2 bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5"
+                transition={{ duration: 0.4, delay: 0.45 }}
+                className="md:col-span-2 card-material bg-white/95 border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5"
               >
                 <div className="flex items-start justify-between mb-3">
                   <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center">
@@ -219,7 +213,7 @@ const Hero = () => {
                     ))}
                   </div>
                 </div>
-                <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-title">
                   Full Stack Development
                 </h3>
                 <p className="text-sm text-base-600 leading-relaxed mb-4">
@@ -263,14 +257,14 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, transform: 'translateY(16px)' }}
                 animate={{ opacity: 1, transform: 'translateY(0px)' }}
-                transition={{ duration: 0.5, delay: 0.8 }}
-                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
+                transition={{ duration: 0.4, delay: 0.5 }}
+                className="card-material bg-white/95 border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
                     <HiSparkles className="w-4.5 h-4.5" />
                   </div>
-                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-title">
                     RAG Systems
                   </h3>
                   <p className="text-sm text-base-600 leading-relaxed mb-3">
@@ -329,14 +323,14 @@ const Hero = () => {
               <motion.div
                 initial={{ opacity: 0, transform: 'translateY(16px)' }}
                 animate={{ opacity: 1, transform: 'translateY(0px)' }}
-                transition={{ duration: 0.5, delay: 0.9 }}
-                className="bg-white/85 backdrop-blur-xl border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
+                transition={{ duration: 0.4, delay: 0.55 }}
+                className="card-material bg-white/95 border border-white/60 rounded-2xl p-5 shadow-xl shadow-black/5 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-9 h-9 rounded-xl bg-base-950 text-white flex items-center justify-center mb-3">
                     <HiCloud className="w-4.5 h-4.5" />
                   </div>
-                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-tight">
+                  <h3 className="font-display text-lg font-bold text-base-950 mb-1.5 tracking-title">
                     Cloud Native
                   </h3>
                   <p className="text-sm text-base-600 leading-relaxed mb-3">
