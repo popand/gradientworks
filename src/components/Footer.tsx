@@ -1,129 +1,94 @@
-import { HiMail } from 'react-icons/hi'
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa'
-import logo from '../assets/logo.png'
+import { FaGithub, FaLinkedin, FaXTwitter } from 'react-icons/fa6'
+import Logo from './Logo'
 import { scrollToSection } from '../motion'
+
+const columns = [
+  {
+    head: 'Services',
+    links: [
+      { name: 'Software development', href: '#services' },
+      { name: 'AI agents', href: '#services' },
+      { name: 'RAG applications', href: '#services' },
+      { name: 'Ontology engineering', href: '#services' },
+      { name: 'Cloud solutions', href: '#services' },
+    ],
+  },
+  {
+    head: 'Company',
+    links: [
+      { name: 'About', href: '#about' },
+      { name: 'Services', href: '#services' },
+      { name: 'Why us', href: '#why-us' },
+      { name: 'Contact', href: '#contact' },
+    ],
+  },
+]
+
+const socialLinks = [
+  { icon: <FaGithub size={15} />, href: '#', label: 'GitHub' },
+  { icon: <FaLinkedin size={15} />, href: '#', label: 'LinkedIn' },
+  { icon: <FaXTwitter size={15} />, href: '#', label: 'X' },
+]
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
-  const footerLinks = {
-    services: [
-      { name: 'Software Development', href: '#services' },
-      { name: 'AI Agents', href: '#services' },
-      { name: 'RAG Applications', href: '#services' },
-      { name: 'Ontology Engineering', href: '#services' },
-      { name: 'Cloud Solutions', href: '#services' },
-    ],
-    company: [
-      { name: 'About', href: '#about' },
-      { name: 'Services', href: '#services' },
-      { name: 'Why Us', href: '#why-us' },
-      { name: 'Contact', href: '#contact' },
-    ],
-  }
-
-  const socialLinks = [
-    { icon: <FaGithub size={18} />, href: '#', label: 'GitHub' },
-    { icon: <FaLinkedin size={18} />, href: '#', label: 'LinkedIn' },
-    { icon: <FaTwitter size={18} />, href: '#', label: 'Twitter' },
-  ]
-
-  const handleNavClick = (
-    e: React.MouseEvent<HTMLAnchorElement>,
-    href: string
-  ) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     scrollToSection(href)
   }
 
   return (
-    <footer className="bg-base-50 border-t border-base-200">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 mb-14">
-          {/* Brand */}
-          <div className="md:col-span-5">
+    <footer className="lm-footer lm-grain">
+      <div className="wrap">
+        <div className="lm-footer-grid">
+          <div>
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className="inline-flex items-center gap-2.5 mb-5"
+              className="lm-logo gap-2.5"
+              aria-label="GradientWorks home"
             >
-              <img src={logo} alt="GradientWorks" className="h-8 w-8" />
-              <span className="text-lg font-display font-bold text-base-950 tracking-tight">
+              <Logo size={30} />
+              <span className="font-serif" style={{ fontSize: 22, fontWeight: 560, letterSpacing: 'var(--tracking-display)' }}>
                 GradientWorks
               </span>
             </a>
-            <p className="text-base-500 text-sm leading-relaxed mb-5 max-w-sm">
-              Expert consulting services for software development and agentic AI
-              solutions. Bridging traditional engineering with cutting-edge AI
-              innovation.
+            <div className="lm-footer-tag">Software & agentic AI · Toronto</div>
+            <p className="mt-5" style={{ color: 'var(--band-sub)', fontSize: 'var(--text-btn-sm)', lineHeight: 1.6, maxWidth: 360 }}>
+              Expert consulting for software development and agentic AI,
+              bridging traditional engineering with what is now possible.
             </p>
-            <a
-              href="mailto:contact@gradientworks.ca"
-              className="inline-flex items-center gap-2 text-sm text-base-500 hover:text-base-950 transition-colors"
-            >
-              <HiMail size={16} />
-              contact@gradientworks.ca
-            </a>
           </div>
 
-          {/* Services */}
-          <div className="md:col-span-3 md:col-start-7">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-500 mb-4">
-              Services
-            </h4>
-            <ul className="space-y-2.5">
-              {footerLinks.services.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-sm text-base-500 hover:text-base-950 transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
+          {columns.map((col) => (
+            <div key={col.head}>
+              <span className="lm-footer-head">{col.head}</span>
+              {col.links.map((link) => (
+                <a key={link.name} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="link">
+                  {link.name}
+                </a>
               ))}
-            </ul>
-          </div>
+            </div>
+          ))}
 
-          {/* Company */}
-          <div className="md:col-span-2">
-            <h4 className="text-xs font-semibold tracking-widest uppercase text-base-500 mb-4">
-              Company
-            </h4>
-            <ul className="space-y-2.5">
-              {footerLinks.company.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    className="text-sm text-base-500 hover:text-base-950 transition-colors"
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div>
+            <span className="lm-footer-head">Contact</span>
+            <a href="mailto:contact@gradientworks.ca" className="link">contact@gradientworks.ca</a>
+            <a href="#contact" onClick={(e) => handleNavClick(e, '#contact')} className="link">Book a call</a>
           </div>
         </div>
 
-        {/* Bottom */}
-        <div className="border-t border-base-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-base-500">
-            &copy; {currentYear} GradientWorks. All rights reserved.
-          </p>
-          <div className="flex items-center gap-3">
+        <div className="lm-footer-base">
+          <span>© {currentYear} GradientWorks — All rights reserved</span>
+          <span className="flex gap-3.5">
             {socialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="w-9 h-9 rounded-full border border-base-200 flex items-center justify-center text-base-500 hover:text-base-950 hover:border-base-400 transition-colors duration-200"
-              >
+              <a key={social.label} href={social.href} aria-label={social.label} className="lm-icon-btn">
                 {social.icon}
               </a>
             ))}
-          </div>
+          </span>
+          <span>Toronto, ON</span>
         </div>
       </div>
     </footer>

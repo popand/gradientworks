@@ -1,144 +1,109 @@
 import { motion, useInView } from 'framer-motion'
 import { useRef } from 'react'
-import { HiLightningBolt, HiTrendingUp, HiUserGroup } from 'react-icons/hi'
+import { revealWhen } from '../motion'
+
+const features = [
+  {
+    step: '01 · Innovation',
+    title: 'Innovation first',
+    description:
+      'We stay at the front of the field, bringing you the latest advances in software and AI without the hype.',
+  },
+  {
+    step: '02 · Results',
+    title: 'Results driven',
+    description:
+      'Every engagement is scoped around a measurable business outcome, not a feature list.',
+  },
+  {
+    step: '03 · Partnership',
+    title: 'Partnership approach',
+    description:
+      'We work as strategic partners, not vendors, and stay invested well past launch.',
+  },
+]
+
+const checklist = [
+  'Depth in both traditional software and AI systems',
+  'A track record of shipping solutions that scale',
+  'Agile delivery in short, reviewable increments',
+  'End-to-end, from concept to production',
+  'Ongoing support once it is live',
+]
 
 const About = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
-  const features = [
-    {
-      icon: <HiLightningBolt className="w-5 h-5" />,
-      title: 'Innovation First',
-      description:
-        'We stay at the forefront of technology, bringing you the latest advancements in software and AI.',
-    },
-    {
-      icon: <HiTrendingUp className="w-5 h-5" />,
-      title: 'Results Driven',
-      description:
-        'Our solutions are designed to deliver measurable business outcomes and drive growth.',
-    },
-    {
-      icon: <HiUserGroup className="w-5 h-5" />,
-      title: 'Partnership Approach',
-      description:
-        'We work closely with you as strategic partners, not just vendors, to ensure your success.',
-    },
-  ]
-
-  const checklistItems = [
-    'Expertise in both traditional software and AI technologies',
-    'Proven track record of delivering scalable solutions',
-    'Agile methodology for rapid, iterative development',
-    'End-to-end services from concept to deployment',
-    'Ongoing support and maintenance',
-  ]
-
   return (
-    <section id="about" ref={ref} className="py-24 md:py-32 bg-base-50">
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, transform: 'translateY(24px)' }}
-          animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-20"
-        >
-          <p className="text-sm font-semibold tracking-widest uppercase text-base-500 mb-4">
-            Who We Are
-          </p>
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black tracking-heading text-base-950 leading-[1.05]">
+    <section id="about" ref={ref} className="lm-section">
+      <div className="wrap">
+        <motion.div {...revealWhen(isInView, 0)} className="lm-section-head">
+          <div className="eyebrow">Who we are</div>
+          <h2>
             We bridge the gap between
             <br />
-            <em>software & intelligence.</em>
+            software and <em>intelligence.</em>
           </h2>
+          <p className="sub">
+            One team that can design the system, build it, and teach it to
+            reason over your data.
+          </p>
         </motion.div>
 
-        {/* Two columns */}
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-20">
-          {/* Mission */}
-          <motion.div
-            initial={{ opacity: 0, transform: 'translateY(24px)' }}
-            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
-            transition={{ duration: 0.6, delay: 0.15 }}
-          >
-            <h3 className="font-display text-2xl font-bold text-base-950 mb-6 tracking-heading">
-              Our Mission
-            </h3>
-            <p className="text-base-500 text-lg leading-relaxed mb-5">
-              At GradientWorks, we believe in the power of intelligent software
-              to transform businesses. Our mission is to empower organizations
-              with robust software solutions enhanced by the latest advancements
-              in artificial intelligence.
+        <div className="lm-grid-2 items-start" style={{ marginTop: 'var(--stack-gap)' }}>
+          <motion.div {...revealWhen(isInView, 1)}>
+            <h3 className="text-h3">Our mission</h3>
+            <p className="text-fg-soft mt-5" style={{ lineHeight: 1.65 }}>
+              We believe intelligent software should be calm to use and honest
+              about what it knows. Our mission is to give organisations robust
+              systems, strengthened by the latest advances in AI, that people
+              actually trust.
             </p>
-            <p className="text-base-500 text-lg leading-relaxed">
-              Whether you need a custom web application, a mobile platform, or an
-              intelligent agent powered by RAG technology, we bring deep technical
-              expertise and a commitment to excellence in every project we
-              undertake.
+            <p className="text-fg-soft mt-4" style={{ lineHeight: 1.65 }}>
+              Whether you need a custom web application, a mobile platform, or
+              an agent grounded in your own knowledge base, we bring deep
+              technical judgement and a commitment to finishing well.
             </p>
           </motion.div>
 
-          {/* Checklist card */}
+          {/* The one dark surface in the section: the DS on-ink treatment with
+              the yellow eyebrow and cream copy. */}
           <motion.div
-            initial={{ opacity: 0, transform: 'translateY(24px)' }}
-            animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="bg-base-950 rounded-3xl p-8 md:p-10"
+            {...revealWhen(isInView, 2)}
+            className="on-ink lm-grain rounded-card"
+            style={{ padding: 'clamp(28px, 3.5vw, 44px)' }}
           >
-            <h3 className="font-display text-xl font-bold text-white mb-8 tracking-title">
-              Why Choose Us
-            </h3>
-            <ul className="space-y-5">
-              {checklistItems.map((item, index) => (
+            <div className="eyebrow left" style={{ marginTop: 0 }}>Why teams choose us</div>
+            <ul className="flex flex-col gap-4 mt-2">
+              {checklist.map((item, index) => (
                 <motion.li
-                  key={index}
-                  initial={{ opacity: 0, transform: 'translateX(16px)' }}
-                  animate={isInView ? { opacity: 1, transform: 'translateX(0px)' } : {}}
-                  transition={{ duration: 0.4, delay: 0.4 + index * 0.07 }}
-                  className="flex items-start gap-3"
+                  key={item}
+                  {...revealWhen(isInView, 3 + index)}
+                  className="flex items-start gap-3.5"
+                  style={{ color: 'var(--foot-ink)', fontSize: 'var(--text-btn)', lineHeight: 1.5 }}
                 >
-                  <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-white flex items-center justify-center">
-                    <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                      <path
-                        d="M1 4L3.5 6.5L9 1"
-                        stroke="var(--color-base-950)"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                  <span className="text-white/70 text-sm leading-relaxed">
-                    {item}
-                  </span>
+                  <span className="lm-dot" aria-hidden="true" />
+                  {item}
                 </motion.li>
               ))}
             </ul>
           </motion.div>
         </div>
 
-        {/* Feature cards */}
-        <div className="grid md:grid-cols-3 gap-5">
+        <div className="lm-grid-3">
           {features.map((feature, index) => (
-            <motion.div
+            <motion.article
               key={feature.title}
-              initial={{ opacity: 0, transform: 'translateY(20px)' }}
-              animate={isInView ? { opacity: 1, transform: 'translateY(0px)' } : {}}
-              transition={{ duration: 0.5, delay: 0.5 + index * 0.08 }}
-              className="card-lift bg-white rounded-2xl p-7 border border-base-200 hover:border-base-300 hover:shadow-lg"
+              {...revealWhen(isInView, 4 + index)}
+              className="lm-card hoverable"
             >
-              <div className="w-10 h-10 rounded-xl bg-base-950 text-white flex items-center justify-center mb-5">
-                {feature.icon}
+              <div className="lm-card-body">
+                <span className="step-num">{feature.step}</span>
+                <h3>{feature.title}</h3>
+                <p>{feature.description}</p>
               </div>
-              <h4 className="font-display text-lg font-bold text-base-950 mb-2 tracking-title">
-                {feature.title}
-              </h4>
-              <p className="text-base-500 text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </motion.div>
+            </motion.article>
           ))}
         </div>
       </div>

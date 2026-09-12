@@ -1,15 +1,34 @@
 /**
- * Shared motion values. Mirrors --ease-out in index.css so CSS transitions and
- * Motion animations use one curve instead of four hardcoded copies.
+ * Shared motion values, mirroring the Lemon design-system tokens in
+ * src/styles/lemon/colors_and_type.css so CSS transitions and Motion
+ * animations use one curve and one rhythm.
+ *
+ *   --ease-smooth  cubic-bezier(.2,.7,.3,1)   default for everything
+ *   --dur-reveal   700ms                       scroll reveal
+ *   --reveal-d1/2/3  80 / 160 / 240 ms         stagger between siblings
  */
-export const EASE_OUT = [0.22, 1, 0.36, 1] as const
+export const EASE_SMOOTH = [0.2, 0.7, 0.3, 1] as const
 
-/** Section reveal: slow enough to read as deliberate, under the 300ms UI cap
- *  only because it is a scroll-triggered entrance, not an interaction. */
-export const REVEAL_DURATION = 0.5
+/** Section reveal: opacity 0→1 with a 14 px rise. */
+export const REVEAL_DURATION = 0.7
+export const REVEAL_RISE = 14
 
 /** Delay between staggered siblings. */
-export const STAGGER = 0.07
+export const STAGGER = 0.08
+
+/** The DS reveal, as Motion props. `delay` is in stagger steps (0, 1, 2 …). */
+export const reveal = (step = 0) => ({
+  initial: { opacity: 0, transform: `translateY(${REVEAL_RISE}px)` },
+  animate: { opacity: 1, transform: 'translateY(0px)' },
+  transition: { duration: REVEAL_DURATION, delay: step * STAGGER, ease: EASE_SMOOTH },
+})
+
+/** Same reveal, gated on an in-view flag (sections below the fold). */
+export const revealWhen = (visible: boolean, step = 0) => ({
+  initial: { opacity: 0, transform: `translateY(${REVEAL_RISE}px)` },
+  animate: visible ? { opacity: 1, transform: 'translateY(0px)' } : {},
+  transition: { duration: REVEAL_DURATION, delay: step * STAGGER, ease: EASE_SMOOTH },
+})
 
 const prefersReducedMotion = () =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches

@@ -1,200 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&family=Inter:opsz,wght@14..32,100..900&family=Geist+Mono:wght@100..900&display=swap');
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Figtree:ital,wght@0,300..700;1,300..700&display=swap');
 
+/* Lemon Design System — vendored verbatim from the Claude Design project
+   "Lemon Design System". These three files ARE the token source of truth;
+   edit them only by re-syncing from the design system. */
+@import "./styles/lemon/fonts.css";
+@import "./styles/lemon/colors_and_type.css";
+@import "./styles/lemon/components.css";
+
+/* Tailwind theme = the design system, nothing else.
+   Every default namespace that carries a design decision is cleared, then
+   re-populated from Lemon tokens. A utility like `text-gray-500`,
+   `rounded-xl` or `shadow-lg` therefore produces NO CSS — an off-token class
+   fails loudly in the audit instead of quietly shipping a foreign value.
+   Spacing keeps Tailwind's 4 px scale; layout is not a brand decision. */
 @theme {
-  --color-base-50: #fafafa;
-  --color-base-100: #f5f5f5;
-  --color-base-200: #e5e5e5;
-  --color-base-300: #d4d4d4;
-  --color-base-400: #a3a3a3;
-  --color-base-500: #737373;
-  --color-base-600: #525252;
-  --color-base-700: #404040;
-  --color-base-800: #262626;
-  --color-base-900: #171717;
-  --color-base-950: #0a0a0a;
+  --color-*: initial;
+  --font-*: initial;
+  --radius-*: initial;
+  --shadow-*: initial;
+  --text-*: initial;
+  --ease-*: initial;
+  --tracking-*: initial;
 
-  /* Status roles. The 700 steps are for text, verified against both light
-     grounds (white and base-50); success-400 is for marks on base-950 panels. */
-  --color-success-400: #34d399;
-  --color-success-700: #047857;
-  --color-danger-700: #b91c1c;
+  /* Brand */
+  --color-yellow: #fff67e;
+  --color-yellow-deep: #ecd44a;
+  --color-mustard: #c9aa3b;
+  --color-violet: #574cfd;
+  --color-violet-soft: #c5c2ff;
+  --color-peri: #9b94ff;
+  --color-lav: #ca97fd;
+  --color-purple: #7a3eb6;
+  --color-plum: #2c0d4b;
+  --color-green: #bcec70;
+  --color-olive: #7fab32;
+  --color-forest: #487113;
+  --color-peach: #ffcb87;
+  --color-orange: #ffaf3e;
 
-  /* Tailwind v4 resolves font utilities from --font-*, not --font-family-*.
-     These generate font-display and font-sans. */
-  --font-display: 'Playfair Display', Georgia, serif;
-  --font-sans: 'Figtree', system-ui, sans-serif;
+  /* Neutrals + ink steps */
+  --color-white: #ffffff;
+  --color-cream: #fbfbed;
+  --color-sage: #eaead7;
+  --color-sage2: #bdbda5;
+  --color-gray: #6a6a5c;
+  --color-ink: #1a1a17;
+  --color-ink-sub: #33332b;
+  --color-ink-stage: #3a3a30;
+  --color-ink-caption: #42423a;
+  --color-fg-soft: #4a4a40;
 
-  /* One step below text-xs, for the Hero card micro-labels. */
-  --text-micro: 0.6875rem;
-  --text-micro--line-height: 1.45;
+  /* Surfaces & washes */
+  --color-surface-sand: #f4efc9;
+  --color-lemon-wash: #fffef6;
+  --color-lemon-wash-deep: #fffbe4;
+  --color-love-wash: #fffde9;
+  --color-love-wash-deep: #fff8c4;
+  --color-leaf-wash: #dff7b0;
+  --color-leaf-ink: #2c3a0b;
+  --color-amber-wash: #ffe1b3;
+  --color-amber-ink: #4a2e05;
+  --color-key-face: #fffdf2;
+  --color-key-face-deep: #f3f0db;
+  --color-key-edge: #d9d6bc;
 
-  /* Motion. --ease-out is the curve already used across the section reveals;
-     it lives here so CSS and JS share one value instead of four copies. */
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  /* On ink */
+  --color-band-sub: #b9b9a8;
+  --color-band-foot: #8f8f80;
+  --color-foot-ink: #dddccb;
+  --color-glass-ink: #ededdf;
+  --color-voice-text: #dbdbcb;
 
-  /* Tracking is a function of size, never one value for the whole ramp.
-     Playfair reads too loose as it grows and too cramped at card sizes, so
-     each tier gets the value that is right at that size. */
-  --tracking-display: -0.04em;
-  --tracking-heading: -0.03em;
-  --tracking-title: -0.015em;
+  /* Status */
+  --color-danger: #b3261e;
+  --color-danger-ink: #8a1c12;
+  --color-flag-clay: #c2410c;
+
+  /* Lines */
+  --color-line: #1a1a171a;
+  --color-line-strong: #1a1a172e;
+
+  /* Type */
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --text-tag: 9.5px;
+  --text-micro: 11.5px;
+  --text-caption: 12px;
+  --text-body-sm: 13.5px;
+  --text-body-lg: 14.5px;
+  --text-btn-sm: 15px;
+  --text-nav: 15.5px;
+  --text-btn: 16px;
+  --text-body: 17px;
+  --text-sub: clamp(17px, 1.45vw, 19.5px);
+  --text-quote: 20px;
+  --text-h3: 21px;
+  --text-title: clamp(22px, 2.2vw, 28px);
+  --text-h2: clamp(34px, 4.6vw, 58px);
+  --text-display: clamp(42px, 6.6vw, 82px);
+
+  --tracking-display: -0.018em;
+  --tracking-h3: -0.014em;
+  --tracking-base: 0.08em;
+  --tracking-mono: 0.12em;
+  --tracking-label: 0.16em;
+  --tracking-brand: 0.2em;
+
+  /* Shape */
+  --radius-mock: 14px;
+  --radius-glass: 16px;
+  --radius-key: 18px;
+  --radius-quote: 24px;
+  --radius-card: 26px;
+  --radius-panel: 32px;
+  --radius-notch: 34px;
+  --radius-pill: 999px;
+
+  /* Depth (tinted, never grey) */
+  --shadow-btn: 0 10px 26px -12px #1a1a178c;
+  --shadow-tab: 0 1.5px #1a1a1724, 0 10px 22px -12px #1a1a1740;
+  --shadow-chip: 0 10px 24px -12px #1a1a1759;
+  --shadow-card-hover: 0 30px 50px -30px #1a1a1759;
+  --shadow-mockup: 0 30px 60px -28px #2c0d4b66, 0 2px 8px #1a1a170d;
+  --shadow-glass: 0 20px 48px -20px #14141099, inset 0 1px #ffffff14;
+
+  /* Motion */
+  --ease-smooth: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --ease-spring: cubic-bezier(0.2, 0.7, 0.3, 1.2);
+  --ease-pop: cubic-bezier(0.3, 1.4, 0.5, 1);
 }
 
-/* No global smooth scroll. It would make every programmatic jump a
-   non-interruptible animation; scrollToSection() in motion.ts opts in per
-   click and cancels the moment the user touches the wheel or screen. */
+/* ------------------------------------------------------------------
+   Site-level additions. Everything below is composed from the tokens
+   above; nothing introduces a new colour, radius, shadow or curve.
+   ------------------------------------------------------------------ */
 
-body {
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: #ffffff;
-  color: var(--color-base-950);
+/* Hero / panel artwork. The design system calls for painterly lavender-sky
+   over meadow imagery; until real renders exist this is the tokenised stand-in
+   (violet-soft → peri → sand → green) with a soft lemon sun. */
+.lm-art {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 45% at 50% 12%, var(--yellow) 0%, transparent 70%),
+    linear-gradient(180deg, var(--violet-soft) 0%, var(--peri) 36%, var(--surface-sand) 66%, var(--green) 100%);
 }
 
-/* Size-matched tracking. Applied per tier rather than one tracking-tight
-   everywhere: -0.025em is too loose on the 88px hero and actively cramps a
-   16px serif card title. */
-.tracking-display { letter-spacing: var(--tracking-display); }
-.tracking-heading { letter-spacing: var(--tracking-heading); }
-.tracking-title { letter-spacing: var(--tracking-title); }
+/* Header burger → X. Bars are 2 px, 5 px apart (see .lm-burger span). */
+.lm-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.lm-burger.open span:nth-child(2) { opacity: 0; }
+.lm-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.lm-burger span { transition: transform var(--dur-base) var(--ease-smooth), opacity var(--dur-fast); }
 
-/* Press feedback. CSS :active rather than Motion's whileTap, for the same
-   reason .card-lift is CSS: whileTap costs a React render before the first
-   frame, and press latency is the one thing that most breaks directness.
-   touch-action also drops the legacy ~300ms tap delay. */
-.press {
-  transition: transform 0.1s var(--ease-out);
-  touch-action: manipulation;
+/* Mobile menu panel: cream material, one hairline, menu rows from the DS. */
+.lm-menu {
+  background: var(--cream);
+  border-top: 1px solid var(--line);
+  box-shadow: var(--shadow-card-hover);
+  padding: 14px var(--gutter) 22px;
 }
+.lm-menu .lm-menu-row { color: var(--ink); }
+.lm-menu .lm-menu-row:last-of-type { border-bottom: 0; }
 
-.press:active {
-  transform: scale(0.97);
+/* Multi-line input in the pill language: same border, ink and focus ring as
+   .lm-input; corner radius steps up to the card radius so the shape stays
+   round at height. */
+.lm-textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 16px 20px;
+  border-radius: var(--radius);
+  background: var(--white);
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.5;
+  resize: vertical;
+  transition: border-color var(--dur-fast), box-shadow var(--dur-fast);
 }
+.lm-textarea::placeholder { color: var(--gray); }
+.lm-textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px #fff67e99; }
 
-@media (prefers-reduced-motion: reduce) {
-  .press {
-    transition: none;
-  }
-  .press:active {
-    transform: none;
-  }
-}
+/* Form label: the DS mono micro label, left-aligned and block. */
+.lm-label { display: block; margin-bottom: 8px; }
 
-/* Card hover lift. CSS rather than Motion's whileHover: hover fires dozens of
-   times a session, so it wants the cheapest interruptible path, and only a
-   media query can keep a tap on a touch screen from leaving the card stuck in
-   its hover state. */
-.card-lift {
-  transition:
-    transform 0.16s var(--ease-out),
-    border-color 0.16s var(--ease-out),
-    box-shadow 0.16s var(--ease-out);
-}
+/* Checklist dot on ink panels. */
+.lm-dot { flex: none; width: 6px; height: 6px; margin-top: 10px; border-radius: 50%; background: var(--yellow); }
 
-@media (hover: hover) and (pointer: fine) {
-  .card-lift:hover {
-    transform: translateY(-3px);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card-lift {
-    transition: border-color 0.16s var(--ease-out), box-shadow 0.16s var(--ease-out);
-  }
-  .card-lift:hover {
-    transform: none;
-  }
-}
-
-/* Hero gradient — lime → emerald → cyan → indigo → violet */
-.hero-gradient {
-  background: linear-gradient(135deg, #d9f99d 0%, #6ee7b7 25%, #67e8f9 50%, #a5b4fc 75%, #d8b4fe 100%);
-}
-
-/* Reduced motion means a gentler equivalent, not no feedback. MotionConfig
-   already drops the transforms, so the reveals become plain opacity fades and
-   we leave those alone — killing opacity too would snap content in, which
-   reads as a glitch rather than a reveal. Only the travel is suppressed.
-   MotionConfig does not reach CSS animations, so stop those here — the dot
-   keeps its colour, which is what carries the meaning. */
-@media (prefers-reduced-motion: reduce) {
-  section [style*="opacity"] {
-    transform: none !important;
-  }
-
-  .animate-pulse {
-    animation: none;
-  }
-
-  /* The submit spinner: the "Sending…" label already carries the state, so the
-     rotation is redundant motion rather than the only signal. */
-  .animate-spin {
-    animation: none;
-  }
-}
-
-/* Translucent surfaces become frosted-solid: raise the background to opaque
-   and drop the blur entirely rather than thinning it. */
-@media (prefers-reduced-transparency: reduce) {
-  .nav-material {
-    background: #ffffff;
-    backdrop-filter: none;
-  }
-
-  .card-material {
-    background: #ffffff;
-    backdrop-filter: none;
-  }
-}
-
-/* Near-solid grounds with defined borders. */
-@media (prefers-contrast: more) {
-  .nav-material {
-    background: #ffffff;
-    backdrop-filter: none;
-    border-bottom: 1px solid var(--color-base-400);
-  }
-
-  .card-lift {
-    border-color: var(--color-base-500);
-  }
-
-  .input-clean {
-    border-color: var(--color-base-700);
-  }
-}
-
-/* Selection */
-::selection {
-  background-color: rgba(167, 139, 250, 0.25);
-  color: var(--color-base-950);
-}
-
-/* Scrollbar */
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #fafafa; }
-::-webkit-scrollbar-thumb { background: #d4d4d4; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #a3a3a3; }
-
-/* Form inputs */
-.input-clean {
-  background: #ffffff;
-  border: 1px solid var(--color-base-200);
-  color: var(--color-base-950);
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
-}
-
-.input-clean:focus {
-  border-color: var(--color-base-950);
-  box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.06);
-  outline: none;
-}
-
-.input-clean::placeholder {
-  color: var(--color-base-400);
-}
+/* Agent-trace rows inside the hero mockup. */
+.lm-trace { display: flex; gap: 12px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.lm-trace:last-child { border-bottom: 0; }
+.lm-trace .step-num { flex: none; width: 120px; white-space: nowrap; }
 
 /* Honeypot field — visually removed but still present in the DOM for bots */
 .sr-only-honeypot {
@@ -207,4 +207,21 @@ body {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* Scrollbar in the neutral ramp. */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream); }
+::-webkit-scrollbar-thumb { background: var(--sage2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gray); }
+
+/* Reduced transparency / more contrast: frosted surfaces go solid cream with a
+   defined hairline, matching the DS "scrolled" header without the blur. */
+@media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .lm-header.scrolled { background: var(--cream); backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .btn-glass { background: var(--white); backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+@media (prefers-contrast: more) {
+  .lm-header.scrolled { border-color: var(--sage2); }
+  .lm-card, .lm-quote { border-color: var(--sage2); }
 }

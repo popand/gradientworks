@@ -1,0 +1,25 @@
+/**
+ * Lemon Design System — Fonts
+ *
+ * The live site self-hosts three variable fonts through next/font. The same
+ * families are on Google Fonts:
+ *
+ *   Source Serif 4  — display voice (h1, h2, pull quotes). Optical size axis on.
+ *   Inter           — body + UI voice. Optical size axis on. Intermediate
+ *                     weights (520 / 560 / 640) are intentional — the site
+ *                     leans on the variable axis, not on 500/600/700 stops.
+ *   Geist Mono      — labels, eyebrows, meta, "machine" text.
+ *
+ * Vendored note: the design system's copy of this file starts with the Google
+ * Fonts @import. Here that @import lives at the very top of src/index.css,
+ * because CSS only honours @import before any other rule and Vite inlines this
+ * file mid-sheet. Everything else is identical.
+ *
+ * Import this file BEFORE colors_and_type.css.
+ */
+
+:root {
+  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:  'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+}
