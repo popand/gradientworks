@@ -1,20 +1,47 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { HiMenu, HiX } from 'react-icons/hi'
-import logo from '../assets/logo.png'
-import IconSwap from './IconSwap'
-import { EASE_OUT, scrollToSection } from '../motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
+import Logo from './Logo'
+import { EASE_SMOOTH, scrollToSection } from '../motion'
+
+const navItems = [
+  { name: 'About', href: '#about' },
+  { name: 'Services', href: '#services' },
+  { name: 'Why us', href: '#why-us' },
+  { name: 'Contact', href: '#contact' },
+]
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeHref, setActiveHref] = useState('#home')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
+  // Scroll position via a motion value, not a scroll listener: the value
+  // updates off the React render path and state only changes when the 20 px
+  // threshold is actually crossed.
+  const { scrollY } = useScroll()
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const next = y > 20
+    setIsScrolled((prev) => (prev === next ? prev : next))
+  })
+
+  // Wayfinding: the nav names the section the reader is in. An observer on
+  // each section, not a scroll listener; the band in the middle of the
+  // viewport decides which one is current.
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const ids = ['#home', ...navItems.map((i) => i.href)]
+    const sections = ids.map((id) => document.querySelector(id)).filter((el): el is Element => el !== null)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveHref('#' + entry.target.id)
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
   }, [])
 
   // While the mobile menu is open: Escape closes it, the page behind it is
@@ -47,13 +74,6 @@ const Navigation = () => {
     }
   }, [isMobileMenuOpen])
 
-  const navItems = [
-    { name: 'About', href: '#about' },
-    { name: 'Services', href: '#services' },
-    { name: 'Why Us', href: '#why-us' },
-    { name: 'Contact', href: '#contact' },
-  ]
-
   const handleNavClick = (
     e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
     href: string
@@ -64,86 +84,64 @@ const Navigation = () => {
   }
 
   return (
-    <motion.nav
-      initial={{ transform: 'translateY(-100%)' }}
-      animate={{ transform: 'translateY(0%)' }}
-      transition={{ duration: 0.4, ease: EASE_OUT }}
-      /* One persistent material rather than a bar that materialises at 20px:
-         chrome that appears and disappears reads as two different objects.
-         Only the edge treatment changes on scroll. 0.72 alpha is low enough
-         that the blur does real work — at 0.9 it was nearly wasted. */
-      className={`nav-material fixed top-0 left-0 right-0 z-50 bg-white/72 backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-300 ${
-        isScrolled || isMobileMenuOpen
-          ? 'shadow-[0_1px_0_0_rgba(0,0,0,0.06)]'
-          : 'shadow-none'
-      }`}
+    <header
+      /* .lm-header is transparent over the cream page; .scrolled brings in the
+         cream-at-80% material and blur once the page moves. No entrance
+         animation: chrome that is simply there is more trustworthy than
+         chrome that arrives. */
+      className={`lm-header ${isScrolled || isMobileMenuOpen ? 'scrolled' : ''}`}
     >
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo */}
-          <a
-            href="#home"
-            onClick={(e) => handleNavClick(e, '#home')}
-            className="flex items-center gap-2.5"
-          >
-            <img src={logo} alt="GradientWorks" className="h-8 w-8" />
-            <span className="text-lg font-display font-bold text-base-950 tracking-tight">
-              GradientWorks
-            </span>
-          </a>
+      <div className="wrap lm-header-inner">
+        <a
+          href="#home"
+          onClick={(e) => handleNavClick(e, '#home')}
+          className="lm-logo gap-2.5"
+          aria-label="GradientWorks home"
+        >
+          <Logo size={30} />
+          <span className="font-serif" style={{ fontSize: 22, fontWeight: 560, letterSpacing: 'var(--tracking-display)' }}>
+            GradientWorks
+          </span>
+        </a>
 
-          {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-sm text-base-500 hover:text-base-950 transition-colors font-medium"
-              >
-                {item.name}
-              </a>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="hidden md:block">
-            <button
-              onClick={(e) => handleNavClick(e, '#contact')}
-              className="press px-6 py-2.5 text-sm font-semibold text-white bg-base-950 rounded-full hover:bg-base-800 transition-colors"
+        <nav className="lm-nav" aria-label="Primary">
+          {navItems.map((item) => (
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
+              aria-current={activeHref === item.href ? 'true' : undefined}
             >
-              Let's Talk
-            </button>
-          </div>
+              {item.name}
+            </a>
+          ))}
+        </nav>
 
-          {/* Mobile toggle */}
-          <button
-            ref={toggleRef}
-            className="md:hidden -mr-2 p-2 text-base-700"
-            aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            <IconSwap swapKey={isMobileMenuOpen ? 'close' : 'open'}>
-              {isMobileMenuOpen ? <HiX size={24} /> : <HiMenu size={24} />}
-            </IconSwap>
+        <div className="lm-header-cta">
+          <button className="btn btn-primary btn-sm" onClick={(e) => handleNavClick(e, '#contact')}>
+            Book a call
           </button>
         </div>
+
+        <button
+          ref={toggleRef}
+          className={`lm-burger ${isMobileMenuOpen ? 'open' : ''}`}
+          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={isMobileMenuOpen}
+          aria-controls="mobile-menu"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
 
       {/* Mobile menu. The panel slides on a transform rather than animating
           height, so no frame costs a layout pass. The outer div is a clipping
-          mask starting below the header bar, so the panel is masked on the way
-          out instead of painting over the logo.
-
-          Springs, not durations: this is the one dismissible surface on the
-          site, so a double-tap has to be able to reverse it mid-flight. A
-          spring animates from the live on-screen value, so the reversal starts
-          where the panel actually is instead of jumping. bounce 0 because the
-          panel was tapped open, not thrown — overshoot on a menu reads wrong.
-          Both channels share one spring so opacity can't finish 70ms before
-          the transform the way the old 0.15s/0.22s pair did. */}
+          mask starting below the header bar. Springs, not durations: this is
+          the one dismissible surface on the site, so a double-tap has to be
+          able to reverse it mid-flight. */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <motion.div
@@ -153,16 +151,15 @@ const Navigation = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
-            className="md:hidden absolute inset-x-0 top-full overflow-hidden"
+            className="absolute inset-x-0 top-full overflow-hidden"
           >
             <motion.div
               initial={{ transform: 'translateY(-100%)' }}
               animate={{ transform: 'translateY(0%)' }}
               exit={{ transform: 'translateY(-100%)' }}
               transition={{ type: 'spring', bounce: 0, duration: 0.35 }}
-              className="bg-white border-t border-base-100 shadow-lg shadow-black/5"
+              className="lm-menu"
             >
-            <div className="px-5 py-6 space-y-1">
               {navItems.map((item, i) => (
                 <motion.a
                   key={item.name}
@@ -170,8 +167,8 @@ const Navigation = () => {
                   onClick={(e) => handleNavClick(e, item.href)}
                   initial={{ opacity: 0, transform: 'translateX(-12px)' }}
                   animate={{ opacity: 1, transform: 'translateX(0px)' }}
-                  transition={{ duration: 0.18, delay: 0.04 + i * 0.02, ease: EASE_OUT }}
-                  className="block px-4 py-3 text-base-600 hover:text-base-950 hover:bg-base-50 rounded-xl transition-colors font-medium"
+                  transition={{ duration: 0.18, delay: 0.04 + i * 0.02, ease: EASE_SMOOTH }}
+                  className="lm-menu-row"
                 >
                   {item.name}
                 </motion.a>
@@ -179,22 +176,17 @@ const Navigation = () => {
               <motion.button
                 initial={{ opacity: 0, transform: 'translateX(-12px)' }}
                 animate={{ opacity: 1, transform: 'translateX(0px)' }}
-                transition={{
-                  duration: 0.18,
-                  delay: 0.04 + navItems.length * 0.02,
-                  ease: EASE_OUT,
-                }}
+                transition={{ duration: 0.18, delay: 0.04 + navItems.length * 0.02, ease: EASE_SMOOTH }}
                 onClick={(e) => handleNavClick(e, '#contact')}
-                className="press w-full mt-3 px-6 py-3 text-sm font-semibold text-white bg-base-950 rounded-full"
+                className="btn btn-primary w-full justify-center mt-4"
               >
-                Let's Talk
+                Book a call
               </motion.button>
-            </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.nav>
+    </header>
   )
 }
 
