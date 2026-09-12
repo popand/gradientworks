@@ -112,7 +112,7 @@ const Contact = () => {
     /* The page closes the way the design system closes: the light-glass notch
        over the same art as the hero. The form lives inside the notch, so the
        glass sits over imagery, never over plain cream. */
-    <section id="contact" ref={ref} style={{ padding: '0 var(--gutter) var(--secpad)' }}>
+    <section id="contact" ref={ref} style={{ padding: 'var(--secpad) var(--gutter)' }}>
       <div className="lm-scene">
         <div className="lm-art" aria-hidden="true" />
         <motion.div {...revealWhen(isInView, 0)} className="lm-notch lm-notch-form">
