@@ -80,6 +80,7 @@ const Services = () => {
     <section id="services" ref={ref} className="lm-section" style={{ paddingTop: 0 }}>
       <div className="wrap">
         <motion.div {...revealWhen(isInView, 0)} className="lm-section-head">
+          <div className="eyebrow">What we do</div>
           <h2>
             Full-spectrum technology
             <br />

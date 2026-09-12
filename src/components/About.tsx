@@ -51,7 +51,7 @@ const About = () => {
             className="on-ink lm-grain rounded-card"
             style={{ padding: 'clamp(28px, 3.5vw, 44px)' }}
           >
-            <h3 className="text-h3" style={{ color: 'var(--cream)' }}>How we work</h3>
+            <h3 className="text-h3" style={{ color: 'var(--cream)' }}>What you can count on</h3>
             <ul className="lm-plain-list mt-5">
               {principles.map((item, index) => (
                 <motion.li key={item} {...revealWhen(isInView, 3 + index)}>

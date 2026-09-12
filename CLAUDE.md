@@ -36,9 +36,10 @@ App.tsx (root)
 ├── main
 │   ├── Hero      (.lm-panel.lm-panel-hero with art, dome and agent mockup)
 │   ├── About     (mission + on-ink checklist + three .lm-card)
-│   ├── Services  (two numbered card groups)
-│   ├── WhyUs     (four cards, then a full-width .on-ink band of .lm-quote)
-│   ├── Contact   (info column + .lm-card form)
+│   ├── Services  (two card groups, one featured love-wash card)
+│   ├── Process   (three how-it-works step cards with DS visuals)
+│   ├── WhyUs     (serif definition list, then a full-width .on-ink band of cards)
+│   ├── Contact   (.lm-scene art panel with the .lm-notch holding the form)
 │   └── (each section has id for smooth scroll)
 └── Footer (.lm-footer on ink)
 ```
