@@ -200,11 +200,11 @@ a:focus-visible, button:focus-visible:not(.btn), .lm-burger:focus-visible { outl
 .lm-notch-form .sub { max-width: 560px; }
 .lm-notch-form .lm-textarea { min-height: 112px; }
 @media (min-width: 900px) {
-  .lm-notch-form { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(32px, 4vw, 56px); align-items: start; text-align: left; }
+  .lm-notch-form { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); grid-template-rows: auto auto 1fr; column-gap: clamp(32px, 4vw, 56px); align-items: start; text-align: left; }
   .lm-notch-form h2 { font-size: clamp(30px, 3.2vw, 42px); }
   .lm-notch-form .sub { margin-left: 0; margin-top: 16px; }
   .lm-notch-form form { grid-column: 2; grid-row: 1 / span 3; margin-top: 0 !important; }
-  .lm-notch-form .lm-notch-alt { grid-column: 1; margin-top: 18px; }
+  .lm-notch-form .lm-notch-alt { grid-column: 1; align-self: end; margin-top: 18px; }
 }
 .lm-notch-form .lm-input, .lm-notch-form .lm-textarea { border-color: var(--line-strong); }
 .lm-notch-alt { margin-top: 22px; font-size: var(--text-btn-sm); color: var(--ink-stage); }
