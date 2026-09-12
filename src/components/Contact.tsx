@@ -168,7 +168,7 @@ const Contact = () => {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                rows={5}
+                rows={4}
                 onBlur={markTouched}
                 aria-invalid={showError('message') ? true : undefined}
                 aria-describedby={showError('message') ? 'message-error' : undefined}

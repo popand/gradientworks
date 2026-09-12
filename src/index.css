@@ -191,10 +191,21 @@ a:focus-visible, button:focus-visible:not(.btn), .lm-burger:focus-visible { outl
 .lm-band { border-radius: var(--radius-lg); overflow: hidden; }
 
 /* Closing scene: the DS art panel with the light-glass notch over it. */
-.lm-scene { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--radius-lg); padding: clamp(48px, 7vw, 96px) var(--gutter); display: flex; justify-content: center; }
+.lm-scene { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--radius-lg); padding: clamp(32px, 4.5vw, 64px) var(--gutter); display: flex; justify-content: center; }
 .lm-scene::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--grain); opacity: .07; mix-blend-mode: overlay; pointer-events: none; }
 .lm-scene .lm-notch { z-index: 2; width: 100%; }
+/* The form notch runs two columns from 900 px: heading and email on the left,
+   the form on the right, so the closing scene stays under one viewport. */
+.lm-notch-form { max-width: 1040px; padding: clamp(28px, 3.5vw, 44px) clamp(22px, 3vw, 44px); }
 .lm-notch-form .sub { max-width: 560px; }
+.lm-notch-form .lm-textarea { min-height: 112px; }
+@media (min-width: 900px) {
+  .lm-notch-form { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); column-gap: clamp(32px, 4vw, 56px); align-items: start; text-align: left; }
+  .lm-notch-form h2 { font-size: clamp(30px, 3.2vw, 42px); }
+  .lm-notch-form .sub { margin-left: 0; margin-top: 16px; }
+  .lm-notch-form form { grid-column: 2; grid-row: 1 / span 3; margin-top: 0 !important; }
+  .lm-notch-form .lm-notch-alt { grid-column: 1; margin-top: 18px; }
+}
 .lm-notch-form .lm-input, .lm-notch-form .lm-textarea { border-color: var(--line-strong); }
 .lm-notch-alt { margin-top: 22px; font-size: var(--text-btn-sm); color: var(--ink-stage); }
 .lm-notch-alt a { font-weight: 560; color: var(--ink); }
