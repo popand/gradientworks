@@ -69,7 +69,6 @@ const Contact = () => {
     <section id="contact" ref={ref} className="lm-section">
       <div className="wrap">
         <motion.div {...revealWhen(isInView, 0)} className="lm-section-head">
-          <div className="eyebrow">Get started</div>
           <h2>
             Let’s build something
             <br />
@@ -80,8 +79,8 @@ const Contact = () => {
         <div className="grid lg:grid-cols-5" style={{ gap: 'clamp(32px, 4vw, 64px)', marginTop: 'var(--stack-gap)' }}>
           <motion.div {...revealWhen(isInView, 1)} className="lg:col-span-2">
             <p className="text-fg-soft" style={{ fontSize: 'var(--text-sub)', lineHeight: 1.65 }}>
-              Ready to start your next project? Tell us what you are trying to
-              do and we will come back within one business day.
+              Tell us what you are trying to build. We will read it properly and
+              come back with how we would approach it.
             </p>
 
             <dl className="flex flex-col gap-6 mt-10">
@@ -96,10 +95,6 @@ const Contact = () => {
               <div>
                 <dt className="micro">Location</dt>
                 <dd className="mt-1.5" style={{ fontWeight: 560 }}>Toronto, ON</dd>
-              </div>
-              <div>
-                <dt className="micro">Response time</dt>
-                <dd className="mt-1.5" style={{ fontWeight: 560 }}>Within one business day</dd>
               </div>
             </dl>
           </motion.div>
@@ -207,7 +202,7 @@ const Contact = () => {
                         className="lm-field-note"
                         style={{ color: 'var(--forest)' }}
                       >
-                        Thanks — your message is on its way. We will be in touch shortly.
+                        Thanks, your message is on its way. We will be in touch shortly.
                       </motion.p>
                     )}
                     {status === 'error' && (

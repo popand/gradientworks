@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-motion'
 import Logo from './Logo'
 import { EASE_SMOOTH, scrollToSection } from '../motion'
 
@@ -16,11 +16,14 @@ const Navigation = () => {
   const toggleRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20)
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  // Scroll position via a motion value, not a scroll listener: the value
+  // updates off the React render path and state only changes when the 20 px
+  // threshold is actually crossed.
+  const { scrollY } = useScroll()
+  useMotionValueEvent(scrollY, 'change', (y) => {
+    const next = y > 20
+    setIsScrolled((prev) => (prev === next ? prev : next))
+  })
 
   // While the mobile menu is open: Escape closes it, the page behind it is
   // inert so focus can't wander into it, and the background doesn't scroll.

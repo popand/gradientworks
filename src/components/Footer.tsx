@@ -80,7 +80,7 @@ const Footer = () => {
         </div>
 
         <div className="lm-footer-base">
-          <span>© {currentYear} GradientWorks — All rights reserved</span>
+          <span>© {currentYear} GradientWorks. All rights reserved</span>
           <span className="flex gap-3.5">
             {socialLinks.map((social) => (
               <a key={social.label} href={social.href} aria-label={social.label} className="lm-icon-btn">

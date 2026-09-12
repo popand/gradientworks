@@ -188,8 +188,23 @@
 /* Form label: the DS mono micro label, left-aligned and block. */
 .lm-label { display: block; margin-bottom: 8px; }
 
-/* Checklist dot on ink panels. */
-.lm-dot { flex: none; width: 6px; height: 6px; margin-top: 10px; border-radius: 50%; background: var(--yellow); }
+/* Plain list on ink panels: no markers, no hairlines, just rhythm. */
+.lm-plain-list { display: flex; flex-direction: column; gap: 14px; color: var(--foot-ink); font-size: var(--text-btn); line-height: 1.5; }
+
+/* Cards keep their own ink even inside an .on-ink band: the DS card sets a
+   white ground but inherits colour, which turns titles cream on white. */
+.lm-card { color: var(--ink); }
+
+/* Featured card: the love-wash treatment the DS uses for its featured tile. */
+.lm-card.feature { background: linear-gradient(160deg, var(--love-wash), var(--love-wash-deep)); border-color: #c9aa3b40; }
+
+/* Definition list for differentiators: serif title left, body right, a single
+   hairline between rows (four rows, so the divider stays sparse). */
+.lm-dl { max-width: 960px; margin-inline: auto; }
+.lm-dl-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2fr); gap: 12px clamp(24px, 4vw, 56px); padding: clamp(22px, 2.6vw, 32px) 0; border-top: 1px solid var(--line); }
+.lm-dl-row:first-child { border-top: 0; padding-top: 0; }
+.lm-dl-row dd { margin: 0; color: var(--fg-soft); font-size: var(--text-sub); line-height: 1.6; }
+@media (max-width: 760px) { .lm-dl-row { grid-template-columns: 1fr; gap: 6px; } }
 
 /* Agent-trace rows inside the hero mockup. */
 .lm-trace { display: flex; gap: 12px; align-items: baseline; padding: 7px 0; border-bottom: 1px solid var(--line); }

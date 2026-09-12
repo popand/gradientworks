@@ -30,6 +30,7 @@ const softwareServices: ServiceItem[] = [
   },
 ]
 
+// The first entry is the featured card; it spans two columns on desktop.
 const aiServices: ServiceItem[] = [
   {
     title: 'AI agent development',
@@ -62,14 +63,15 @@ const Services = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
-  const card = (service: ServiceItem, prefix: string, index: number, step: number) => (
-    <motion.article key={service.title} {...revealWhen(isInView, step)} className="lm-card hoverable">
+  const card = (service: ServiceItem, step: number, featured = false) => (
+    <motion.article
+      key={service.title}
+      {...revealWhen(isInView, step)}
+      className={`lm-card hoverable${featured ? ' feature md:col-span-2' : ''}`}
+    >
       <div className="lm-card-body">
-        <span className="step-num">
-          {String(index + 1).padStart(2, '0')} · {prefix}
-        </span>
-        <h3 style={{ fontSize: 'var(--text-h3)' }}>{service.title}</h3>
-        <p>{service.description}</p>
+        <h3 style={{ fontSize: featured ? 'var(--text-title)' : 'var(--text-h3)' }}>{service.title}</h3>
+        <p style={featured ? { maxWidth: '52ch' } : undefined}>{service.description}</p>
       </div>
     </motion.article>
   )
@@ -78,7 +80,6 @@ const Services = () => {
     <section id="services" ref={ref} className="lm-section" style={{ paddingTop: 0 }}>
       <div className="wrap">
         <motion.div {...revealWhen(isInView, 0)} className="lm-section-head">
-          <div className="eyebrow">What we do</div>
           <h2>
             Full-spectrum technology
             <br />
@@ -91,32 +92,31 @@ const Services = () => {
         </motion.div>
 
         <div style={{ marginTop: 'var(--stack-gap)' }}>
-          <motion.div {...revealWhen(isInView, 1)} className="eyebrow left" style={{ margin: '0 0 18px' }}>
+          <motion.h3 {...revealWhen(isInView, 1)} className="text-h3" style={{ marginBottom: 18 }}>
             Software development
-          </motion.div>
+          </motion.h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4" style={{ gap: 'var(--grid-gap)' }}>
-            {softwareServices.map((s, i) => card(s, 'Software', i, 2 + i))}
+            {softwareServices.map((s, i) => card(s, 2 + i))}
           </div>
         </div>
 
         <div style={{ marginTop: 'clamp(40px, 5vw, 64px)' }}>
-          <motion.div {...revealWhen(isInView, 6)} className="eyebrow left" style={{ margin: '0 0 18px' }}>
-            Agentic AI and advanced capabilities
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3" style={{ gap: 'var(--grid-gap)' }}>
-            {aiServices.map((s, i) => card(s, 'Agentic', i, 7 + i))}
+          <motion.h3 {...revealWhen(isInView, 6)} className="text-h3" style={{ marginBottom: 18 }}>
+            Agentic AI
+          </motion.h3>
+          <div className="grid md:grid-cols-3" style={{ gap: 'var(--grid-gap)' }}>
+            {aiServices.map((s, i) => card(s, 7 + i, i === 0))}
           </div>
         </div>
 
         <motion.div
           {...revealWhen(isInView, 12)}
-          className="flex flex-col items-center text-center"
+          className="flex justify-center"
           style={{ marginTop: 'clamp(40px, 5vw, 64px)' }}
         >
           <button className="btn btn-primary" onClick={() => scrollToSection('#contact')}>
-            Start a conversation
+            Book a call
           </button>
-          <span className="micro mt-5">Scoped in one call · No retainer required</span>
         </motion.div>
       </div>
     </section>
