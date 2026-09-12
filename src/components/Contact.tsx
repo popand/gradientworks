@@ -27,10 +27,33 @@ const Contact = () => {
   })
   const [status, setStatus] = useState<SubmitStatus>('idle')
   const [errorMessage, setErrorMessage] = useState('')
+  // Inline validation: a field is judged when the reader leaves it, not when
+  // they press send. Messages are plain and sit under the field they belong to.
+  const [touched, setTouched] = useState<Record<string, boolean>>({})
+
+  const fieldError = (name: 'name' | 'email' | 'message'): string | null => {
+    const value = formData[name].trim()
+    if (name === 'name' && !value) return 'Add your name so we know who to reply to.'
+    if (name === 'email') {
+      if (!value) return 'Add an email address so we can reply.'
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'That does not look like an email address.'
+    }
+    if (name === 'message' && !value) return 'Tell us a little about the project.'
+    return null
+  }
+  const showError = (name: 'name' | 'email' | 'message') => (touched[name] ? fieldError(name) : null)
+  const markTouched = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setTouched((t) => ({ ...t, [e.target.name]: true }))
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (status === 'sending') return
+    setTouched({ name: true, email: true, message: true })
+    if (fieldError('name') || fieldError('email') || fieldError('message')) {
+      const first = (['name', 'email', 'message'] as const).find((f) => fieldError(f))
+      if (first) document.getElementById(first)?.focus()
+      return
+    }
 
     setStatus('sending')
     setErrorMessage('')
@@ -50,6 +73,7 @@ const Contact = () => {
 
       setStatus('sent')
       setFormData({ name: '', email: '', company: '', message: '', website: '' })
+      setTouched({})
     } catch (err) {
       setStatus('error')
       setErrorMessage(
@@ -102,7 +126,7 @@ const Contact = () => {
           <motion.div {...revealWhen(isInView, 2)} className="lg:col-span-3">
             <div className="lm-card" style={{ padding: 'clamp(24px, 3vw, 40px)' }}>
               <h3 style={{ fontSize: 'var(--text-h3)' }}>Send us a message</h3>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5 mt-6">
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5 mt-6">
                 {/* Honeypot — hidden from users, catches naive bots */}
                 <div aria-hidden="true" className="sr-only-honeypot">
                   <label htmlFor="website">Website</label>
@@ -128,9 +152,13 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="lm-input"
+                      onBlur={markTouched}
+                      aria-invalid={showError('name') ? true : undefined}
+                      aria-describedby={showError('name') ? 'name-error' : undefined}
+                      className={`lm-input${showError('name') ? ' error' : ''}`}
                       placeholder="Your name"
                     />
+                    {showError('name') && <p id="name-error" className="lm-field-note error">{showError('name')}</p>}
                   </div>
                   <div>
                     <label htmlFor="email" className="micro lm-label">Email *</label>
@@ -142,9 +170,13 @@ const Contact = () => {
                       required
                       value={formData.email}
                       onChange={handleChange}
-                      className="lm-input"
+                      onBlur={markTouched}
+                      aria-invalid={showError('email') ? true : undefined}
+                      aria-describedby={showError('email') ? 'email-error' : undefined}
+                      className={`lm-input${showError('email') ? ' error' : ''}`}
                       placeholder="you@company.com"
                     />
+                    {showError('email') && <p id="email-error" className="lm-field-note error">{showError('email')}</p>}
                   </div>
                 </div>
 
@@ -171,9 +203,13 @@ const Contact = () => {
                     value={formData.message}
                     onChange={handleChange}
                     rows={5}
-                    className="lm-textarea"
+                    onBlur={markTouched}
+                    aria-invalid={showError('message') ? true : undefined}
+                    aria-describedby={showError('message') ? 'message-error' : undefined}
+                    className={`lm-textarea${showError('message') ? ' error' : ''}`}
                     placeholder="Tell us about the project…"
                   />
+                  {showError('message') && <p id="message-error" className="lm-field-note error">{showError('message')}</p>}
                 </div>
 
                 <button

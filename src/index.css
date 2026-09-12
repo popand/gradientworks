@@ -149,6 +149,44 @@
     linear-gradient(180deg, var(--violet-soft) 0%, var(--peri) 36%, var(--surface-sand) 66%, var(--green) 100%);
 }
 
+/* ------------------------------------------------------------------
+   Response, feedback and reach (Apple fluid-interface rules, on DS tokens)
+   ------------------------------------------------------------------ */
+
+/* Press feedback lands on pointer-down and lands fast. The DS button's
+   250 ms overshoot curve is right for the hover lift, wrong for the press:
+   the press-in must be ~100 ms with no overshoot or it reads as lag. */
+.btn:active { transition: transform 100ms ease-out, box-shadow 100ms ease-out; }
+.lm-tab:active { transform: scale(0.97); transition: transform 100ms ease-out; }
+.lm-menu-row:active { background: var(--sage); }
+.lm-nav a:active { opacity: 1; }
+.lm-footer a.link:active { color: var(--yellow); }
+
+/* Hover lifts are for pointers that hover. On touch, a tap would leave the
+   element stuck in its lifted state, so the lift is gated. */
+@media (hover: none) {
+  .lm-card.hoverable:hover, .lm-quote:hover, .btn-primary:hover, .btn-sun:hover, .btn-glass:hover, .lm-tab:hover { transform: none; }
+  .lm-card.hoverable:hover, .lm-quote:hover { box-shadow: none; }
+}
+
+/* Reach: nav links become 44 px targets without changing their visual size,
+   and the current section is answered in the nav itself ("where am I?"). */
+.lm-nav a { display: inline-flex; align-items: center; min-height: 44px; padding-inline: 2px; }
+.lm-nav a[aria-current="true"] { opacity: 1; font-weight: 560; }
+.lm-nav a[aria-current="true"]::after { content: ""; position: absolute; left: 2px; right: 2px; bottom: 8px; height: 2px; border-radius: 1px; background: var(--yellow); }
+.lm-nav a { position: relative; }
+.lm-footer a.link { min-height: 32px; display: flex; align-items: center; }
+a.hl { display: inline-block; padding-block: 6px; }
+
+/* Keyboard focus is as visible as the pointer's hover. */
+a:focus-visible, button:focus-visible:not(.btn), .lm-burger:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 6px; }
+.on-ink a:focus-visible, .lm-footer a:focus-visible { outline-color: var(--yellow); }
+
+/* Scroll edge, not a hard divider: where the floating header meets content,
+   the cream fades out instead of a 1 px line. */
+.lm-header.scrolled { border-bottom-color: transparent; }
+.lm-header.scrolled::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 18px; pointer-events: none; background: linear-gradient(var(--cream), transparent); opacity: .7; }
+
 /* Header burger → X. Bars are 2 px, 5 px apart (see .lm-burger span). */
 .lm-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .lm-burger.open span:nth-child(2) { opacity: 0; }
@@ -184,6 +222,7 @@
 }
 .lm-textarea::placeholder { color: var(--gray); }
 .lm-textarea:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 4px #fff67e99; }
+.lm-textarea.error { border-color: var(--danger); }
 
 /* Form label: the DS mono micro label, left-aligned and block. */
 .lm-label { display: block; margin-bottom: 8px; }

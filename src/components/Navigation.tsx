@@ -12,6 +12,7 @@ const navItems = [
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [activeHref, setActiveHref] = useState('#home')
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const toggleRef = useRef<HTMLButtonElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -24,6 +25,24 @@ const Navigation = () => {
     const next = y > 20
     setIsScrolled((prev) => (prev === next ? prev : next))
   })
+
+  // Wayfinding: the nav names the section the reader is in. An observer on
+  // each section, not a scroll listener; the band in the middle of the
+  // viewport decides which one is current.
+  useEffect(() => {
+    const ids = ['#home', ...navItems.map((i) => i.href)]
+    const sections = ids.map((id) => document.querySelector(id)).filter((el): el is Element => el !== null)
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) setActiveHref('#' + entry.target.id)
+        }
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    )
+    sections.forEach((s) => observer.observe(s))
+    return () => observer.disconnect()
+  }, [])
 
   // While the mobile menu is open: Escape closes it, the page behind it is
   // inert so focus can't wander into it, and the background doesn't scroll.
@@ -65,12 +84,11 @@ const Navigation = () => {
   }
 
   return (
-    <motion.header
-      initial={{ transform: 'translateY(-100%)' }}
-      animate={{ transform: 'translateY(0%)' }}
-      transition={{ duration: 0.4, ease: EASE_SMOOTH }}
+    <header
       /* .lm-header is transparent over the cream page; .scrolled brings in the
-         cream-at-80% material, hairline and blur once the page moves. */
+         cream-at-80% material and blur once the page moves. No entrance
+         animation: chrome that is simply there is more trustworthy than
+         chrome that arrives. */
       className={`lm-header ${isScrolled || isMobileMenuOpen ? 'scrolled' : ''}`}
     >
       <div className="wrap lm-header-inner">
@@ -88,7 +106,12 @@ const Navigation = () => {
 
         <nav className="lm-nav" aria-label="Primary">
           {navItems.map((item) => (
-            <a key={item.name} href={item.href} onClick={(e) => handleNavClick(e, item.href)}>
+            <a
+              key={item.name}
+              href={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
+              aria-current={activeHref === item.href ? 'true' : undefined}
+            >
               {item.name}
             </a>
           ))}
@@ -163,7 +186,7 @@ const Navigation = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </header>
   )
 }
 
