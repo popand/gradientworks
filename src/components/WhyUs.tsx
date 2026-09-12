@@ -73,8 +73,10 @@ const WhyUs = () => {
         </div>
       </div>
 
-      {/* The dark band: DS on-ink treatment with the yellow eyebrow. */}
-      <div className="lm-section on-ink lm-grain">
+      {/* The dark band as an inset tile: same gutter and 32 px radius as the
+          hero panel and the closing scene, so the three big surfaces match. */}
+      <div style={{ padding: '0 var(--gutter)' }}>
+        <div className="lm-section on-ink lm-grain lm-band">
         <div className="wrap">
           <motion.div {...revealWhen(isInView, 5)} className="lm-section-head">
             <div className="eyebrow">Where we start</div>
@@ -99,6 +101,7 @@ const WhyUs = () => {
               </motion.article>
             ))}
           </div>
+        </div>
         </div>
       </div>
     </section>

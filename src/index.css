@@ -187,6 +187,9 @@ a:focus-visible, button:focus-visible:not(.btn), .lm-burger:focus-visible { outl
 .lm-header.scrolled { border-bottom-color: transparent; }
 .lm-header.scrolled::after { content: ""; position: absolute; left: 0; right: 0; top: 100%; height: 18px; pointer-events: none; background: linear-gradient(var(--cream), transparent); opacity: .7; }
 
+/* Inset dark band: the on-ink section as a rounded tile. */
+.lm-band { border-radius: var(--radius-lg); overflow: hidden; }
+
 /* Closing scene: the DS art panel with the light-glass notch over it. */
 .lm-scene { position: relative; overflow: hidden; isolation: isolate; border-radius: var(--radius-lg); padding: clamp(48px, 7vw, 96px) var(--gutter); display: flex; justify-content: center; }
 .lm-scene::after { content: ""; position: absolute; inset: 0; z-index: 1; background: var(--grain); opacity: .07; mix-blend-mode: overlay; pointer-events: none; }
