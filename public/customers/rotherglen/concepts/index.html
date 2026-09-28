@@ -1,0 +1,1226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Rotherglen · Website concepts</title>
+<link rel="icon" href="../assets/RG_logo_shield-big_1.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&amp;display=swap">
+<style>
+    .sc-placeholder{background:color-mix(in srgb,currentColor 8%,transparent);
+      border:1px solid color-mix(in srgb,currentColor 50%,transparent);
+      border-radius:2px;box-sizing:border-box;overflow:hidden}
+    @keyframes sc-shine{0%{background-position:100% 50%}100%{background-position:0% 50%}}
+    html.sc-dc-streaming .sc-placeholder,
+    html.sc-dc-streaming .sc-interp.sc-missing{position:relative;
+      background:color-mix(in srgb,currentColor 5%,transparent);
+      border-color:transparent}
+    html.sc-dc-streaming .sc-placeholder::before,
+    html.sc-dc-streaming .sc-interp.sc-missing::before{content:'';
+      position:absolute;inset:0;pointer-events:none;
+      background:linear-gradient(90deg,rgba(217,119,87,0) 25%,rgba(247,225,211,.95) 37%,rgba(217,119,87,0) 63%);
+      background-size:400% 100%;animation:sc-shine 1.4s ease infinite}
+    html.sc-dc-streaming .sc-placeholder:nth-child(n+9 of .sc-placeholder)::before,
+    html.sc-dc-streaming .sc-interp.sc-missing:nth-child(n+9 of .sc-interp.sc-missing)::before{animation:none;
+      background:color-mix(in srgb,currentColor 8%,transparent)}
+    .sc-placeholder-error{padding:4px 8px;font:11px/1.4 ui-monospace,monospace;
+      color:color-mix(in srgb,currentColor 70%,transparent);word-break:break-word}
+    .sc-interp.sc-missing{display:inline-block;width:2em;height:1em;overflow:hidden;
+      vertical-align:text-bottom;background:rgba(255,255,255,.3);border:1px solid rgba(0,0,0,.5);
+      border-radius:2px;box-sizing:border-box;color:transparent;
+      user-select:none}
+    .sc-interp.sc-unresolved{font-family:ui-monospace,monospace;font-size:.85em;
+      color:color-mix(in srgb,currentColor 50%,transparent);
+      background:color-mix(in srgb,currentColor 10%,transparent);border-radius:3px;
+      padding:0 3px}
+    .sc-host.sc-has-error{position:relative}
+    .sc-logic-error{position:absolute;top:8px;left:8px;z-index:2147483647;max-width:60ch;
+      padding:6px 10px;background:#b00020;color:#fff;font:12px/1.4 ui-monospace,monospace;
+      border-radius:4px;white-space:pre-wrap;pointer-events:none}
+    /* Mirrors PRINT_BASELINE_CSS in apps/web deck-stage-export.ts — keep both
+       in sync until dc-runtime regains a build step. */
+    @media print {
+      @page { margin: 0.5cm; }
+      figure, table { break-inside: avoid; }
+      #dc-root, #dc-root > .sc-host { height: auto; }
+      *, *::before, *::after {
+        print-color-adjust: exact; -webkit-print-color-adjust: exact;
+        backdrop-filter: none !important; -webkit-backdrop-filter: none !important;
+        animation-delay: -99s !important; animation-duration: .001s !important;
+        animation-iteration-count: 1 !important; animation-fill-mode: both !important;
+        animation-play-state: running !important; transition-duration: 0s !important;
+      }
+    }
+  </style>
+<style>html,body{background:transparent}</style>
+<style>x-dc{display:none!important}</style>
+<style>html,body{background:#f0eee6}#dc-root>.sc-host{position:relative}</style>
+<style>.fx{display:flex}.col{display:flex;flex-direction:column}.grid{display:grid}.ac{align-items:center}.jc{justify-content:center}.jb{justify-content:space-between}.f1{flex:1}.noshrink{flex-shrink:0}.wrap{flex-wrap:wrap}.fw5{font-weight:500}.fw6{font-weight:600}.fw7{font-weight:700}.fw8{font-weight:800}.fs11{font-size:11px}.fs12{font-size:12px}.fs13{font-size:13px}.fs14{font-size:14px}.fs15{font-size:15px}.fs16{font-size:16px}.fs20{font-size:20px}.fs22{font-size:22px}.upper{text-transform:uppercase}.tc{text-align:center}.nowrap{white-space:nowrap}.gap8{gap:8px}.gap10{gap:10px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}.m0{margin:0}.mt8{margin-top:8px}.mt12{margin-top:12px}.mt16{margin-top:16px}.mb8{margin-bottom:8px}.mb12{margin-bottom:12px}.mb16{margin-bottom:16px}.posrel{position:relative}.posabs{position:absolute}.round{border-radius:50%}.ohide{overflow:hidden}.bbox{box-sizing:border-box}.pointer{cursor:pointer}.w100{width:100%}.b0{border:none}</style>
+<style>html,body{height:100%;margin:0}#dc-root,#dc-root>.sc-host{height:100%}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com/" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&amp;family=Instrument+Serif:ital@0;1&amp;display=swap">
+<style>
+          body{margin:0;background:#ECEAE4}
+          a{color:#0B4F73}
+          a:hover{color:#D8232A}
+          .fr{position:absolute}
+          .fr-label{position:absolute;top:-36px;left:0;font:600 12px/1 ui-monospace,Menlo,monospace;color:#fff;background:#1a1a1a;padding:8px 11px;border-radius:6px;cursor:grab;white-space:nowrap}
+          .turn{position:absolute;left:0;display:flex;align-items:baseline;gap:16px;font-family:"Instrument Sans",sans-serif;color:#1B2A38}
+          .turn-id{font:600 13px/1 ui-monospace,Menlo,monospace;background:#C9962B;color:#fff;padding:9px 12px;border-radius:6px}
+          .turn-t{font-size:22px;font-weight:600;letter-spacing:-.01em}
+          .turn-s{font-size:15px;color:#5E6B76}
+          .turn-next{font:500 12px/1.5 ui-monospace,Menlo,monospace;color:#5E6B76}
+          .au{width:1280px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:44px 48px 40px;box-sizing:border-box;font-family:"Instrument Sans",sans-serif;color:#1B2A38;text-wrap:pretty}
+          .au-top{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;border-bottom:1px solid rgba(27,42,56,.12);padding-bottom:22px;margin-bottom:30px}
+          .au-t{font-family:"Instrument Serif",serif;font-size:46px;line-height:1;letter-spacing:-.02em;margin:0 0 10px}
+          .au-s{font-size:15px;color:#5E6B76;margin:0}
+          .au-meta{text-align:right;font:500 12px/1.6 ui-monospace,Menlo,monospace;color:#5E6B76;white-space:nowrap}
+          .au-grid{display:grid;grid-template-columns:440px 1fr;gap:44px;align-items:start}
+          .au-k{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#C9962B;font-weight:700;margin:0 0 12px}
+          .find{list-style:none;margin:0;padding:0;counter-reset:f}
+          .find li{counter-increment:f;display:grid;grid-template-columns:30px 1fr;gap:10px;padding:11px 0;border-bottom:1px solid rgba(27,42,56,.1);font-size:14px;line-height:1.45}
+          .find li::before{content:counter(f,decimal-leading-zero);font:600 12px/1.6 ui-monospace,Menlo,monospace;color:#D8232A}
+          .find b{font-weight:600}
+          .dna{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;margin-top:26px;padding:18px;background:#F6F1E8;border-radius:12px}
+          .dna img{width:64px;height:62px;object-fit:contain}
+          .sw{display:flex;gap:8px;margin:8px 0 10px}
+          .sw span{width:34px;height:34px;border-radius:8px;border:1px solid rgba(0,0,0,.08)}
+          .dna p{margin:0;font-size:13px;line-height:1.5;color:#3C4A57}
+          .how{margin-top:30px;padding-top:22px;border-top:1px solid rgba(27,42,56,.12);display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+          .how-c{padding:16px 18px;border:1px solid rgba(27,42,56,.12);border-radius:12px;font-size:13px;line-height:1.5}
+          .how-c b{display:block;font-size:15px;margin-bottom:4px}
+          .how-c i{display:block;color:#5E6B76;font-style:normal;margin-bottom:8px;font:500 11px/1.4 ui-monospace,Menlo,monospace}
+          .cur{width:440px;border:1px solid rgba(0,0,0,.14);border-radius:6px;overflow:hidden;background:#fff;font-family:Georgia,serif;position:relative;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+          .cur-top{background:#005984;color:#fff;font-size:7px;padding:6px 8px;text-align:right;font-family:Georgia,serif}
+          .cur-hero{height:150px;background-size:cover;background-position:center;position:relative}
+          .cur-crest{position:absolute;left:48px;top:20px;width:82px}
+          .cur-body{padding:14px 22px 10px}
+          .cur-h1{font-family:Helvetica,Arial,sans-serif;font-weight:700;color:#005984;font-size:15px;margin-bottom:8px}
+          .cur-body p{font-size:8.5px;line-height:1.5;color:#333;margin:0 0 12px}
+          .cur-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+          .cur-card{height:120px;background-size:cover;background-position:center;position:relative}
+          .cur-card span{position:absolute;left:0;bottom:0;width:58%;height:60%;background:#005984;color:#fff;font-family:Helvetica,Arial,sans-serif;font-size:7.5px;line-height:1.35;padding:8px;box-sizing:border-box}
+          .cur-card span b{display:block;font-size:8px;margin-bottom:3px}
+          .cur-card span::before{content:"Learn More";position:absolute;top:-14px;left:0;background:#ED1C24;color:#fff;font-size:6.5px;padding:3px 6px}
+          .cur-foot{background:#005984;color:#fff;font-size:7px;padding:8px 12px}
+          .cur-pop{position:absolute;left:44px;top:56px;width:352px;background:#fff;border-top:5px solid #0D5A85;box-shadow:0 10px 30px rgba(0,0,0,.35);font-family:Georgia,serif}
+          .cur-pop-h{background:#0D5A85;color:#fff;padding:8px 10px;font-size:11px;font-weight:700;display:flex;justify-content:space-between}
+          .cur-pop-b{display:grid;grid-template-columns:1fr 1.3fr;gap:10px;padding:10px}
+          .cur-pop-b img{width:100%;height:96px;object-fit:cover}
+          .cur-pop-b div{font-size:7.5px;line-height:1.6;color:#222}
+          .cur-pop-b u{color:#ED1C24;font-weight:700}
+          .cur-cap{margin-top:12px;font:500 11px/1.6 ui-monospace,Menlo,monospace;color:#5E6B76}
+        </style>
+<style>
+          .a-row{display:flex;gap:48px;align-items:flex-start;font-family:"Instrument Sans",sans-serif;color:#1B2A38;text-wrap:pretty}
+          .a-row a{color:#0B4F73}
+          .a-row a:hover{color:#D8232A}
+          .a-desk{width:1280px;background:#F6F1E8;overflow:hidden;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.08);flex:none}
+          .a-nav{display:flex;align-items:center;justify-content:space-between;padding:20px 56px;border-bottom:1px solid rgba(27,42,56,.12)}
+          .a-brand{display:flex;align-items:center;gap:12px}
+          .a-crest{width:44px;height:42px;object-fit:contain}
+          .a-word{font-family:"Instrument Serif",serif;font-size:30px;letter-spacing:-.01em}
+          .a-links{display:flex;gap:30px;font-size:15px;font-weight:500}
+          .a-navr{display:flex;align-items:center;gap:22px;font-size:14px;color:#3C4A57}
+          .a-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:600;font-size:15px;white-space:nowrap}
+          .a-btn-navy{background:#0B4F73;color:#fff}
+          .a-btn-red{background:#D8232A;color:#fff}
+          .a-hero{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;padding:72px 56px 64px;align-items:center}
+          .a-eyebrow{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#0B4F73;font-weight:600;margin-bottom:22px}
+          .a-h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:76px;line-height:.98;letter-spacing:-.02em;margin:0 0 24px}
+          .a-h1 em{font-style:italic;color:#0B4F73}
+          .a-lede{font-size:19px;line-height:1.5;color:#3C4A57;max-width:520px;margin:0 0 32px}
+          .a-finder{display:flex;align-items:stretch;background:#fff;border:1px solid rgba(27,42,56,.16);border-radius:16px;padding:8px;gap:8px;box-shadow:0 10px 30px rgba(27,42,56,.08)}
+          .a-field{display:flex;flex-direction:column;gap:3px;padding:8px 16px;border-right:1px solid rgba(27,42,56,.12);min-width:150px;justify-content:center}
+          .a-lbl{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#6B7883}
+          .a-val{font-size:16px;font-weight:600}
+          .a-finder .a-btn{margin-left:auto}
+          .a-hint{margin-top:14px;font-size:14px;color:#6B7883}
+          .a-hero-r{position:relative}
+          .a-hero-img{width:100%;height:520px;object-fit:cover;border-radius:22px;display:block}
+          .a-quote{position:absolute;left:-40px;bottom:36px;width:340px;background:#fff;padding:22px 24px;border-radius:14px;box-shadow:0 18px 40px rgba(27,42,56,.16)}
+          .a-quote-t{font-family:"Instrument Serif",serif;font-size:21px;line-height:1.25;margin-bottom:10px}
+          .a-quote-a{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#0B4F73;font-weight:600}
+          .a-ai{position:absolute;right:14px;top:14px;font:500 10px/1 ui-monospace,Menlo,monospace;background:rgba(27,42,56,.72);color:#fff;padding:6px 8px;border-radius:6px}
+          .a-sec{padding:64px 56px}
+          .a-sec-h{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px}
+          .a-kicker{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#C9962B;font-weight:600}
+          .a-h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:44px;letter-spacing:-.015em;margin:8px 0 0}
+          .a-sec-h p{margin:0;max-width:380px;font-size:15px;line-height:1.5;color:#3C4A57}
+          .a-stages{display:grid;grid-template-columns:repeat(4,1fr);position:relative}
+          .a-stages::before{content:"";position:absolute;left:0;right:0;top:9px;height:1px;background:#C9962B}
+          .a-stage{padding:36px 28px 0 0;position:relative}
+          .a-stage::before{content:"";position:absolute;left:0;top:3px;width:13px;height:13px;border-radius:50%;background:#C9962B}
+          .a-stage-t{font-family:"Instrument Serif",serif;font-size:30px;margin-bottom:4px}
+          .a-stage-g{font-size:12px;color:#0B4F73;font-weight:600;letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+          .a-stage p{font-size:15px;line-height:1.5;color:#3C4A57;margin:0 0 14px}
+          .a-chips{display:flex;flex-wrap:wrap;gap:6px}
+          .a-chips span{font-size:12px;padding:5px 10px;border-radius:999px;background:#fff;border:1px solid rgba(27,42,56,.16)}
+          .a-camp{background:#fff}
+          .a-cgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+          .a-card{display:grid;grid-template-columns:200px 1fr;gap:22px;border:1px solid rgba(27,42,56,.12);border-radius:18px;overflow:hidden;background:#F6F1E8}
+          .a-card img{width:200px;height:100%;min-height:210px;object-fit:cover;display:block}
+          .a-card-b{padding:22px 22px 22px 0;display:flex;flex-direction:column;gap:6px}
+          .a-card-n{font-family:"Instrument Serif",serif;font-size:26px}
+          .a-card-k{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#0B4F73;font-weight:600}
+          .a-card-m{font-size:14px;color:#3C4A57;line-height:1.45}
+          .a-card-l{margin-top:auto;font-weight:600;color:#D8232A;font-size:14px;padding-top:8px}
+          .a-proof{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(27,42,56,.12);border-bottom:1px solid rgba(27,42,56,.12)}
+          .a-stat{padding:36px 28px;border-right:1px solid rgba(27,42,56,.12)}
+          .a-stat:last-child{border-right:0}
+          .a-stat-n{font-family:"Instrument Serif",serif;font-size:52px;line-height:1;color:#0B4F73}
+          .a-stat-l{font-size:14px;color:#3C4A57;margin-top:8px;line-height:1.4}
+          .a-foot{display:flex;align-items:center;justify-content:space-between;padding:32px 56px;font-size:13px;color:#6B7883}
+          .a-foot b{font-family:"Instrument Serif",serif;font-weight:400;font-size:18px;color:#1B2A38}
+          .a-phone{width:390px;background:#F6F1E8;border-radius:40px;border:8px solid #1B2A38;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.2);flex:none;box-sizing:border-box}
+          .a-pnav{display:flex;align-items:center;justify-content:space-between;padding:18px 20px 12px}
+          .a-pnav .a-word{font-size:24px}
+          .a-burger{width:22px;height:2px;background:#1B2A38;box-shadow:0 -7px 0 #1B2A38,0 7px 0 #1B2A38}
+          .a-pimg{width:100%;height:230px;object-fit:cover;display:block}
+          .a-pbody{padding:22px 20px 26px}
+          .a-ph1{font-family:"Instrument Serif",serif;font-size:40px;line-height:1;letter-spacing:-.02em;margin:0 0 12px}
+          .a-pbody p{font-size:15px;line-height:1.5;color:#3C4A57;margin:0}
+          .a-pfinder{display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid rgba(27,42,56,.16);border-radius:14px;padding:10px;margin-top:18px}
+          .a-pfield{display:flex;justify-content:space-between;padding:11px 12px;border:1px solid rgba(27,42,56,.12);border-radius:10px;font-size:15px}
+          .a-pfield span:last-child{font-weight:600}
+          .a-pfinder .a-btn{justify-content:center}
+          .a-plist{display:flex;flex-direction:column;margin-top:26px;border-top:1px solid rgba(27,42,56,.12)}
+          .a-pitem{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-bottom:1px solid rgba(27,42,56,.12);font-size:15px}
+          .a-pitem b{font-family:"Instrument Serif",serif;font-weight:400;font-size:20px}
+          .a-pitem span{font-size:12px;color:#0B4F73;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+          .a-notes{width:420px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:28px 28px 24px;font-size:14px;line-height:1.5;color:#1B2A38;box-shadow:0 2px 12px rgba(0,0,0,.06);flex:none;box-sizing:border-box}
+          .n-tag{display:inline-block;font:600 11px/1 ui-monospace,Menlo,monospace;background:#1B2A38;color:#fff;padding:5px 8px;border-radius:5px;margin-bottom:12px}
+          .n-h{font-family:"Instrument Serif",serif;font-weight:400;font-size:28px;letter-spacing:-.01em;margin:0 0 6px;line-height:1.1}
+          .n-sub{color:#5E6B76;margin:0 0 6px}
+          .n-k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C9962B;font-weight:700;margin:18px 0 6px}
+          .n-p{margin:0}
+          .n-ul{margin:0;padding-left:18px}
+          .n-ul li{margin:0 0 5px}
+          .n-type{display:flex;gap:10px;margin-top:6px}
+          .n-type span{padding:6px 10px;border:1px solid rgba(27,42,56,.16);border-radius:8px;font-size:12px}
+        </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&amp;family=EB+Garamond:wght@400;500;600&amp;family=Besley:wght@400;600;700&amp;family=Libre+Franklin:wght@400;500;600;800&amp;family=Instrument+Sans:wght@400;500;600&amp;display=swap">
+<style>
+          .h-row{display:flex;gap:64px;align-items:flex-start;font-family:"Instrument Sans",sans-serif;color:#1B2A38;text-wrap:pretty}
+          .h-row a{color:#0B4F73}
+          .h-row a:hover{color:#D8232A}
+          .h-opt{display:flex;flex-direction:column;gap:20px;flex:none;width:1280px}
+          .h-hero{width:1280px;background:#F6F1E8;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.08);overflow:hidden;box-sizing:border-box}
+          .h-nav{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:20px 56px;border-bottom:1px solid rgba(27,42,56,.12)}
+          .h-links{display:flex;gap:30px;font-size:15px;font-weight:500}
+          .h-navr{display:flex;align-items:center;gap:22px;font-size:14px;color:#3C4A57}
+          .h-crest{width:46px;height:44px;object-fit:contain}
+          .h-btn{display:inline-flex;align-items:center;padding:11px 18px;border-radius:4px;font-weight:600;font-size:15px;white-space:nowrap;color:#fff}
+          .h-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;padding:72px 56px 64px;align-items:center}
+          .h-imgw{position:relative}
+          .h-img{width:100%;height:520px;object-fit:cover;border-radius:4px;display:block}
+          .h-ai{position:absolute;right:14px;top:14px;font:500 10px/1 ui-monospace,Menlo,monospace;background:rgba(27,42,56,.72);color:#fff;padding:6px 8px;border-radius:6px}
+          .h-lede{font-size:18px;line-height:1.55;color:#3C4A57;max-width:520px;margin:0 0 30px}
+          .h-finder{display:flex;align-items:stretch;background:#fff;border:1px solid rgba(27,42,56,.18);border-radius:6px;padding:6px;gap:6px}
+          .h-field{display:flex;flex-direction:column;gap:3px;padding:8px 16px;border-right:1px solid rgba(27,42,56,.12);min-width:150px;justify-content:center}
+          .h-lbl{font-size:12px;color:#6B7883}
+          .h-val{font-size:16px;font-weight:600}
+          .h-go{margin-left:auto;display:inline-flex;align-items:center;padding:0 22px;border-radius:4px;color:#fff;font-weight:600;font-size:15px;white-space:nowrap}
+          .h-cap{background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:22px 26px;display:grid;grid-template-columns:auto 1fr auto;gap:24px;align-items:start;font-size:14px;line-height:1.5}
+          .h-cap-id{font:600 11px/1 ui-monospace,Menlo,monospace;background:#1B2A38;color:#fff;padding:6px 8px;border-radius:5px}
+          .h-cap-t{font-weight:600;font-size:17px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+          .h-cap p{margin:0;color:#3C4A57}
+          .h-spec{display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right;font:500 11px/1.4 ui-monospace,Menlo,monospace;color:#5E6B76;white-space:nowrap}
+          .h-rec{background:#C9962B;color:#fff;padding:5px 8px;border-radius:5px;font:600 11px/1 ui-monospace,Menlo,monospace}
+          .v1-lock{display:flex;align-items:center;gap:14px;flex:none}
+          .v1-word{display:flex;flex-direction:column;gap:5px;font-family:"Cinzel",serif;color:#0E3A57}
+          .v1-word b{font-weight:600;font-size:21px;letter-spacing:.06em;line-height:1}
+          .v1-word span{font-size:10.5px;letter-spacing:.16em;line-height:1;border-top:1px solid rgba(14,58,87,.35);padding-top:5px}
+          .v1-links{font-family:"EB Garamond",serif;font-size:18px;font-weight:500;gap:24px}
+          .v1-btn{background:#0E3A57}
+          .v1-h1{font-family:"EB Garamond",serif;font-weight:500;font-size:96px;line-height:.95;letter-spacing:-.015em;color:#0E3A57;margin:0 0 22px}
+          .v1-sub{display:flex;flex-wrap:wrap;gap:12px;align-items:center;font-family:"Cinzel",serif;font-size:17px;letter-spacing:.05em;color:#1B2A38;margin:0 0 24px}
+          .v1-pipe{color:#C9962B}
+          .v1-rule{width:64px;height:2px;background:#C9962B;margin:0 0 24px}
+          .v1-go{background:#0E3A57}
+          .v1-quote{position:absolute;left:-36px;bottom:32px;width:330px;background:#0E3A57;color:#F6F1E8;padding:22px 24px;border-radius:4px;box-shadow:0 18px 40px rgba(14,58,87,.25)}
+          .v1-quote-t{font-family:"EB Garamond",serif;font-size:22px;line-height:1.25;margin-bottom:12px}
+          .v1-quote-a{font-family:"Cinzel",serif;font-size:12px;letter-spacing:.08em;color:#E2C27A}
+          .v2-brand{display:flex;align-items:center;gap:12px}
+          .v2-word{font-family:"Besley",serif;font-weight:700;font-size:27px;color:#1B2A38;letter-spacing:-.01em}
+          .v2-btn{background:#0B4F73}
+          .v2-kick{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:600;color:#0B4F73;margin-bottom:22px}
+          .v2-sq{width:10px;height:10px;background:#C9962B;flex:none}
+          .v2-h1{font-family:"Besley",serif;font-weight:600;font-size:56px;line-height:1.06;letter-spacing:-.02em;margin:0 0 24px;color:#1B2A38;text-wrap:balance}
+          .v2-go{background:#0B4F73}
+          .v2-quote{position:absolute;right:24px;bottom:-28px;width:320px;background:#fff;border-top:4px solid #C9962B;padding:20px 22px;box-shadow:0 14px 34px rgba(27,42,56,.16)}
+          .v2-quote-t{font-family:"Besley",serif;font-size:19px;line-height:1.32;margin-bottom:10px}
+          .v2-quote-a{font-size:13px;font-weight:600;color:#0B4F73}
+          .v3-hero{background:#fff}
+          .v3-word{font-family:"Libre Franklin",sans-serif;font-weight:800;font-size:22px;letter-spacing:-.015em;color:#0B2E47}
+          .v3-links{font-family:"Libre Franklin",sans-serif;font-weight:600}
+          .v3-btn{background:#0B2E47;font-family:"Libre Franklin",sans-serif}
+          .v3-top{padding:64px 56px 36px;display:grid;grid-template-columns:1fr 280px;gap:56px;align-items:end}
+          .v3-h1{font-family:"Libre Franklin",sans-serif;font-weight:800;font-size:92px;line-height:.95;letter-spacing:-.04em;color:#0B2E47;margin:0}
+          .v3-side{margin:0;font-family:"Libre Franklin",sans-serif;font-size:15px;line-height:1.6;color:#3C4A57;border-left:2px solid #C9962B;padding-left:18px}
+          .v3-facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(11,46,71,.14);margin:0 56px;font-family:"Libre Franklin",sans-serif}
+          .v3-fact{padding:18px 0 22px;font-size:14px;color:#3C4A57}
+          .v3-fact b{display:block;font-weight:800;font-size:24px;color:#0B2E47;letter-spacing:-.02em;margin-bottom:2px}
+          .v3-band{position:relative;height:440px}
+          .v3-band img{width:100%;height:100%;object-fit:cover;object-position:50% 35%;display:block}
+          .v3-panel{position:absolute;left:56px;bottom:40px;background:#fff;padding:8px;display:flex;gap:6px;align-items:stretch;box-shadow:0 16px 40px rgba(11,46,71,.25);border-radius:4px;font-family:"Libre Franklin",sans-serif}
+          .v3-go{background:#0B2E47;padding:14px 22px}
+        </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&amp;family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+<style>
+          .c-row{display:flex;gap:48px;align-items:flex-start;font-family:"Atkinson Hyperlegible",sans-serif;color:#14212B;text-wrap:pretty}
+          .c-row a{color:#123B5C}
+          .c-row a:hover{color:#E63946}
+          .c-desk{width:1280px;background:#FFFBF0;overflow:hidden;flex:none;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+          .c-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:#FFFBF0;border-top:10px solid #FFD84D}
+          .c-brand{display:flex;align-items:center;gap:12px}
+          .c-crest{width:44px;height:42px;object-fit:contain}
+          .c-word{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:26px;letter-spacing:-.02em}
+          .c-links{display:flex;gap:26px;font-size:15px;font-weight:700}
+          .c-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 22px;border-radius:14px;font-weight:800;font-size:15px;font-family:"Bricolage Grotesque",sans-serif;white-space:nowrap}
+          .c-btn-red{background:#E63946;color:#fff}
+          .c-btn-navy{background:#123B5C;color:#fff}
+          .c-btn-line{border:2px solid #14212B;color:#14212B}
+          .c-hero{background:#FFD84D;display:grid;grid-template-columns:1.1fr 1fr;gap:48px;padding:56px 56px 64px;align-items:center;position:relative}
+          .c-real{display:grid;grid-template-columns:auto 1fr;column-gap:3px;align-items:baseline;margin-bottom:22px}
+          .c-real b{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:92px;line-height:.9;letter-spacing:-.04em;color:#123B5C}
+          .c-real span{font-family:"Bricolage Grotesque",sans-serif;font-weight:600;font-size:22px;color:#14212B;line-height:1.1}
+          .c-h1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:54px;line-height:1;letter-spacing:-.03em;margin:0 0 16px}
+          .c-lede{font-size:18px;line-height:1.5;max-width:520px;margin:0 0 26px}
+          .c-cta{display:flex;gap:12px}
+          .c-hero-r{position:relative;height:560px}
+          .c-photo{position:absolute;left:0;top:0;right:0;bottom:0;border-radius:28px;overflow:hidden;transform:rotate(-2deg);box-shadow:0 24px 60px rgba(20,33,43,.22);border:8px solid #fff}
+          .c-photo img{width:100%;height:100%;object-fit:cover;display:block}
+          .c-stk{position:absolute;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:15px;padding:10px 14px;border-radius:999px;box-shadow:0 6px 16px rgba(20,33,43,.18);z-index:2}
+          .c-ai{position:absolute;left:20px;bottom:18px;font:500 10px/1 ui-monospace,Menlo,monospace;background:rgba(20,33,43,.75);color:#fff;padding:6px 8px;border-radius:6px}
+          .c-sec{padding:64px 56px}
+          .c-kicker{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:#E63946}
+          .c-h2{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:46px;letter-spacing:-.03em;line-height:1;margin:8px 0 0}
+          .c-sec-h{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:32px}
+          .c-sec-h p{margin:0;max-width:380px;font-size:15px;line-height:1.5}
+          .c-feed{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:220px;gap:18px}
+          .c-post{border-radius:20px;overflow:hidden;position:relative;padding:20px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:flex-end;gap:6px;color:#14212B;background:#fff;border:1px solid rgba(20,33,43,.1)}
+          .c-post img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover}
+          .c-img{color:#fff}
+          .c-img::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(20,33,43,0) 25%,rgba(20,33,43,.92) 100%)}
+          .c-post > *{position:relative;z-index:1}
+          .c-tag{align-self:flex-start;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:11px;letter-spacing:.08em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:#123B5C;color:#fff}
+          .c-post-t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;line-height:1.05;letter-spacing:-.02em}
+          .c-post-m{font-size:13px;opacity:.9}
+          .c-tall{grid-row:span 2}
+          .c-adm{background:#123B5C;color:#FFFBF0}
+          .c-adm .c-kicker{color:#FFD84D}
+          .c-steps{display:grid;grid-template-columns:repeat(5,1fr);position:relative;margin-top:8px}
+          .c-steps::before{content:"";position:absolute;left:24px;right:24px;top:22px;height:4px;background:rgba(255,251,240,.2);border-radius:2px}
+          .c-step{position:relative;padding:0 24px 0 0}
+          .c-step-n{width:48px;height:48px;border-radius:50%;background:#FFD84D;color:#123B5C;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;position:relative}
+          .c-step-t{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:20px;line-height:1.1;margin-bottom:6px}
+          .c-step-m{font-size:14px;line-height:1.45;color:rgba(255,251,240,.86)}
+          .c-adm-l{margin-top:36px;display:flex;gap:26px;font-size:14px;font-weight:700;color:#FFD84D}
+          .c-talk{background:#BFE3F7;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+          .c-talk p{max-width:460px;font-size:16px;line-height:1.5;margin:16px 0 0}
+          .c-talk-card{background:#fff;border-radius:20px;padding:22px 26px;width:380px;box-sizing:border-box;box-shadow:0 12px 30px rgba(20,33,43,.12)}
+          .c-talk-card b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px;line-height:1.1;margin:8px 0 6px;letter-spacing:-.02em}
+          .c-talk-card span{font-size:14px}
+          .c-hello{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+          .c-hi{border-radius:18px;padding:20px;border:2px solid #14212B;background:#fff}
+          .c-hi b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:19px;letter-spacing:-.02em;margin-bottom:4px}
+          .c-hi small{display:block;font-size:12px;font-weight:700;color:#E63946;letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px}
+          .c-hi span{display:block;font-size:14px;line-height:1.5}
+          .c-foot{display:flex;align-items:center;justify-content:space-between;padding:26px 56px;border-top:10px solid #FFD84D;font-size:13px}
+          .c-foot b{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:18px;letter-spacing:-.02em}
+          .c-phone{width:390px;background:#FFFBF0;border-radius:40px;border:8px solid #14212B;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.2);flex:none;box-sizing:border-box}
+          .c-pnav{display:flex;align-items:center;justify-content:space-between;padding:16px 22px;border-top:8px solid #FFD84D}
+          .c-pnav .c-word{font-size:22px}
+          .c-burger{width:22px;height:2px;background:#14212B;box-shadow:0 -7px 0 #14212B,0 7px 0 #14212B}
+          .c-phero{background:#FFD84D;padding:22px 20px 26px}
+          .c-preal{display:flex;gap:6px;margin-bottom:10px}
+          .c-preal b{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:56px;line-height:.9;letter-spacing:-.04em;color:#123B5C}
+          .c-ph1{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:34px;line-height:1;letter-spacing:-.03em;margin:0 0 10px}
+          .c-phero p{font-size:14px;line-height:1.45;margin:0 0 16px}
+          .c-pimg{width:100%;height:190px;object-fit:cover;display:block;border-radius:18px;border:5px solid #fff;box-sizing:border-box}
+          .c-pfeed{padding:18px 18px 22px;display:flex;flex-direction:column;gap:10px}
+          .c-pfeed .c-post{height:120px;padding:14px}
+          .c-pfeed .c-post-t{font-size:17px}
+          .c-notes{width:420px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:28px 28px 24px;font-size:14px;line-height:1.5;color:#1B2A38;box-shadow:0 2px 12px rgba(0,0,0,.06);flex:none;box-sizing:border-box;font-family:"Atkinson Hyperlegible",sans-serif}
+          .n-tag{display:inline-block;font:600 11px/1 ui-monospace,Menlo,monospace;background:#1B2A38;color:#fff;padding:5px 8px;border-radius:5px;margin-bottom:12px}
+          .c-notes .n-h{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:28px;letter-spacing:-.03em;margin:0 0 6px;line-height:1.05}
+          .n-sub{color:#5E6B76;margin:0 0 6px}
+          .n-k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C9962B;font-weight:700;margin:18px 0 6px}
+          .n-p{margin:0}
+          .n-ul{margin:0;padding-left:18px}
+          .n-ul li{margin:0 0 5px}
+          .n-type{display:flex;gap:10px;margin-top:6px}
+          .n-type span{padding:6px 10px;border:1px solid rgba(27,42,56,.16);border-radius:8px;font-size:12px}
+        </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700&amp;family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&amp;display=swap">
+<style>
+          .d-row{display:flex;gap:48px;align-items:flex-start;font-family:"Schibsted Grotesk",sans-serif;color:#15222D;text-wrap:pretty}
+          .d-row a{color:#0F4A70}
+          .d-row a:hover{color:#0B2E47}
+          .d-desk{width:1280px;background:#FAF8F4;overflow:hidden;flex:none;border:1px solid rgba(0,0,0,.08);box-shadow:0 2px 12px rgba(0,0,0,.08)}
+          .d-util{display:flex;justify-content:space-between;align-items:center;background:#0B2E47;color:#E9EEF2;padding:10px 56px;font-size:13px}
+          .d-util b{font-weight:600;color:#fff}
+          .d-util-r{display:flex;gap:22px;color:#C4CFD8}
+          .d-nav{display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:#fff;border-bottom:1px solid rgba(21,34,45,.1)}
+          .d-brand{display:flex;align-items:center;gap:12px}
+          .d-crest{width:44px;height:42px;object-fit:contain}
+          .d-word{font-weight:700;font-size:21px;letter-spacing:-.01em;line-height:1.1}
+          .d-word small{display:block;font-weight:500;font-size:12px;color:#5B6873;letter-spacing:0;margin-top:2px}
+          .d-links{display:flex;gap:28px;font-size:15px;font-weight:500}
+          .d-navr{display:flex;gap:10px}
+          .d-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 18px;border-radius:6px;font-weight:600;font-size:15px;white-space:nowrap}
+          .d-btn-navy{background:#0F4A70;color:#fff}
+          .d-btn-line{border:1px solid rgba(21,34,45,.3);color:#15222D;background:#fff}
+          .d-btn-white{background:#fff;color:#0B2E47}
+          .d-hero{display:grid;grid-template-columns:1fr 560px;gap:64px;padding:72px 56px 64px;align-items:center}
+          .d-kick{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:500;color:#0F4A70;margin-bottom:22px}
+          .d-kick::before{content:"";width:28px;height:2px;background:#C9962B;flex:none}
+          .d-h1{font-weight:700;font-size:60px;line-height:1.02;letter-spacing:-.03em;margin:0 0 22px}
+          .d-lede{font-size:18px;line-height:1.55;color:#3E4B56;margin:0 0 30px;max-width:540px}
+          .d-cta{display:flex;gap:20px;align-items:center}
+          .d-tlink{font-weight:600;font-size:15px;color:#0F4A70}
+          .d-photo{width:560px;height:440px;object-fit:cover;border-radius:8px;display:block}
+          .d-facts{display:grid;grid-template-columns:repeat(4,1fr);margin:0 56px;background:#fff;border:1px solid rgba(21,34,45,.1);border-radius:8px}
+          .d-fact{padding:24px 26px;border-right:1px solid rgba(21,34,45,.1)}
+          .d-fact:last-child{border-right:0}
+          .d-fact b{display:block;font-weight:700;font-size:28px;letter-spacing:-.02em;color:#0B2E47;margin-bottom:4px}
+          .d-fact span{font-size:14px;color:#4A5763;line-height:1.4}
+          .d-sec{padding:88px 56px}
+          .d-sec-h{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:44px}
+          .d-eyebrow{font-size:14px;font-weight:600;color:#A87A1F;margin-bottom:10px}
+          .d-h2{font-weight:700;font-size:40px;line-height:1.08;letter-spacing:-.025em;margin:0}
+          .d-sec-h p{margin:0;font-size:16px;line-height:1.6;color:#3E4B56}
+          .d-real{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+          .d-trait{border-top:3px solid #0F4A70;padding-top:22px;display:flex;flex-direction:column}
+          .d-trait-l{font-family:"Source Serif 4",serif;font-weight:600;font-size:56px;line-height:1;color:#0F4A70;margin-bottom:14px}
+          .d-trait-t{font-weight:700;font-size:20px;letter-spacing:-.01em;margin-bottom:8px}
+          .d-trait p{margin:0 0 16px;font-size:15px;line-height:1.55;color:#3E4B56;flex:1}
+          .d-trait ul{margin:0;padding:14px 0 0;list-style:none;border-top:1px solid rgba(21,34,45,.1);display:flex;flex-direction:column;gap:7px;font-size:14px;color:#15222D}
+          .d-trait li{display:flex;gap:10px;align-items:baseline}
+          .d-trait li::before{content:"";width:6px;height:6px;background:#C9962B;flex:none;transform:translateY(-2px)}
+          .d-news{background:#fff;border-top:1px solid rgba(21,34,45,.08);border-bottom:1px solid rgba(21,34,45,.08)}
+          .d-news-g{display:grid;grid-template-columns:1fr 1fr 1fr 340px;gap:24px;align-items:start}
+          .d-card{display:flex;flex-direction:column;gap:10px}
+          .d-card img{width:100%;height:170px;object-fit:cover;border-radius:6px;display:block;background:#E8ECEF}
+          .d-card .d-fit{object-fit:contain;background:#0B2447}
+          .d-meta{font-size:13px;color:#5B6873;display:flex;gap:8px}
+          .d-meta b{font-weight:600;color:#0F4A70}
+          .d-card-t{font-weight:600;font-size:18px;line-height:1.25;letter-spacing:-.01em}
+          .d-up{border-left:1px solid rgba(21,34,45,.12);padding-left:24px}
+          .d-up-h{font-weight:700;font-size:18px;margin:0 0 8px}
+          .d-ev{display:grid;grid-template-columns:56px 1fr;gap:14px;padding:14px 0;border-top:1px solid rgba(21,34,45,.1);align-items:start}
+          .d-date{text-align:center;border:1px solid rgba(21,34,45,.15);border-radius:6px;padding:7px 0 6px;background:#fff}
+          .d-date b{display:block;font-size:22px;font-weight:700;line-height:1}
+          .d-date span{display:block;font-size:11px;font-weight:600;color:#A87A1F;text-transform:uppercase;letter-spacing:.06em;margin-top:3px}
+          .d-ev-t{font-weight:600;font-size:15px;line-height:1.3}
+          .d-ev-m{font-size:13px;color:#5B6873;margin-top:3px;line-height:1.4}
+          .d-adm{background:#0F4A70;color:#fff;position:relative;overflow:hidden}
+          .d-adm .d-eyebrow{color:#E2C27A}
+          .d-adm .d-sec-h p{color:rgba(255,255,255,.88)}
+          .d-wm{position:absolute;right:-90px;top:-70px;width:560px;opacity:.07;pointer-events:none}
+          .d-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;position:relative}
+          .d-step{border-top:1px solid rgba(255,255,255,.3);padding-top:18px}
+          .d-step-n{font-family:"Source Serif 4",serif;font-size:34px;line-height:1;color:#E2C27A;margin-bottom:12px}
+          .d-step-t{font-weight:700;font-size:18px;margin-bottom:6px}
+          .d-step-m{font-size:14px;line-height:1.5;color:rgba(255,255,255,.88)}
+          .d-keys{display:grid;grid-template-columns:repeat(3,1fr);margin-top:44px;border:1px solid rgba(255,255,255,.24);border-radius:8px;position:relative}
+          .d-key{padding:20px 24px;border-right:1px solid rgba(255,255,255,.24);font-size:14px;line-height:1.5;color:rgba(255,255,255,.88)}
+          .d-key:last-child{border-right:0}
+          .d-key b{display:block;font-size:22px;color:#fff;font-weight:700;margin-bottom:4px}
+          .d-adm-cta{display:flex;gap:20px;align-items:center;margin-top:36px;position:relative}
+          .d-adm-cta .d-tlink{color:#fff}
+          .d-quote{padding:88px 56px;display:grid;grid-template-columns:100px 1fr;gap:28px;align-items:start}
+          .d-quote-m{font-family:"Source Serif 4",serif;font-size:120px;line-height:.8;color:#C9962B}
+          .d-quote-t{font-family:"Source Serif 4",serif;font-size:34px;line-height:1.3;letter-spacing:-.01em;margin:0 0 18px;max-width:920px}
+          .d-quote-a{font-size:15px;color:#4A5763}
+          .d-dir{padding:0 56px 88px}
+          .d-tbl{background:#fff;border:1px solid rgba(21,34,45,.1);border-radius:8px;overflow:hidden;margin-top:28px}
+          .d-trow{display:grid;grid-template-columns:1.25fr .95fr 1fr 1.05fr 1.3fr;gap:16px;padding:16px 24px;border-top:1px solid rgba(21,34,45,.1);align-items:center;font-size:15px}
+          .d-thead{font-size:13px;font-weight:600;color:#5B6873;background:#F3F1EC;border-top:0}
+          .d-trow b{font-weight:600}
+          .d-num{white-space:nowrap}
+          .d-foot{background:#0B2E47;color:#C4CFD8;padding:36px 56px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+          .d-foot-b{display:flex;align-items:center;gap:14px;color:#fff}
+          .d-foot-b b{font-weight:700;font-size:18px;display:block}
+          .d-foot-t{font-family:"Source Serif 4",serif;font-size:15px;color:#E9EEF2}
+          .d-phone{width:390px;background:#FAF8F4;border-radius:40px;border:8px solid #15222D;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.2);flex:none;box-sizing:border-box}
+          .d-putil{background:#0B2E47;color:#E9EEF2;font-size:12px;padding:14px 24px 10px}
+          .d-putil b{color:#fff;font-weight:600}
+          .d-pnav{display:flex;justify-content:space-between;align-items:center;padding:14px 24px;background:#fff;border-bottom:1px solid rgba(21,34,45,.1)}
+          .d-burger{width:22px;height:2px;background:#15222D;box-shadow:0 -7px 0 #15222D,0 7px 0 #15222D}
+          .d-pbody{padding:24px 22px 26px}
+          .d-ph1{font-weight:700;font-size:36px;line-height:1.04;letter-spacing:-.03em;margin:0 0 12px}
+          .d-pbody p{font-size:15px;line-height:1.5;color:#3E4B56;margin:0 0 18px}
+          .d-pimg{width:100%;height:200px;object-fit:cover;border-radius:8px;display:block;margin-bottom:16px}
+          .d-pbtns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+          .d-pfacts{display:grid;grid-template-columns:1fr 1fr;column-gap:16px;border-top:1px solid rgba(21,34,45,.1);margin-top:22px}
+          .d-pfacts div{padding:12px 0;border-bottom:1px solid rgba(21,34,45,.1);font-size:13px;color:#4A5763}
+          .d-pfacts b{display:block;font-size:20px;color:#0B2E47;font-weight:700}
+          .d-notes{width:420px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:28px 28px 24px;font-size:14px;line-height:1.5;color:#1B2A38;box-shadow:0 2px 12px rgba(0,0,0,.06);flex:none;box-sizing:border-box;font-family:"Schibsted Grotesk",sans-serif}
+          .n-tag{display:inline-block;font:600 11px/1 ui-monospace,Menlo,monospace;background:#1B2A38;color:#fff;padding:5px 8px;border-radius:5px;margin-bottom:12px}
+          .d-notes .n-h{font-family:"Schibsted Grotesk",sans-serif;font-weight:700;font-size:26px;letter-spacing:-.025em;margin:0 0 6px;line-height:1.1}
+          .n-sub{color:#5E6B76;margin:0 0 6px}
+          .n-k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C9962B;font-weight:700;margin:18px 0 6px}
+          .n-p{margin:0}
+          .n-ul{margin:0;padding-left:18px}
+          .n-ul li{margin:0 0 5px}
+          .n-type{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+          .n-type span{padding:6px 10px;border:1px solid rgba(27,42,56,.16);border-radius:8px;font-size:12px}
+        </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&amp;family=Manrope:wght@400;600;700;800&amp;display=swap">
+<style>
+          .b-row{display:flex;gap:48px;align-items:flex-start;font-family:"Manrope",sans-serif;color:#F3EDE2;text-wrap:pretty}
+          .b-row a{color:#D4A64A}
+          .b-row a:hover{color:#F3EDE2}
+          .b-desk{width:1280px;background:#07131E;overflow:hidden;flex:none;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+          .b-hero{position:relative;height:780px;background:#07131E}
+          .b-bg{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block}
+          .b-shade{position:absolute;left:0;top:0;right:0;bottom:0;background:linear-gradient(90deg,rgba(7,19,30,.8) 0%,rgba(7,19,30,.45) 40%,rgba(7,19,30,0) 72%),linear-gradient(180deg,rgba(7,19,30,.55) 0%,rgba(7,19,30,0) 28%,rgba(7,19,30,.2) 55%,rgba(7,19,30,.94) 100%)}
+          .b-nav{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:24px 56px}
+          .b-brand{display:flex;align-items:center;gap:12px}
+          .b-crest{width:44px;height:42px;object-fit:contain}
+          .b-word{font-family:"Bodoni Moda",serif;font-size:30px;letter-spacing:.02em}
+          .b-links{display:flex;gap:30px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#F3EDE2}
+          .b-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:999px;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+          .b-btn-gold{background:#D4A64A;color:#07131E}
+          .b-btn-line{border:1.5px solid rgba(243,237,226,.7);color:#F3EDE2}
+          .b-hero-c{position:absolute;left:56px;right:56px;bottom:100px}
+          .b-eyebrow{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#D4A64A;font-weight:700;margin-bottom:18px}
+          .b-h1{font-family:"Bodoni Moda",serif;font-weight:400;font-size:112px;line-height:.92;letter-spacing:-.01em;margin:0 0 22px;color:#F3EDE2}
+          .b-lede{font-size:19px;line-height:1.5;max-width:560px;color:rgba(243,237,226,.9);margin:0 0 30px}
+          .b-cta{display:flex;gap:14px}
+          .b-ai{position:absolute;right:16px;top:96px;font:500 10px/1 ui-monospace,Menlo,monospace;background:rgba(7,19,30,.7);color:#F3EDE2;padding:6px 8px;border-radius:6px}
+          .b-tick{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:28px;padding:14px 56px;background:#D4A64A;color:#07131E;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+          .b-tick b{font-weight:800}
+          .b-tick span:last-child{margin-left:auto}
+          .b-sec{padding:80px 56px}
+          .b-kicker{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#D4A64A;font-weight:700}
+          .b-h2{font-family:"Bodoni Moda",serif;font-weight:400;font-size:56px;line-height:1;margin:10px 0 0;letter-spacing:-.01em}
+          .b-sec-h{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px}
+          .b-sec-h p{margin:0;max-width:400px;font-size:15px;line-height:1.55;color:rgba(243,237,226,.78)}
+          .b-doors{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+          .b-door{position:relative;height:420px;border-radius:14px;overflow:hidden;background:#0B2A40}
+          .b-door img{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.85)}
+          .b-door::after{content:"";position:absolute;left:0;top:0;right:0;bottom:0;background:linear-gradient(180deg,rgba(7,19,30,0) 35%,rgba(7,19,30,.94) 100%)}
+          .b-door-t{position:absolute;left:20px;right:20px;bottom:20px;z-index:1}
+          .b-door-g{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#D4A64A;font-weight:700;margin-bottom:6px}
+          .b-door-n{font-family:"Bodoni Moda",serif;font-size:28px;line-height:1.05;margin-bottom:8px}
+          .b-door-h{font-size:13px;color:rgba(243,237,226,.82);margin-bottom:14px;line-height:1.4}
+          .b-door-l{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+          .b-play{width:26px;height:26px;border-radius:50%;background:#D4A64A;color:#07131E;display:inline-flex;align-items:center;justify-content:center;font-size:10px;flex:none}
+          .b-day{background:#0B2A40;display:grid;grid-template-columns:560px 1fr;gap:64px;align-items:stretch}
+          .b-day img{width:560px;height:100%;min-height:640px;object-fit:cover;object-position:10% 50%;display:block}
+          .b-day-c{padding:72px 56px 72px 0}
+          .b-moments{margin:32px 0 0;padding:0;list-style:none;display:flex;flex-direction:column}
+          .b-moments li{display:grid;grid-template-columns:48px 1fr;gap:16px;padding:16px 0;border-top:1px solid rgba(243,237,226,.14);font-size:18px;align-items:baseline}
+          .b-moments li:last-child{border-bottom:1px solid rgba(243,237,226,.14)}
+          .b-moments b{font-family:"Bodoni Moda",serif;font-weight:400;color:#D4A64A;font-size:22px}
+          .b-moments small{display:block;font-size:13px;color:rgba(243,237,226,.7);margin-top:3px}
+          .b-note{margin-top:18px;font:500 11px/1.5 ui-monospace,Menlo,monospace;color:rgba(243,237,226,.6)}
+          .b-quote{padding:96px 56px;text-align:center}
+          .b-quote-t{font-family:"Bodoni Moda",serif;font-style:italic;font-weight:400;font-size:44px;line-height:1.2;max-width:900px;margin:0 auto 22px}
+          .b-quote-a{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#D4A64A;font-weight:700;margin-bottom:36px}
+          .b-quote .b-cta{justify-content:center}
+          .b-foot{display:flex;align-items:center;justify-content:space-between;padding:28px 56px;border-top:1px solid rgba(243,237,226,.14);font-size:12px;color:rgba(243,237,226,.7);letter-spacing:.06em;text-transform:uppercase}
+          .b-foot b{font-family:"Bodoni Moda",serif;font-weight:400;font-size:18px;color:#F3EDE2;text-transform:none;letter-spacing:0}
+          .b-phone{width:390px;height:844px;background:#07131E;border-radius:40px;border:8px solid #2A3641;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.35);flex:none;box-sizing:border-box;position:relative;color:#F3EDE2}
+          .b-phero{position:relative;height:470px}
+          .b-pbg{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;display:block}
+          .b-phero .b-shade{background:linear-gradient(180deg,rgba(7,19,30,.55) 0%,rgba(7,19,30,0) 30%,rgba(7,19,30,.95) 100%)}
+          .b-pnav{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:22px 26px}
+          .b-pnav .b-word{font-size:22px}
+          .b-burger{width:22px;height:2px;background:#F3EDE2;box-shadow:0 -7px 0 #F3EDE2,0 7px 0 #F3EDE2}
+          .b-pplay{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:64px;height:64px;border-radius:50%;background:#D4A64A;color:#07131E;display:flex;align-items:center;justify-content:center;font-size:20px}
+          .b-pc{position:absolute;left:18px;right:18px;bottom:18px}
+          .b-ph1{font-family:"Bodoni Moda",serif;font-weight:400;font-size:46px;line-height:.95;margin:8px 0 8px}
+          .b-pc p{font-size:14px;color:rgba(243,237,226,.85);margin:0;line-height:1.45}
+          .b-plist{padding:8px 18px 0}
+          .b-pitem{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(243,237,226,.14)}
+          .b-pitem b{font-family:"Bodoni Moda",serif;font-weight:400;font-size:19px}
+          .b-pitem small{display:block;font-size:11px;color:#D4A64A;letter-spacing:.12em;text-transform:uppercase;margin-top:2px}
+          .b-pbar{position:absolute;left:0;right:0;bottom:0;padding:26px 18px 22px;background:linear-gradient(180deg,rgba(7,19,30,0),#07131E 40%)}
+          .b-pbar .b-btn{width:100%;justify-content:center;box-sizing:border-box}
+          .b-notes{width:420px;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:28px 28px 24px;font-size:14px;line-height:1.5;color:#1B2A38;box-shadow:0 2px 12px rgba(0,0,0,.06);flex:none;box-sizing:border-box;font-family:"Manrope",sans-serif}
+          .n-tag{display:inline-block;font:600 11px/1 ui-monospace,Menlo,monospace;background:#1B2A38;color:#fff;padding:5px 8px;border-radius:5px;margin-bottom:12px}
+          .b-notes .n-h{font-family:"Bodoni Moda",serif;font-weight:400;font-size:30px;letter-spacing:-.01em;margin:0 0 6px;line-height:1.1}
+          .n-sub{color:#5E6B76;margin:0 0 6px}
+          .n-k{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#C9962B;font-weight:700;margin:18px 0 6px}
+          .n-p{margin:0}
+          .n-ul{margin:0;padding-left:18px}
+          .n-ul li{margin:0 0 5px}
+          .n-type{display:flex;gap:10px;margin-top:6px}
+          .n-type span{padding:6px 10px;border:1px solid rgba(27,42,56,.16);border-radius:8px;font-size:12px}
+        </style>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;background:#ECEAE4}
+#gw-bar{position:fixed;left:0;right:0;top:0;height:56px;z-index:10;display:flex;align-items:center;gap:14px;padding:0 18px;background:#0B2E47;color:#fff;font:500 14px/1 "Schibsted Grotesk",system-ui,sans-serif;box-shadow:0 2px 10px rgba(0,0,0,.18)}
+#gw-bar img{width:28px;height:27px;object-fit:contain}
+#gw-bar b{font-weight:700;font-size:15px;white-space:nowrap}
+#gw-bar .sp{flex:1}
+#gw-bar button,#gw-bar a.gw-l{appearance:none;border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;border-radius:6px;height:34px;padding:0 12px;font:600 13px/1 inherit;font-family:inherit;cursor:pointer;display:inline-flex;align-items:center;text-decoration:none;white-space:nowrap}
+#gw-bar button:hover,#gw-bar a.gw-l:hover{background:rgba(255,255,255,.12)}
+#gw-bar a.gw-l{background:#C9962B;border-color:#C9962B;color:#0B2E47}
+#gw-bar a.gw-l:hover{background:#E2C27A}
+#gw-z{min-width:52px;text-align:center;font-variant-numeric:tabular-nums;color:#C4CFD8}
+#gw-hint{color:#9FB0BE;font-size:12.5px;white-space:nowrap}
+#gw-view{position:fixed;left:0;right:0;top:56px;bottom:0;overflow:auto;cursor:grab;-webkit-overflow-scrolling:touch}
+#gw-view.drag{cursor:grabbing;user-select:none}
+#gw-size{position:relative}
+#gw-stage{position:absolute;left:0;top:0;transform-origin:0 0;padding:60px 40px 40px;box-sizing:content-box}
+@media (max-width:760px){#gw-hint,#gw-bar .gw-t{display:none}#gw-bar{gap:8px;padding:0 10px}}
+</style>
+</head>
+<body>
+<header id="gw-bar"><img src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><b>Rotherglen</b><span class="gw-t">Website concepts</span><span class="sp"></span><span id="gw-hint">Drag to move · Ctrl or Cmd + scroll to zoom</span><button id="gw-out" aria-label="Zoom out">&minus;</button><span id="gw-z">100%</span><button id="gw-in" aria-label="Zoom in">+</button><button id="gw-fit">Fit</button><button id="gw-100">100%</button><a class="gw-l" href="../storyboard/">Rotherglen Hub storyboard &rarr;</a></header>
+<main id="gw-view"><div id="gw-size"><div id="gw-stage">
+<div id="dc-root"><div class="sc-host" data-sc-name="Rotherglen Concepts">
+      
+      <div data-dc-tpl="5" style="position: relative; width: 4000px; height: 14960px; pointer-events: none;"></div>
+      <div data-dc-tpl="6" class="turn" data-screen-label="Round 2 header" style="top: 0px;">
+        <span data-dc-tpl="7" class="turn-id">ROUND 2</span>
+        <span data-dc-tpl="8" class="turn-t">From your feedback on 1a and 1c</span>
+        <span data-dc-tpl="9" class="turn-s">2a to 2c replace the 1a hero type and message · 2d redesigns 1c to read professional</span>
+      </div>
+      <div data-dc-tpl="10" class="turn-next" style="position: absolute; left: 0px; top: 40px;">Try next: “apply 2a to the full 1a page” · “2d with the 2a type” · “merge 1a structure and 2d admissions”</div>
+      <div data-dc-tpl="11" class="fr" data-screen-label="2a 2b 2c hero riffs on 1a" style="left: 0px; top: 130px;">
+        <div data-dc-tpl="12" class="fr-label" data-drags-parent="1">2a · 2b · 2c · NEW HERO TYPE AND MESSAGE FOR 1a · rest of the 1a page unchanged</div>
+        <div class="sc-host" data-sc-name="HeroRiffsA" data-dc-tpl="13">
+      
+      <div data-dc-tpl="4" class="h-row">
+        <div data-dc-tpl="5" class="h-opt" id="2a">
+          <div data-dc-tpl="6" class="h-hero" data-screen-label="2a hero Viewbook">
+            <header data-dc-tpl="7" class="h-nav">
+              <div data-dc-tpl="8" class="v1-lock"><img data-dc-tpl="9" class="h-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><div data-dc-tpl="10" class="v1-word"><b data-dc-tpl="11">ROTHERGLEN SCHOOL</b><span data-dc-tpl="12">WHAT SCHOOL SHOULD BE</span></div></div>
+              <nav data-dc-tpl="13" class="h-links v1-links"><span data-dc-tpl="14">The journey</span><span data-dc-tpl="15">Campuses</span><span data-dc-tpl="16">Admissions</span><span data-dc-tpl="17">Community</span><span data-dc-tpl="18">Camps 2026</span></nav>
+              <div data-dc-tpl="19" class="h-navr"><span data-dc-tpl="20">Community login</span><span data-dc-tpl="21" class="h-btn v1-btn">Book a tour</span></div>
+            </header>
+            <section data-dc-tpl="22" class="h-grid">
+              <div data-dc-tpl="23">
+                <h1 data-dc-tpl="24" class="v1-h1">What school should be.</h1>
+                <div data-dc-tpl="25" class="v1-sub"><span data-dc-tpl="26">Casa to Grade 8</span><span data-dc-tpl="27" class="v1-pipe">|</span><span data-dc-tpl="28">Oakville &amp; Mississauga</span><span data-dc-tpl="29" class="v1-pipe">|</span><span data-dc-tpl="30">Since 1979</span></div>
+                <div data-dc-tpl="31" class="v1-rule"></div>
+                <p data-dc-tpl="32" class="h-lede">Montessori roots through Grade 3, an enriched Ontario curriculum through Grade 8, and French and music from the very first year. Ask our families to describe us and the word they use most is nurturing.</p>
+                <div data-dc-tpl="33" class="h-finder"><div data-dc-tpl="34" class="h-field"><span data-dc-tpl="35" class="h-lbl">My child is</span><span data-dc-tpl="36" class="h-val">4 years old ▾</span></div><div data-dc-tpl="37" class="h-field"><span data-dc-tpl="38" class="h-lbl">We live near</span><span data-dc-tpl="39" class="h-val">L6H</span></div><span data-dc-tpl="40" class="h-go v1-go">Find a campus</span></div>
+              </div>
+              <div data-dc-tpl="41" class="h-imgw">
+                <img data-dc-tpl="42" class="h-img" src="../assets/concept-844829c2.jpg" alt="Casa student working with bead materials">
+                <span data-dc-tpl="43" class="h-ai">AI placeholder · reshoot</span>
+                <div data-dc-tpl="44" class="v1-quote"><div data-dc-tpl="45" class="v1-quote-t">“K entered the school five months ago not knowing her letters. Today she will be getting her first reader bag.”</div><div data-dc-tpl="46" class="v1-quote-a">A Casa parent</div></div>
+              </div>
+            </section>
+          </div>
+          <div data-dc-tpl="47" class="h-cap">
+            <span data-dc-tpl="48" class="h-cap-id">2a</span>
+            <div data-dc-tpl="49"><p data-dc-tpl="50" class="h-cap-t">Viewbook <span data-dc-tpl="51" class="h-rec">recommended</span></p><p data-dc-tpl="52">Carries the school’s 2025 printed viewbook onto the web: classical capitals for the wordmark, a book serif for the message, set upright with no italic accent. The headline is simply the school’s own tagline, so print and web finally match.</p></div>
+            <div data-dc-tpl="53" class="h-spec"><span data-dc-tpl="54">Cinzel · wordmark, small caps</span><span data-dc-tpl="55">EB Garamond · headline, quote</span><span data-dc-tpl="56">Instrument Sans · body</span></div>
+          </div>
+        </div>
+        <div data-dc-tpl="57" class="h-opt" id="2b">
+          <div data-dc-tpl="58" class="h-hero" data-screen-label="2b hero Schoolhouse">
+            <header data-dc-tpl="59" class="h-nav">
+              <div data-dc-tpl="60" class="v2-brand"><img data-dc-tpl="61" class="h-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><span data-dc-tpl="62" class="v2-word">Rotherglen</span></div>
+              <nav data-dc-tpl="63" class="h-links"><span data-dc-tpl="64">The journey</span><span data-dc-tpl="65">Campuses</span><span data-dc-tpl="66">Admissions</span><span data-dc-tpl="67">Community</span><span data-dc-tpl="68">Camps 2026</span></nav>
+              <div data-dc-tpl="69" class="h-navr"><span data-dc-tpl="70">Community login</span><span data-dc-tpl="71" class="h-btn v2-btn">Book a tour</span></div>
+            </header>
+            <section data-dc-tpl="72" class="h-grid">
+              <div data-dc-tpl="73">
+                <div data-dc-tpl="74" class="v2-kick"><span data-dc-tpl="75" class="v2-sq"></span>Casa to Grade 8 · Oakville and Mississauga · Since 1979</div>
+                <h1 data-dc-tpl="76" class="v2-h1">From the first reader&nbsp;bag to Grade&nbsp;8 graduation.</h1>
+                <p data-dc-tpl="77" class="h-lede">Rotherglen is an independent school for children aged 3.9 to 14, with four campuses in Oakville and Mississauga. Montessori through Grade 3, an enriched Ontario curriculum after that, and a community families describe as nurturing.</p>
+                <div data-dc-tpl="78" class="h-finder"><div data-dc-tpl="79" class="h-field"><span data-dc-tpl="80" class="h-lbl">My child is</span><span data-dc-tpl="81" class="h-val">4 years old ▾</span></div><div data-dc-tpl="82" class="h-field"><span data-dc-tpl="83" class="h-lbl">We live near</span><span data-dc-tpl="84" class="h-val">L6H</span></div><span data-dc-tpl="85" class="h-go v2-go">Find a campus</span></div>
+              </div>
+              <div data-dc-tpl="86" class="h-imgw">
+                <img data-dc-tpl="87" class="h-img" src="../assets/concept-39a87164.jpg" alt="Grade 8 student presenting to classmates">
+                <span data-dc-tpl="88" class="h-ai">AI placeholder · reshoot</span>
+                <div data-dc-tpl="89" class="v2-quote"><div data-dc-tpl="90" class="v2-quote-t">“Rotherglen has conditioned G to become the considerate, honest and confident young man he is today.”</div><div data-dc-tpl="91" class="v2-quote-a">Parent of a Rotherglen graduate</div></div>
+              </div>
+            </section>
+          </div>
+          <div data-dc-tpl="92" class="h-cap">
+            <span data-dc-tpl="93" class="h-cap-id">2b</span>
+            <div data-dc-tpl="94"><p data-dc-tpl="95" class="h-cap-t">Schoolhouse</p><p data-dc-tpl="96">A sturdy Clarendon-style serif with the warmth of school signage and yearbooks. The message tells the whole Casa-to-Grade-8 story in one specific line, borrowed from a real parent’s testimonial.</p></div>
+            <div data-dc-tpl="97" class="h-spec"><span data-dc-tpl="98">Besley · wordmark, headline, quote</span><span data-dc-tpl="99">Instrument Sans · body</span></div>
+          </div>
+        </div>
+        <div data-dc-tpl="100" class="h-opt" id="2c">
+          <div data-dc-tpl="101" class="h-hero v3-hero" data-screen-label="2c hero Institutional">
+            <header data-dc-tpl="102" class="h-nav">
+              <div data-dc-tpl="103" class="v2-brand"><img data-dc-tpl="104" class="h-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><span data-dc-tpl="105" class="v3-word">Rotherglen School</span></div>
+              <nav data-dc-tpl="106" class="h-links v3-links"><span data-dc-tpl="107">The journey</span><span data-dc-tpl="108">Campuses</span><span data-dc-tpl="109">Admissions</span><span data-dc-tpl="110">Community</span><span data-dc-tpl="111">Camps 2026</span></nav>
+              <div data-dc-tpl="112" class="h-navr v3-links"><span data-dc-tpl="113">Community login</span><span data-dc-tpl="114" class="h-btn v3-btn">Book a tour</span></div>
+            </header>
+            <div data-dc-tpl="115" class="v3-top">
+              <h1 data-dc-tpl="116" class="v3-h1">The school families call nurturing.</h1>
+              <p data-dc-tpl="117" class="v3-side">Ask Rotherglen parents to describe the school in one word and most choose nurturing. Montessori through Grade 3, an enriched Ontario curriculum to Grade 8, four campuses in Oakville and Mississauga.</p>
+            </div>
+            <div data-dc-tpl="118" class="v3-facts">
+              <div data-dc-tpl="119" class="v3-fact"><b data-dc-tpl="120">1979</b>Founded in Mississauga</div>
+              <div data-dc-tpl="121" class="v3-fact"><b data-dc-tpl="122">4</b>Campuses</div>
+              <div data-dc-tpl="123" class="v3-fact"><b data-dc-tpl="124">3.9 to 14</b>Ages, Casa to Grade 8</div>
+              <div data-dc-tpl="125" class="v3-fact"><b data-dc-tpl="126">24 Oct</b>Fall Open House, 10 am to 2 pm</div>
+            </div>
+            <div data-dc-tpl="127" class="v3-band">
+              <img data-dc-tpl="128" src="../assets/HeroImage-scaled.jpg" alt="Rotherglen students working at laptops">
+              <div data-dc-tpl="129" class="v3-panel"><div data-dc-tpl="130" class="h-field"><span data-dc-tpl="131" class="h-lbl">My child is</span><span data-dc-tpl="132" class="h-val">4 years old ▾</span></div><div data-dc-tpl="133" class="h-field"><span data-dc-tpl="134" class="h-lbl">We live near</span><span data-dc-tpl="135" class="h-val">L6H</span></div><span data-dc-tpl="136" class="h-go v3-go">Find a campus</span></div>
+            </div>
+          </div>
+          <div data-dc-tpl="137" class="h-cap">
+            <span data-dc-tpl="138" class="h-cap-id">2c</span>
+            <div data-dc-tpl="139"><p data-dc-tpl="140" class="h-cap-t">Institutional</p><p data-dc-tpl="141">A heritage American grotesk, set big and tight, over a real Rotherglen photo at full width. It reads established and confident rather than trendy. The headline uses the one word parents actually use most.</p></div>
+            <div data-dc-tpl="142" class="h-spec"><span data-dc-tpl="143">Libre Franklin · everything</span><span data-dc-tpl="144">real photo · rotherglen.com hero</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div data-dc-tpl="14" class="fr" data-screen-label="2d The REAL Student" style="left: 0px; top: 1340px;">
+        <div data-dc-tpl="15" class="fr-label" data-drags-parent="1">2d · THE REAL STUDENT · 1c redesigned · desktop home · phone home · rationale</div>
+        <div class="sc-host" data-sc-name="ConceptC2" data-dc-tpl="16">
+      
+      <div data-dc-tpl="4" class="d-row">
+        <div data-dc-tpl="5" class="d-desk" data-screen-label="2d desktop home">
+          <div data-dc-tpl="6" class="d-util"><span data-dc-tpl="7"><b data-dc-tpl="8">Fall Open House</b> · Saturday 24 October, 10 am to 2 pm · Register</span><span data-dc-tpl="9" class="d-util-r"><span data-dc-tpl="10">Community login</span><span data-dc-tpl="11">Careers</span><span data-dc-tpl="12">Contact</span></span></div>
+          <header data-dc-tpl="13" class="d-nav">
+            <div data-dc-tpl="14" class="d-brand"><img data-dc-tpl="15" class="d-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><span data-dc-tpl="16" class="d-word">Rotherglen School<small data-dc-tpl="17">Oakville · Mississauga</small></span></div>
+            <nav data-dc-tpl="18" class="d-links"><span data-dc-tpl="19">About</span><span data-dc-tpl="20">Programs</span><span data-dc-tpl="21">Campuses</span><span data-dc-tpl="22">Admissions</span><span data-dc-tpl="23">News and events</span></nav>
+            <div data-dc-tpl="24" class="d-navr"><span data-dc-tpl="25" class="d-btn d-btn-line">Book a tour</span><span data-dc-tpl="26" class="d-btn d-btn-navy">Apply</span></div>
+          </header>
+          <section data-dc-tpl="27" class="d-hero">
+            <div data-dc-tpl="28">
+              <div data-dc-tpl="29" class="d-kick">Independent school · Casa to Grade 8 · Est. 1979</div>
+              <h1 data-dc-tpl="30" class="d-h1">Every Rotherglen student is REAL.</h1>
+              <p data-dc-tpl="31" class="d-lede">Respectful, Engaged, Academically motivated and a Leader: the profile all four campuses teach to, from Casa at age 3.9 to Grade 8. A co-educational, non-denominational independent school in Oakville and Mississauga since 1979.</p>
+              <div data-dc-tpl="32" class="d-cta"><span data-dc-tpl="33" class="d-btn d-btn-navy">Book a tour</span><span data-dc-tpl="34" class="d-tlink">How admissions works →</span></div>
+            </div>
+            <img data-dc-tpl="35" class="d-photo" src="../assets/img_callout3_low.jpg" alt="A Rotherglen teacher working with students">
+          </section>
+          <div data-dc-tpl="36" class="d-facts">
+            <div data-dc-tpl="37" class="d-fact"><b data-dc-tpl="38">1979</b><span data-dc-tpl="39">Founded in Mississauga by Marie Lanigan</span></div>
+            <div data-dc-tpl="40" class="d-fact"><b data-dc-tpl="41">4</b><span data-dc-tpl="42">Campuses in Oakville and Mississauga</span></div>
+            <div data-dc-tpl="43" class="d-fact"><b data-dc-tpl="44">3.9 to 14</b><span data-dc-tpl="45">Ages served, Casa to Grade 8</span></div>
+            <div data-dc-tpl="46" class="d-fact"><b data-dc-tpl="47">French and music</b><span data-dc-tpl="48">Taught by specialists from Casa</span></div>
+          </div>
+          <section data-dc-tpl="49" class="d-sec">
+            <div data-dc-tpl="50" class="d-sec-h">
+              <div data-dc-tpl="51"><div data-dc-tpl="52" class="d-eyebrow">Portrait of a Rotherglen student</div><h2 data-dc-tpl="53" class="d-h2">Four qualities we teach to, at every campus and every grade.</h2></div>
+              <p data-dc-tpl="54">REAL is how Rotherglen describes the student it sets out to develop. Each quality shows up in specific programs families can see on a tour.</p>
+            </div>
+            <div data-dc-tpl="55" class="d-real">
+              <div data-dc-tpl="56" class="d-trait"><div data-dc-tpl="57" class="d-trait-l">R</div><div data-dc-tpl="58" class="d-trait-t">Respectful</div><p data-dc-tpl="59">Of themselves, inclusive of others, and protective of the environment.</p><ul data-dc-tpl="60"><li data-dc-tpl="61">Mutual Respect program</li><li data-dc-tpl="62">Earth Week and Orange Shirt Day</li></ul></div>
+              <div data-dc-tpl="63" class="d-trait"><div data-dc-tpl="64" class="d-trait-l">E</div><div data-dc-tpl="65" class="d-trait-t">Engaged</div><p data-dc-tpl="66">In their learning, athletics, the arts and co-curricular activities.</p><ul data-dc-tpl="67"><li data-dc-tpl="68">Arts, athletics and clubs</li><li data-dc-tpl="69">The Workshop for hands-on science</li></ul></div>
+              <div data-dc-tpl="70" class="d-trait"><div data-dc-tpl="71" class="d-trait-l">A</div><div data-dc-tpl="72" class="d-trait-t">Academically motivated</div><p data-dc-tpl="73">To achieve excellence, supported by teaching matched to how each child learns.</p><ul data-dc-tpl="74"><li data-dc-tpl="75">Differentiated learning</li><li data-dc-tpl="76">The Learning Success Centre</li></ul></div>
+              <div data-dc-tpl="77" class="d-trait"><div data-dc-tpl="78" class="d-trait-l">L</div><div data-dc-tpl="79" class="d-trait-t">Leaders</div><p data-dc-tpl="80">And innovators prepared to contribute locally and globally.</p><ul data-dc-tpl="81"><li data-dc-tpl="82">R.E.A.C.H. character and leadership</li><li data-dc-tpl="83">Community service</li></ul></div>
+            </div>
+          </section>
+          <section data-dc-tpl="84" class="d-sec d-news">
+            <div data-dc-tpl="85" class="d-sec-h">
+              <div data-dc-tpl="86"><div data-dc-tpl="87" class="d-eyebrow">News and events</div><h2 data-dc-tpl="88" class="d-h2">What is happening across the campuses.</h2></div>
+              <p data-dc-tpl="89">One stream for all four campuses, drawn from the news pages and campus feeds. Real post titles and dates shown.</p>
+            </div>
+            <div data-dc-tpl="90" class="d-news-g">
+              <div data-dc-tpl="91" class="d-card"><img data-dc-tpl="92" class="d-fit" src="../assets/RG-OE-Speaker-Session-Oct-20-Blog-post-hero.png" alt="Tuesday Talks graphic"><div data-dc-tpl="93" class="d-meta"><b data-dc-tpl="94">Oakville Elementary</b><span data-dc-tpl="95" class="d-num">23 Sep 2026</span></div><div data-dc-tpl="96" class="d-card-t">Tuesday Talks: Reframing Anxiety and Increasing Resilience</div></div>
+              <div data-dc-tpl="97" class="d-card"><img data-dc-tpl="98" src="../assets/Greeting.jpg" alt="Meadowvale entrance hall"><div data-dc-tpl="99" class="d-meta"><b data-dc-tpl="100">Meadowvale</b><span data-dc-tpl="101" class="d-num">13 Jan 2026</span></div><div data-dc-tpl="102" class="d-card-t">Grade 7/8 Information Evening</div></div>
+              <div data-dc-tpl="103" class="d-card"><img data-dc-tpl="104" src="../assets/IMG_6861-scaled-e1770392687107.jpg" alt="Student choosing an apple"><div data-dc-tpl="105" class="d-meta"><b data-dc-tpl="106">Erin Mills</b><span data-dc-tpl="107" class="d-num">15 Oct 2025</span></div><div data-dc-tpl="108" class="d-card-t">Enjoying the taste of fall at our Erin Mills Campus</div></div>
+              <div data-dc-tpl="109" class="d-up">
+                <div data-dc-tpl="110" class="d-up-h">Upcoming</div>
+                <div data-dc-tpl="111" class="d-ev"><div data-dc-tpl="112" class="d-date"><b data-dc-tpl="113">29</b><span data-dc-tpl="114">Sep</span></div><div data-dc-tpl="115"><div data-dc-tpl="116" class="d-ev-t">Tuesday Talks: Your Brain on Sports</div><div data-dc-tpl="117" class="d-ev-m">Oakville Elementary Campus · parent speaker series</div></div></div>
+                <div data-dc-tpl="118" class="d-ev"><div data-dc-tpl="119" class="d-date"><b data-dc-tpl="120">20</b><span data-dc-tpl="121">Oct</span></div><div data-dc-tpl="122"><div data-dc-tpl="123" class="d-ev-t">Tuesday Talks: Reframing Anxiety and Increasing Resilience</div><div data-dc-tpl="124" class="d-ev-m">Oakville Elementary Campus</div></div></div>
+                <div data-dc-tpl="125" class="d-ev"><div data-dc-tpl="126" class="d-date"><b data-dc-tpl="127">24</b><span data-dc-tpl="128">Oct</span></div><div data-dc-tpl="129"><div data-dc-tpl="130" class="d-ev-t">Fall Open House</div><div data-dc-tpl="131" class="d-ev-m">10 am to 2 pm · Oakville Primary, Oakville Elementary, Meadowvale</div></div></div>
+              </div>
+            </div>
+          </section>
+          <section data-dc-tpl="132" class="d-sec d-adm">
+            <img data-dc-tpl="133" class="d-wm" src="../assets/RG_logo_shield-big_1.svg" alt="">
+            <div data-dc-tpl="134" class="d-sec-h" style="position: relative;">
+              <div data-dc-tpl="135"><div data-dc-tpl="136" class="d-eyebrow">Admissions</div><h2 data-dc-tpl="137" class="d-h2">One process for all four campuses, in five steps.</h2></div>
+              <p data-dc-tpl="138">The same steps, documents and fee apply whichever campus you choose. Each campus has a named admissions contact to guide you.</p>
+            </div>
+            <div data-dc-tpl="139" class="d-steps">
+              <div data-dc-tpl="140" class="d-step"><div data-dc-tpl="141" class="d-step-n">1</div><div data-dc-tpl="142" class="d-step-t">Visit</div><div data-dc-tpl="143" class="d-step-m">Book a personal tour or attend an open house.</div></div>
+              <div data-dc-tpl="144" class="d-step"><div data-dc-tpl="145" class="d-step-n">2</div><div data-dc-tpl="146" class="d-step-t">Apply</div><div data-dc-tpl="147" class="d-step-m">Submit the online application with report cards and a confidential school report.</div></div>
+              <div data-dc-tpl="148" class="d-step"><div data-dc-tpl="149" class="d-step-n">3</div><div data-dc-tpl="150" class="d-step-t">Assessment</div><div data-dc-tpl="151" class="d-step-m">Grades 1 to 8 complete an in-person literacy and numeracy assessment.</div></div>
+              <div data-dc-tpl="152" class="d-step"><div data-dc-tpl="153" class="d-step-n">4</div><div data-dc-tpl="154" class="d-step-t">Decision</div><div data-dc-tpl="155" class="d-step-m">Families receive an offer of admission or a waitlist notification.</div></div>
+              <div data-dc-tpl="156" class="d-step"><div data-dc-tpl="157" class="d-step-n">5</div><div data-dc-tpl="158" class="d-step-t">Register</div><div data-dc-tpl="159" class="d-step-m">Return the registration package and tuition payment to confirm the place.</div></div>
+            </div>
+            <div data-dc-tpl="160" class="d-keys">
+              <div data-dc-tpl="161" class="d-key"><b data-dc-tpl="162">$300</b>Non-refundable application fee</div>
+              <div data-dc-tpl="163" class="d-key"><b data-dc-tpl="164">Grades 1 to 8</b>In-person entrance assessment</div>
+              <div data-dc-tpl="165" class="d-key"><b data-dc-tpl="166">24 October</b>Fall Open House, 10 am to 2 pm</div>
+            </div>
+            <div data-dc-tpl="167" class="d-adm-cta"><span data-dc-tpl="168" class="d-btn d-btn-white">Start an application</span><span data-dc-tpl="169" class="d-tlink">Fees and schedules →</span><span data-dc-tpl="170" class="d-tlink">Before and after school care →</span></div>
+          </section>
+          <section data-dc-tpl="171" class="d-quote">
+            <div data-dc-tpl="172" class="d-quote-m">“</div>
+            <div data-dc-tpl="173"><p data-dc-tpl="174" class="d-quote-t">We are impressed with the level of communication at Rotherglen and feel that we are a part of such a wonderful community.</p><div data-dc-tpl="175" class="d-quote-a">The M family, parents of a Grade 1 student</div></div>
+          </section>
+          <section data-dc-tpl="176" class="d-dir">
+            <div data-dc-tpl="177" class="d-eyebrow">Speak with admissions</div><h2 data-dc-tpl="178" class="d-h2">A named contact at every campus.</h2>
+            <div data-dc-tpl="179" class="d-tbl">
+              <div data-dc-tpl="180" class="d-trow d-thead"><span data-dc-tpl="181">Campus</span><span data-dc-tpl="182">Grades</span><span data-dc-tpl="183">Admissions</span><span data-dc-tpl="184">Phone</span><span data-dc-tpl="185">Email</span></div>
+              <div data-dc-tpl="186" class="d-trow"><b data-dc-tpl="187">Oakville Primary</b><span data-dc-tpl="188">JK to Grade 1</span><span data-dc-tpl="189">Mary Williamson</span><span data-dc-tpl="190" class="d-num">905 338 3528</span><span data-dc-tpl="191">primary@rotherglen.com</span></div>
+              <div data-dc-tpl="192" class="d-trow"><b data-dc-tpl="193">Oakville Elementary</b><span data-dc-tpl="194">Grades 1 to 8</span><span data-dc-tpl="195">Deanna Colgan</span><span data-dc-tpl="196" class="d-num">905 849 1897 ext. 1240</span><span data-dc-tpl="197">dcolgan@rotherglen.com</span></div>
+              <div data-dc-tpl="198" class="d-trow"><b data-dc-tpl="199">Meadowvale Elementary</b><span data-dc-tpl="200">JK to Grade 8</span><span data-dc-tpl="201">Laura Rossi</span><span data-dc-tpl="202" class="d-num">905 565 8707</span><span data-dc-tpl="203">lrossi@rotherglen.com</span></div>
+              <div data-dc-tpl="204" class="d-trow"><b data-dc-tpl="205">Erin Mills</b><span data-dc-tpl="206">JK to Grade 6</span><span data-dc-tpl="207">Eileen Lanigan</span><span data-dc-tpl="208" class="d-num">905 820 9445</span><span data-dc-tpl="209">elanigan@rotherglen.com</span></div>
+            </div>
+          </section>
+          <footer data-dc-tpl="210" class="d-foot">
+            <div data-dc-tpl="211" class="d-foot-b"><img data-dc-tpl="212" class="d-crest" src="../assets/RG_logo_shield-big_1.svg" alt=""><div data-dc-tpl="213"><b data-dc-tpl="214">Rotherglen School</b><span data-dc-tpl="215" class="d-foot-t">Engaged Minds | Inspired Hearts | Purposeful Lives</span></div></div>
+            <span data-dc-tpl="216">Privacy · AODA · Careers · Community login · Contact</span>
+          </footer>
+        </div>
+        <div data-dc-tpl="217" class="d-phone" data-screen-label="2d phone home">
+          <div data-dc-tpl="218" class="d-putil"><b data-dc-tpl="219">Fall Open House</b> · Sat 24 Oct · Register</div>
+          <div data-dc-tpl="220" class="d-pnav"><div data-dc-tpl="221" class="d-brand"><img data-dc-tpl="222" class="d-crest" src="../assets/RG_logo_shield-big_1.svg" alt="" style="width: 32px; height: 30px;"><span data-dc-tpl="223" class="d-word" style="font-size: 18px;">Rotherglen School</span></div><div data-dc-tpl="224" class="d-burger"></div></div>
+          <div data-dc-tpl="225" class="d-pbody">
+            <div data-dc-tpl="226" class="d-kick">Casa to Grade 8 · Est. 1979</div>
+            <h1 data-dc-tpl="227" class="d-ph1">Every Rotherglen student is REAL.</h1>
+            <p data-dc-tpl="228">Respectful, Engaged, Academically motivated and a Leader, at four campuses in Oakville and Mississauga.</p>
+            <img data-dc-tpl="229" class="d-pimg" src="../assets/img_callout3_low.jpg" alt="">
+            <div data-dc-tpl="230" class="d-pbtns"><span data-dc-tpl="231" class="d-btn d-btn-navy">Book a tour</span><span data-dc-tpl="232" class="d-btn d-btn-line">Admissions</span></div>
+            <div data-dc-tpl="233" class="d-pfacts"><div data-dc-tpl="234"><b data-dc-tpl="235">4</b>Campuses</div><div data-dc-tpl="236"><b data-dc-tpl="237">3.9 to 14</b>Ages</div><div data-dc-tpl="238"><b data-dc-tpl="239">$300</b>Application fee</div><div data-dc-tpl="240"><b data-dc-tpl="241">24 Oct</b>Open House</div></div>
+            <div data-dc-tpl="242" class="d-up-h" style="margin-top: 22px;">Upcoming</div>
+            <div data-dc-tpl="243" class="d-ev"><div data-dc-tpl="244" class="d-date"><b data-dc-tpl="245">29</b><span data-dc-tpl="246">Sep</span></div><div data-dc-tpl="247"><div data-dc-tpl="248" class="d-ev-t">Tuesday Talks: Your Brain on Sports</div><div data-dc-tpl="249" class="d-ev-m">Oakville Elementary</div></div></div>
+            <div data-dc-tpl="250" class="d-ev"><div data-dc-tpl="251" class="d-date"><b data-dc-tpl="252">24</b><span data-dc-tpl="253">Oct</span></div><div data-dc-tpl="254"><div data-dc-tpl="255" class="d-ev-t">Fall Open House</div><div data-dc-tpl="256" class="d-ev-m">10 am to 2 pm</div></div></div>
+          </div>
+        </div>
+        <div data-dc-tpl="257" class="d-notes" data-screen-label="2d rationale">
+          <span data-dc-tpl="258" class="n-tag">2d · 1c redesigned</span>
+          <h3 data-dc-tpl="259" class="n-h">The REAL Student</h3>
+          <p data-dc-tpl="260" class="n-sub">Annual-report clarity. Ivory, viewbook navy, crest gold. Schibsted Grotesk with Source Serif 4.</p>
+          <div data-dc-tpl="261" class="n-type"><span data-dc-tpl="262" style="font-weight: 700;">Schibsted Grotesk</span><span data-dc-tpl="263" style="font-family: &quot;Source Serif 4&quot;, serif;">Source Serif 4</span><span data-dc-tpl="264" style="background: rgb(15, 74, 112); color: rgb(255, 255, 255);">#0F4A70 navy</span></div>
+          <p data-dc-tpl="265" class="n-k">What stayed from 1c</p>
+          <p data-dc-tpl="266" class="n-p">The strategy: lead with the REAL student profile, prove the school is active week to week, and make admissions plain.</p>
+          <p data-dc-tpl="267" class="n-k">What changed</p>
+          <ul data-dc-tpl="268" class="n-ul">
+            <li data-dc-tpl="269">The sun-yellow fields, stickers, tilted photo and giant acrostic are gone. Yellow survives only as the crest-gold accent.</li>
+            <li data-dc-tpl="270">REAL is presented as “Portrait of a Rotherglen student”, the school’s own page name, with where each quality shows up in practice.</li>
+            <li data-dc-tpl="271">The feed becomes News and events: real post titles and dates, plus the next three confirmed events.</li>
+            <li data-dc-tpl="272">Admissions sits on viewbook navy with a watermark crest, echoing the 2025 viewbook cover, and adds the key facts panel.</li>
+            <li data-dc-tpl="273">Contacts become a proper admissions directory.</li>
+            <li data-dc-tpl="274">Real campus photography throughout; no AI imagery on this page.</li>
+          </ul>
+          <p data-dc-tpl="275" class="n-k">Why it lifts appeal</p>
+          <p data-dc-tpl="276" class="n-p">It reads like a well-run institution: clear, specific and confident. Parents comparing independent schools get the profile, the proof and the process on one page.</p>
+          <p data-dc-tpl="277" class="n-k">Watch-outs</p>
+          <ul data-dc-tpl="278" class="n-ul">
+            <li data-dc-tpl="279">News needs a posting rhythm; Erin Mills’ latest post is from October 2025.</li>
+            <li data-dc-tpl="280">Confirm Tuesday Talks times before launch.</li>
+          </ul>
+          <p data-dc-tpl="281" class="n-k">Effort</p>
+          <p data-dc-tpl="282" class="n-p">Medium. Template refresh plus a news feed that merges the four campus blogs.</p>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div data-dc-tpl="17" class="turn" data-screen-label="Round 1 header" style="top: 5260px;">
+        <span data-dc-tpl="18" class="turn-id" style="background: rgb(27, 42, 56);">ROUND 1</span>
+        <span data-dc-tpl="19" class="turn-t">Audit and three original concepts</span>
+        <span data-dc-tpl="20" class="turn-s">kept unchanged for reference</span>
+      </div>
+      <div data-dc-tpl="21" class="fr" data-screen-label="00 Audit of the current site" style="left: 0px; top: 5360px;">
+        <div data-dc-tpl="22" class="fr-label" data-drags-parent="1">00 · AUDIT · rotherglen.com as of 28 Sep 2026</div>
+        <div data-dc-tpl="23" class="au">
+          <div data-dc-tpl="24" class="au-top">
+            <div data-dc-tpl="25">
+              <h1 data-dc-tpl="26" class="au-t">Rotherglen.com · three concept directions</h1>
+              <p data-dc-tpl="27" class="au-s">A review of the current site and four campus pages, and three distinct ways to make the school more appealing to prospective families. Each concept changes the strategy, not just the skin.</p>
+            </div>
+            <div data-dc-tpl="28" class="au-meta">reviewed: home · welcome · why-rotherglen · testimonials<br data-dc-tpl="29">admissions/how-to-apply · primary · elementary · meadowvale · erinmills<br data-dc-tpl="30">stack: WordPress 7.0 · custom theme dated 2014-10-25</div>
+          </div>
+          <div data-dc-tpl="31" class="au-grid">
+            <div data-dc-tpl="32">
+              <p data-dc-tpl="33" class="au-k">Today · homepage, live assets, 1440px</p>
+              <div data-dc-tpl="34" class="cur">
+                <div data-dc-tpl="35" class="cur-top">Home &nbsp; Our Campuses &nbsp; Exciting News &nbsp; Community Login &nbsp; News &nbsp; Careers &nbsp; Contact &nbsp; Camps 2026</div>
+                <div data-dc-tpl="36" class="cur-hero" style="background-image: url(&quot;../assets/HeroImage-scaled.jpg&quot;);"><img data-dc-tpl="37" class="cur-crest" src="../assets/RG_logo_shield-big_1.svg" alt=""></div>
+                <div data-dc-tpl="38" class="cur-body">
+                  <div data-dc-tpl="39" class="cur-h1">Rotherglen – What School Should Be</div>
+                  <p data-dc-tpl="40">Rotherglen School is a co-educational, non-denominational community of private independent schools for students in Montessori, Casa (ages 4-6) to Grade 8. With four campuses located in Oakville and Mississauga, we offer learning environments which foster excellence in education, character and leadership programs…</p>
+                  <div data-dc-tpl="41" class="cur-cards">
+                    <div data-dc-tpl="42" class="cur-card" style="background-image: url(&quot;../assets/img_callout1_low.jpg&quot;);"><span data-dc-tpl="43"><b data-dc-tpl="44">Oakville Primary Campus</b>JK to Grade 1<br data-dc-tpl="45">2045 Sixth Line</span></div>
+                    <div data-dc-tpl="46" class="cur-card" style="background-image: url(&quot;../assets/img_callout2f_low.jpg&quot;);"><span data-dc-tpl="47"><b data-dc-tpl="48">Oakville Elementary Campus</b>Grade 1 to 8<br data-dc-tpl="49">2050 Neyagawa Blvd.</span></div>
+                    <div data-dc-tpl="50" class="cur-card" style="background-image: url(&quot;../assets/img_callout3_low.jpg&quot;);"><span data-dc-tpl="51"><b data-dc-tpl="52">Meadowvale Elementary</b>JK to Grade 8<br data-dc-tpl="53">929 Old Derry Rd.</span></div>
+                    <div data-dc-tpl="54" class="cur-card" style="background-image: url(&quot;../assets/img_callout4_low.jpg&quot;);"><span data-dc-tpl="55"><b data-dc-tpl="56">Erin Mills Campus</b>JK to Grade 6<br data-dc-tpl="57">3553 South Common Ct.</span></div>
+                  </div>
+                </div>
+                <div data-dc-tpl="58" class="cur-foot">Home &nbsp; Community Login &nbsp; Privacy &nbsp; AODA &nbsp; Contact &nbsp; Admin</div>
+                <div data-dc-tpl="59" class="cur-pop">
+                  <div data-dc-tpl="60" class="cur-pop-h"><span data-dc-tpl="61">JOIN US FOR OUR FALL OPEN HOUSE!</span><span data-dc-tpl="62">×</span></div>
+                  <div data-dc-tpl="63" class="cur-pop-b"><img data-dc-tpl="64" src="../assets/slide1-primary.jpg" alt=""><div data-dc-tpl="65">Please join us on <b data-dc-tpl="66">Saturday, October 24</b>, between 10:00 a.m. and 2:00 p.m., for an in-person Open House at:<br data-dc-tpl="67">• Oakville Primary Campus <u data-dc-tpl="68">[Register]</u><br data-dc-tpl="69">• Oakville Elementary Campus <u data-dc-tpl="70">[Register]</u><br data-dc-tpl="71">• Meadowvale Elementary Campus <u data-dc-tpl="72">[Register]</u></div></div>
+                </div>
+              </div>
+              <div data-dc-tpl="73" class="cur-cap">Recreated from the live page with its own photos and crest. The open-house popup fires on every page of every campus.</div>
+            </div>
+            <div data-dc-tpl="74">
+              <p data-dc-tpl="75" class="au-k">What holds the site back</p>
+              <ol data-dc-tpl="76" class="find">
+                <li data-dc-tpl="77"><span data-dc-tpl="78"><b data-dc-tpl="79">It reads as 2014.</b> Theme stylesheet dated Oct 2014, 940×370 slider photos from Oct 2012, the same Vimeo tour on every campus, bevelled nav bar, 16px grey Georgia body copy.</span></li>
+                <li data-dc-tpl="80"><span data-dc-tpl="81"><b data-dc-tpl="82">The homepage is a directory, not a story.</b> One paragraph, then four address cards. No promise in the hero, no call to action above the fold.</span></li>
+                <li data-dc-tpl="83"><span data-dc-tpl="84"><b data-dc-tpl="85">Campus-first navigation forces a decision before understanding.</b> A parent must pick “Oakville Primary” vs “Oakville Elementary” before learning what Casa is or which grades overlap.</span></li>
+                <li data-dc-tpl="86"><span data-dc-tpl="87"><b data-dc-tpl="88">The proof is buried.</b> Founded 1979, 45+ years, “nurturing” as the word parents use most, the REAL student profile, R.E.A.C.H., Tuesday Talks, the Learning Success Centre: none of it is on the homepage.</span></li>
+                <li data-dc-tpl="89"><span data-dc-tpl="90"><b data-dc-tpl="91">Every visit starts with a popup</b> that covers the content on all five entry pages.</span></li>
+                <li data-dc-tpl="92"><span data-dc-tpl="93"><b data-dc-tpl="94">Broken details erode trust.</b> Grey image placeholders where three Heads of School should be, “Our Campuses” links back to Home, red “click here” text links as the only CTAs, tuition pages 404 from the elementary menu.</span></li>
+                <li data-dc-tpl="95"><span data-dc-tpl="96"><b data-dc-tpl="97">Mobile is a bolted-on menu plugin</b> on a fixed 940px layout.</span></li>
+              </ol>
+              <div data-dc-tpl="98" class="dna">
+                <img data-dc-tpl="99" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest">
+                <div data-dc-tpl="100">
+                  <p data-dc-tpl="101" class="au-k" style="margin-bottom: 4px;">Brand DNA every concept keeps</p>
+                  <div data-dc-tpl="102" class="sw"><span data-dc-tpl="103" style="background: rgb(0, 89, 132);"></span><span data-dc-tpl="104" style="background: rgb(2, 65, 91);"></span><span data-dc-tpl="105" style="background: rgb(237, 28, 36);"></span><span data-dc-tpl="106" style="background: rgb(201, 150, 43);"></span><span data-dc-tpl="107" style="background: rgb(246, 241, 232);"></span></div>
+                  <p data-dc-tpl="108">The crest (lion, horse, oak), navy and red, and the lines that already work: <b data-dc-tpl="109">What School Should Be</b> · <b data-dc-tpl="110">Engaged Minds, Inspired Hearts, Purposeful Lives</b> · the <b data-dc-tpl="111">REAL</b> student · <b data-dc-tpl="112">Seeing is Believing</b>. Real site photography is reused throughout; AI-generated hero imagery is marked as placeholder for a reshoot.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-dc-tpl="113" class="how">
+            <div data-dc-tpl="114" class="how-c"><b data-dc-tpl="115">1a · One School, Four Front Doors</b><i data-dc-tpl="116">warm editorial · age-first</i>Reorganise around the child’s journey (Casa → Gr 8) instead of four separate campus sites. A campus finder does the choosing.</div>
+            <div data-dc-tpl="117" class="how-c"><b data-dc-tpl="118">1b · Seeing Is Believing</b><i data-dc-tpl="119">cinematic · tour-first</i>Turn the school’s own line into the product: the website is the open house, every page ends at “book a tour”.</div>
+            <div data-dc-tpl="120" class="how-c"><b data-dc-tpl="121">1c · REAL Kids</b><i data-dc-tpl="122">bright · proof-and-community-first</i>Lead with the REAL student profile, this week’s real school life, and an admissions process made plain.</div>
+          </div>
+        </div>
+      </div>
+      <div data-dc-tpl="123" class="fr" data-screen-label="1a One School Four Front Doors" style="left: 0px; top: 6600px;">
+        <div data-dc-tpl="124" class="fr-label" data-drags-parent="1">1a · ONE SCHOOL, FOUR FRONT DOORS · desktop home · phone home · rationale</div>
+        <div class="sc-host" data-sc-name="ConceptA" data-dc-tpl="125">
+      
+      <div data-dc-tpl="4" class="a-row">
+        <div data-dc-tpl="5" class="a-desk" data-screen-label="1a desktop home">
+          <header data-dc-tpl="6" class="a-nav">
+            <div data-dc-tpl="7" class="a-brand"><img data-dc-tpl="8" class="a-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><span data-dc-tpl="9" class="a-word">Rotherglen</span></div>
+            <nav data-dc-tpl="10" class="a-links"><span data-dc-tpl="11">The journey</span><span data-dc-tpl="12">Campuses</span><span data-dc-tpl="13">Admissions</span><span data-dc-tpl="14">Community</span><span data-dc-tpl="15">Camps 2026</span></nav>
+            <div data-dc-tpl="16" class="a-navr"><span data-dc-tpl="17">Community login</span><span data-dc-tpl="18" class="a-btn a-btn-navy">Book a tour</span></div>
+          </header>
+          <section data-dc-tpl="19" class="a-hero">
+            <div data-dc-tpl="20">
+              <div data-dc-tpl="21" class="a-eyebrow">Casa to Grade 8 · Oakville &amp; Mississauga · Since 1979</div>
+              <h1 data-dc-tpl="22" class="a-h1">What school should be, <em data-dc-tpl="23">at every age.</em></h1>
+              <p data-dc-tpl="24" class="a-lede">One Rotherglen, four campuses. A single path from the Montessori Casa classroom at age three and a half to a Grade 8 graduate who is respectful, engaged, academically motivated and ready to lead.</p>
+              <div data-dc-tpl="25" class="a-finder">
+                <div data-dc-tpl="26" class="a-field"><span data-dc-tpl="27" class="a-lbl">My child is</span><span data-dc-tpl="28" class="a-val">4 years old ▾</span></div>
+                <div data-dc-tpl="29" class="a-field"><span data-dc-tpl="30" class="a-lbl">We live near</span><span data-dc-tpl="31" class="a-val">L6H</span></div>
+                <span data-dc-tpl="32" class="a-btn a-btn-red">Find our campus →</span>
+              </div>
+              <div data-dc-tpl="33" class="a-hint">Every campus, every grade, one application. We show you the right front door.</div>
+            </div>
+            <div data-dc-tpl="34" class="a-hero-r">
+              <img data-dc-tpl="35" class="a-hero-img" src="../assets/concept-844829c2.jpg" alt="Casa student working with bead materials">
+              <span data-dc-tpl="36" class="a-ai">AI placeholder · reshoot</span>
+              <div data-dc-tpl="37" class="a-quote">
+                <div data-dc-tpl="38" class="a-quote-t">“K entered the school five months ago not knowing her letters. Today she will be getting her first reader bag.”</div>
+                <div data-dc-tpl="39" class="a-quote-a">A Casa parent · Rotherglen testimonials</div>
+              </div>
+            </div>
+          </section>
+          <section data-dc-tpl="40" class="a-sec">
+            <div data-dc-tpl="41" class="a-sec-h">
+              <div data-dc-tpl="42"><span data-dc-tpl="43" class="a-kicker">The journey</span><h2 data-dc-tpl="44" class="a-h2">Four stages. One school.</h2></div>
+              <p data-dc-tpl="45">Montessori roots through Grade 3, an enriched and progressive Ontario curriculum from Grade 4. French and music start in Casa.</p>
+            </div>
+            <div data-dc-tpl="46" class="a-stages">
+              <div data-dc-tpl="47" class="a-stage"><div data-dc-tpl="48" class="a-stage-t">Casa</div><div data-dc-tpl="49" class="a-stage-g">JK &amp; SK · ages 3.9 to 6</div><p data-dc-tpl="50">Practical life, sensorial, language, mathematics and culture in a prepared Montessori classroom.</p><div data-dc-tpl="51" class="a-chips"><span data-dc-tpl="52">Oakville Primary</span><span data-dc-tpl="53">Meadowvale</span><span data-dc-tpl="54">Erin Mills</span></div></div>
+              <div data-dc-tpl="55" class="a-stage"><div data-dc-tpl="56" class="a-stage-t">Primary</div><div data-dc-tpl="57" class="a-stage-g">Grades 1 to 3</div><p data-dc-tpl="58">Montessori principles with an enhanced Ontario curriculum, differentiated for each learner.</p><div data-dc-tpl="59" class="a-chips"><span data-dc-tpl="60">Oakville Primary (Gr 1)</span><span data-dc-tpl="61">Oakville Elementary</span><span data-dc-tpl="62">Meadowvale</span><span data-dc-tpl="63">Erin Mills</span></div></div>
+              <div data-dc-tpl="64" class="a-stage"><div data-dc-tpl="65" class="a-stage-t">Junior</div><div data-dc-tpl="66" class="a-stage-g">Grades 4 to 6</div><p data-dc-tpl="67">An enriched, progressive style of learning: The Workshop for hands-on science, athletics, the arts.</p><div data-dc-tpl="68" class="a-chips"><span data-dc-tpl="69">Oakville Elementary</span><span data-dc-tpl="70">Meadowvale</span><span data-dc-tpl="71">Erin Mills</span></div></div>
+              <div data-dc-tpl="72" class="a-stage"><div data-dc-tpl="73" class="a-stage-t">Upper</div><div data-dc-tpl="74" class="a-stage-g">Grades 7 to 8</div><p data-dc-tpl="75">R.E.A.C.H. leadership, the Learning Success Centre, and a confident step into high school.</p><div data-dc-tpl="76" class="a-chips"><span data-dc-tpl="77">Oakville Elementary</span><span data-dc-tpl="78">Meadowvale</span></div></div>
+            </div>
+          </section>
+          <section data-dc-tpl="79" class="a-sec a-camp">
+            <div data-dc-tpl="80" class="a-sec-h">
+              <div data-dc-tpl="81"><span data-dc-tpl="82" class="a-kicker">Four front doors</span><h2 data-dc-tpl="83" class="a-h2">Which one is yours?</h2></div>
+              <p data-dc-tpl="84">Each campus has its own Head of School and its own character. All four share one philosophy, one uniform and one admissions team.</p>
+            </div>
+            <div data-dc-tpl="85" class="a-cgrid">
+              <div data-dc-tpl="86" class="a-card"><img data-dc-tpl="87" src="../assets/img_callout1_low.jpg" alt=""><div data-dc-tpl="88" class="a-card-b"><span data-dc-tpl="89" class="a-card-k">Oakville · JK to Grade 1</span><span data-dc-tpl="90" class="a-card-n">Oakville Primary, “the Yellow School”</span><span data-dc-tpl="91" class="a-card-m">35+ years of Montessori in a bright yellow schoolhouse. Mary Williamson, Head of School. 2045 Sixth Line.</span><span data-dc-tpl="92" class="a-card-l">Tour this campus →</span></div></div>
+              <div data-dc-tpl="93" class="a-card"><img data-dc-tpl="94" src="../assets/img_callout2f_low.jpg" alt=""><div data-dc-tpl="95" class="a-card-b"><span data-dc-tpl="96" class="a-card-k">Oakville · Grades 1 to 8</span><span data-dc-tpl="97" class="a-card-n">Oakville Elementary</span><span data-dc-tpl="98" class="a-card-m">Our largest campus, now expanding. Arts, athletics, R.E.A.C.H. and the Learning Success Centre. Laura Crumb, Head of School. 2050 Neyagawa Blvd.</span><span data-dc-tpl="99" class="a-card-l">Tour this campus →</span></div></div>
+              <div data-dc-tpl="100" class="a-card"><img data-dc-tpl="101" src="../assets/img_callout3_low.jpg" alt=""><div data-dc-tpl="102" class="a-card-b"><span data-dc-tpl="103" class="a-card-k">Mississauga · JK to Grade 8</span><span data-dc-tpl="104" class="a-card-n">Meadowvale Elementary</span><span data-dc-tpl="105" class="a-card-m">A 19th-century Georgian landmark with The Workshop inside. Jacinta Snyder, Head of School. 929 Old Derry Rd.</span><span data-dc-tpl="106" class="a-card-l">Tour this campus →</span></div></div>
+              <div data-dc-tpl="107" class="a-card"><img data-dc-tpl="108" src="../assets/img_callout4_low.jpg" alt=""><div data-dc-tpl="109" class="a-card-b"><span data-dc-tpl="110" class="a-card-k">Mississauga · JK to Grade 6</span><span data-dc-tpl="111" class="a-card-n">Erin Mills, where it began</span><span data-dc-tpl="112" class="a-card-m">Founded by Marie Lanigan in 1979. Tracey Chong-Kelpin and Eileen Lanigan, Heads of School. 3553 South Common Court.</span><span data-dc-tpl="113" class="a-card-l">Tour this campus →</span></div></div>
+            </div>
+          </section>
+          <section data-dc-tpl="114" class="a-proof">
+            <div data-dc-tpl="115" class="a-stat"><div data-dc-tpl="116" class="a-stat-n">1979</div><div data-dc-tpl="117" class="a-stat-l">Founded in Mississauga by Marie Lanigan</div></div>
+            <div data-dc-tpl="118" class="a-stat"><div data-dc-tpl="119" class="a-stat-n">4</div><div data-dc-tpl="120" class="a-stat-l">Campuses, one philosophy, one application</div></div>
+            <div data-dc-tpl="121" class="a-stat"><div data-dc-tpl="122" class="a-stat-n">3.9–14</div><div data-dc-tpl="123" class="a-stat-l">Ages served, Casa through Grade 8</div></div>
+            <div data-dc-tpl="124" class="a-stat"><div data-dc-tpl="125" class="a-stat-n" style="font-style: italic;">nurturing</div><div data-dc-tpl="126" class="a-stat-l">The word families use most to describe us</div></div>
+          </section>
+          <footer data-dc-tpl="127" class="a-foot"><b data-dc-tpl="128">Engaged Minds · Inspired Hearts · Purposeful Lives</b><span data-dc-tpl="129">Community login · Careers · Privacy · AODA · Contact</span></footer>
+        </div>
+        <div data-dc-tpl="130" class="a-phone" data-screen-label="1a phone home">
+          <div data-dc-tpl="131" class="a-pnav"><div data-dc-tpl="132" class="a-brand"><img data-dc-tpl="133" class="a-crest" src="../assets/RG_logo_shield-big_1.svg" alt="" style="width: 34px; height: 32px;"><span data-dc-tpl="134" class="a-word">Rotherglen</span></div><div data-dc-tpl="135" class="a-burger"></div></div>
+          <img data-dc-tpl="136" class="a-pimg" src="../assets/img_callout1_low.jpg" alt="">
+          <div data-dc-tpl="137" class="a-pbody">
+            <h1 data-dc-tpl="138" class="a-ph1">What school should be, <em data-dc-tpl="139" style="color: rgb(11, 79, 115);">at every age.</em></h1>
+            <p data-dc-tpl="140">Casa to Grade 8, four campuses in Oakville and Mississauga, since 1979.</p>
+            <div data-dc-tpl="141" class="a-pfinder">
+              <div data-dc-tpl="142" class="a-pfield"><span data-dc-tpl="143">My child is</span><span data-dc-tpl="144">4 years old ▾</span></div>
+              <div data-dc-tpl="145" class="a-pfield"><span data-dc-tpl="146">We live near</span><span data-dc-tpl="147">L6H</span></div>
+              <span data-dc-tpl="148" class="a-btn a-btn-red">Find our campus →</span>
+            </div>
+            <div data-dc-tpl="149" class="a-plist">
+              <div data-dc-tpl="150" class="a-pitem"><b data-dc-tpl="151">Casa</b><span data-dc-tpl="152">Ages 3.9 to 6</span></div>
+              <div data-dc-tpl="153" class="a-pitem"><b data-dc-tpl="154">Primary</b><span data-dc-tpl="155">Grades 1 to 3</span></div>
+              <div data-dc-tpl="156" class="a-pitem"><b data-dc-tpl="157">Junior</b><span data-dc-tpl="158">Grades 4 to 6</span></div>
+              <div data-dc-tpl="159" class="a-pitem"><b data-dc-tpl="160">Upper</b><span data-dc-tpl="161">Grades 7 to 8</span></div>
+            </div>
+          </div>
+        </div>
+        <div data-dc-tpl="162" class="a-notes" data-screen-label="1a rationale">
+          <span data-dc-tpl="163" class="n-tag">1a · concept</span>
+          <h3 data-dc-tpl="164" class="n-h">One School, Four Front Doors</h3>
+          <p data-dc-tpl="165" class="n-sub">Warm editorial. Paper, navy, crest gold. Instrument Serif with Instrument Sans.</p>
+          <div data-dc-tpl="166" class="n-type"><span data-dc-tpl="167" style="font-family: &quot;Instrument Serif&quot;, serif; font-size: 16px;">Instrument Serif</span><span data-dc-tpl="168">Instrument Sans</span><span data-dc-tpl="169" style="background: rgb(246, 241, 232);">#F6F1E8 paper</span></div>
+          <p data-dc-tpl="170" class="n-k">The big idea</p>
+          <p data-dc-tpl="171" class="n-p">Parents shop by their child’s age, not by street address. The site is reorganised around one journey (Casa → Primary → Junior → Upper) and a finder that picks the campus for them. Four campus sites become one school with four front doors.</p>
+          <p data-dc-tpl="172" class="n-k">What changes</p>
+          <ul data-dc-tpl="173" class="n-ul">
+            <li data-dc-tpl="174">Age + postal code finder replaces the four-card directory as the primary action.</li>
+            <li data-dc-tpl="175">The journey strip shows what each stage teaches and which campuses offer it, so the JK-to-1 vs 1-to-8 overlap stops being confusing.</li>
+            <li data-dc-tpl="176">Campus pages become chapters of one site: same nav, same admissions flow, one “Book a tour”.</li>
+            <li data-dc-tpl="177">Proof moves above the fold: 1979, four campuses, the “nurturing” line, a real parent quote.</li>
+            <li data-dc-tpl="178">Open house becomes a banner inside the flow, never a popup.</li>
+          </ul>
+          <p data-dc-tpl="179" class="n-k">Why it lifts appeal</p>
+          <p data-dc-tpl="180" class="n-p">It answers the first question a parent has (“is there a place for my 4-year-old near me?”) in one step, and it makes Rotherglen feel like a 45-year institution rather than four small schools.</p>
+          <p data-dc-tpl="181" class="n-k">Watch-outs</p>
+          <ul data-dc-tpl="182" class="n-ul">
+            <li data-dc-tpl="183">Campus heads may want their own identity; keep a per-campus welcome and Instagram feed one level down.</li>
+            <li data-dc-tpl="184">Finder needs real catchment logic (or simply distance) and a fallback for families who already know the campus.</li>
+          </ul>
+          <p data-dc-tpl="185" class="n-k">Effort</p>
+          <p data-dc-tpl="186" class="n-p">Medium. New information architecture plus a template refresh. Existing WordPress content maps cleanly onto the four stages.</p>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div data-dc-tpl="126" class="fr" data-screen-label="1b Seeing Is Believing" style="left: 0px; top: 9020px;">
+        <div data-dc-tpl="127" class="fr-label" data-drags-parent="1">1b · SEEING IS BELIEVING · desktop home · phone home · rationale</div>
+        <div class="sc-host" data-sc-name="ConceptB" data-dc-tpl="128">
+      
+      <div data-dc-tpl="4" class="b-row">
+        <div data-dc-tpl="5" class="b-desk" data-screen-label="1b desktop home">
+          <section data-dc-tpl="6" class="b-hero">
+            <img data-dc-tpl="7" class="b-bg" src="../assets/concept-9e52c135.jpg" alt="Georgian school building at dusk">
+            <div data-dc-tpl="8" class="b-shade"></div>
+            <header data-dc-tpl="9" class="b-nav">
+              <div data-dc-tpl="10" class="b-brand"><img data-dc-tpl="11" class="b-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><span data-dc-tpl="12" class="b-word">Rotherglen</span></div>
+              <nav data-dc-tpl="13" class="b-links"><span data-dc-tpl="14">Campuses</span><span data-dc-tpl="15">The day</span><span data-dc-tpl="16">Admissions</span><span data-dc-tpl="17">Open House</span></nav>
+              <span data-dc-tpl="18" class="b-btn b-btn-line">Book a tour</span>
+            </header>
+            <span data-dc-tpl="19" class="b-ai">AI placeholder · reshoot Meadowvale at blue hour</span>
+            <div data-dc-tpl="20" class="b-hero-c">
+              <div data-dc-tpl="21" class="b-eyebrow">Four campuses · Oakville &amp; Mississauga · Casa to Grade 8</div>
+              <h1 data-dc-tpl="22" class="b-h1">Seeing is believing.</h1>
+              <p data-dc-tpl="23" class="b-lede">Walk through every Rotherglen campus from your kitchen table. Then come and see it for real.</p>
+              <div data-dc-tpl="24" class="b-cta"><span data-dc-tpl="25" class="b-btn b-btn-gold"><span data-dc-tpl="26" class="b-play">▶</span>Watch the walk-through · 3:12</span><span data-dc-tpl="27" class="b-btn b-btn-line">Book a tour</span></div>
+            </div>
+            <div data-dc-tpl="28" class="b-tick"><b data-dc-tpl="29">Fall Open House</b><span data-dc-tpl="30">Saturday 24 October · 10 am to 2 pm</span><span data-dc-tpl="31">Oakville Primary · Oakville Elementary · Meadowvale</span><span data-dc-tpl="32">Register →</span></div>
+          </section>
+          <section data-dc-tpl="33" class="b-sec">
+            <div data-dc-tpl="34" class="b-sec-h"><div data-dc-tpl="35"><span data-dc-tpl="36" class="b-kicker">Four front doors</span><h2 data-dc-tpl="37" class="b-h2">Choose a door.</h2></div><p data-dc-tpl="38">Each campus gets its own three-minute walk-through, led by its Head of School. No form, no popup, no waiting for October.</p></div>
+            <div data-dc-tpl="39" class="b-doors">
+              <div data-dc-tpl="40" class="b-door"><img data-dc-tpl="41" src="../assets/img_callout1_low.jpg" alt=""><div data-dc-tpl="42" class="b-door-t"><div data-dc-tpl="43" class="b-door-g">Oakville · JK to Grade 1</div><div data-dc-tpl="44" class="b-door-n">Oakville Primary</div><div data-dc-tpl="45" class="b-door-h">With Mary Williamson, Head of School</div><span data-dc-tpl="46" class="b-door-l"><span data-dc-tpl="47" class="b-play">▶</span>Walk through</span></div></div>
+              <div data-dc-tpl="48" class="b-door"><img data-dc-tpl="49" src="../assets/img_callout2f_low.jpg" alt=""><div data-dc-tpl="50" class="b-door-t"><div data-dc-tpl="51" class="b-door-g">Oakville · Grades 1 to 8</div><div data-dc-tpl="52" class="b-door-n">Oakville Elementary</div><div data-dc-tpl="53" class="b-door-h">With Laura Crumb, Head of School</div><span data-dc-tpl="54" class="b-door-l"><span data-dc-tpl="55" class="b-play">▶</span>Walk through</span></div></div>
+              <div data-dc-tpl="56" class="b-door"><img data-dc-tpl="57" src="../assets/img_callout3_low.jpg" alt=""><div data-dc-tpl="58" class="b-door-t"><div data-dc-tpl="59" class="b-door-g">Mississauga · JK to Grade 8</div><div data-dc-tpl="60" class="b-door-n">Meadowvale Elementary</div><div data-dc-tpl="61" class="b-door-h">With Jacinta Snyder, Head of School</div><span data-dc-tpl="62" class="b-door-l"><span data-dc-tpl="63" class="b-play">▶</span>Walk through</span></div></div>
+              <div data-dc-tpl="64" class="b-door"><img data-dc-tpl="65" src="../assets/img_callout4_low.jpg" alt=""><div data-dc-tpl="66" class="b-door-t"><div data-dc-tpl="67" class="b-door-g">Mississauga · JK to Grade 6</div><div data-dc-tpl="68" class="b-door-n">Erin Mills</div><div data-dc-tpl="69" class="b-door-h">With Tracey Chong-Kelpin and Eileen Lanigan, Heads of School</div><span data-dc-tpl="70" class="b-door-l"><span data-dc-tpl="71" class="b-play">▶</span>Walk through</span></div></div>
+            </div>
+          </section>
+          <section data-dc-tpl="72" class="b-day">
+            <img data-dc-tpl="73" src="../assets/concept-e09233a0.jpg" alt="Student playing trumpet">
+            <div data-dc-tpl="74" class="b-day-c">
+              <span data-dc-tpl="75" class="b-kicker">A day at Rotherglen</span>
+              <h2 data-dc-tpl="76" class="b-h2">Every hour, on purpose.</h2>
+              <ul data-dc-tpl="77" class="b-moments">
+                <li data-dc-tpl="78"><b data-dc-tpl="79">01</b><span data-dc-tpl="80">Greeted by name at the door<small data-dc-tpl="81">The open-door approach: two-way communication with home, every day</small></span></li>
+                <li data-dc-tpl="82"><b data-dc-tpl="83">02</b><span data-dc-tpl="84">The Montessori work cycle<small data-dc-tpl="85">Practical life, sensorial, language, mathematics, culture</small></span></li>
+                <li data-dc-tpl="86"><b data-dc-tpl="87">03</b><span data-dc-tpl="88">French and music, from Casa<small data-dc-tpl="89">Specialist teachers at every campus</small></span></li>
+                <li data-dc-tpl="90"><b data-dc-tpl="91">04</b><span data-dc-tpl="92">The Workshop<small data-dc-tpl="93">Hands-on science in the Georgian house at Meadowvale</small></span></li>
+                <li data-dc-tpl="94"><b data-dc-tpl="95">05</b><span data-dc-tpl="96">R.E.A.C.H., clubs and athletics<small data-dc-tpl="97">Character, leadership, band, U10 soccer</small></span></li>
+                <li data-dc-tpl="98"><b data-dc-tpl="99">06</b><span data-dc-tpl="100">Before and after school care<small data-dc-tpl="101">At all four campuses</small></span></li>
+              </ul>
+              <div data-dc-tpl="102" class="b-note">sequence illustrative · confirm with each Head of School · image is an AI placeholder</div>
+            </div>
+          </section>
+          <section data-dc-tpl="103" class="b-quote">
+            <p data-dc-tpl="104" class="b-quote-t">“Rotherglen has conditioned G to become the considerate, honest and confident young man he is today.”</p>
+            <div data-dc-tpl="105" class="b-quote-a">Parent of an Oakville Elementary graduate · Rotherglen testimonials</div>
+            <div data-dc-tpl="106" class="b-cta"><span data-dc-tpl="107" class="b-btn b-btn-gold">Book a tour</span><span data-dc-tpl="108" class="b-btn b-btn-line">Ask admissions</span></div>
+          </section>
+          <footer data-dc-tpl="109" class="b-foot"><b data-dc-tpl="110">What School Should Be</b><span data-dc-tpl="111">Community login · Careers · Privacy · AODA · Contact</span></footer>
+        </div>
+        <div data-dc-tpl="112" class="b-phone" data-screen-label="1b phone home">
+          <div data-dc-tpl="113" class="b-phero">
+            <img data-dc-tpl="114" class="b-pbg" src="../assets/concept-9e52c135.jpg" alt="">
+            <div data-dc-tpl="115" class="b-shade"></div>
+            <div data-dc-tpl="116" class="b-pnav"><div data-dc-tpl="117" class="b-brand"><img data-dc-tpl="118" class="b-crest" src="../assets/RG_logo_shield-big_1.svg" alt="" style="width: 32px; height: 30px;"><span data-dc-tpl="119" class="b-word">Rotherglen</span></div><div data-dc-tpl="120" class="b-burger"></div></div>
+            <div data-dc-tpl="121" class="b-pplay">▶</div>
+            <div data-dc-tpl="122" class="b-pc"><div data-dc-tpl="123" class="b-eyebrow" style="margin-bottom: 0px;">Walk-through · 3:12</div><h1 data-dc-tpl="124" class="b-ph1">Seeing is believing.</h1><p data-dc-tpl="125">Four campuses, Casa to Grade 8. Tour them all tonight.</p></div>
+          </div>
+          <div data-dc-tpl="126" class="b-plist">
+            <div data-dc-tpl="127" class="b-pitem"><div data-dc-tpl="128"><b data-dc-tpl="129">Oakville Primary</b><small data-dc-tpl="130">JK to Gr 1 · Mary Williamson</small></div><span data-dc-tpl="131" class="b-play">▶</span></div>
+            <div data-dc-tpl="132" class="b-pitem"><div data-dc-tpl="133"><b data-dc-tpl="134">Oakville Elementary</b><small data-dc-tpl="135">Gr 1 to 8 · Laura Crumb</small></div><span data-dc-tpl="136" class="b-play">▶</span></div>
+            <div data-dc-tpl="137" class="b-pitem"><div data-dc-tpl="138"><b data-dc-tpl="139">Meadowvale</b><small data-dc-tpl="140">JK to Gr 8 · Jacinta Snyder</small></div><span data-dc-tpl="141" class="b-play">▶</span></div>
+            <div data-dc-tpl="142" class="b-pitem"><div data-dc-tpl="143"><b data-dc-tpl="144">Erin Mills</b><small data-dc-tpl="145">JK to Gr 6 · Chong-Kelpin &amp; Lanigan</small></div><span data-dc-tpl="146" class="b-play">▶</span></div>
+          </div>
+          <div data-dc-tpl="147" class="b-pbar"><span data-dc-tpl="148" class="b-btn b-btn-gold">Book a tour</span></div>
+        </div>
+        <div data-dc-tpl="149" class="b-notes" data-screen-label="1b rationale">
+          <span data-dc-tpl="150" class="n-tag">1b · concept</span>
+          <h3 data-dc-tpl="151" class="n-h">Seeing Is Believing</h3>
+          <p data-dc-tpl="152" class="n-sub">Cinematic. Midnight navy, crest gold, cream. Bodoni Moda with Manrope.</p>
+          <div data-dc-tpl="153" class="n-type"><span data-dc-tpl="154" style="font-family: &quot;Bodoni Moda&quot;, serif; font-size: 16px;">Bodoni Moda</span><span data-dc-tpl="155">Manrope</span><span data-dc-tpl="156" style="background: rgb(7, 19, 30); color: rgb(243, 237, 226);">#07131E midnight</span></div>
+          <p data-dc-tpl="157" class="n-k">The big idea</p>
+          <p data-dc-tpl="158" class="n-p">The school already says “Seeing is Believing” on every campus page and then hides the seeing behind a 2012 video and a popup. This concept makes the website the open house: a walk-through per campus led by its Head of School, a day-in-the-life, and one persistent action, “Book a tour”.</p>
+          <p data-dc-tpl="159" class="n-k">What changes</p>
+          <ul data-dc-tpl="160" class="n-ul">
+            <li data-dc-tpl="161">Full-bleed hero with the walk-through as the primary action; open house lives in a ticker, not a popup.</li>
+            <li data-dc-tpl="162">Four campus “doors”, each a short video with its Head of School (fixes the missing headshots and gives each campus a face).</li>
+            <li data-dc-tpl="163">“A day at Rotherglen” replaces the principal’s letter with what actually happens: work cycle, French, music, The Workshop, R.E.A.C.H.</li>
+            <li data-dc-tpl="164">A single parent quote, set large, instead of a testimonials page nobody finds.</li>
+            <li data-dc-tpl="165">Phone-first: the video is the homepage on mobile.</li>
+          </ul>
+          <p data-dc-tpl="166" class="n-k">Why it lifts appeal</p>
+          <p data-dc-tpl="167" class="n-p">Private-school parents compare on feel. A confident, cinematic presentation signals a school that knows its worth, and the walk-throughs let a family fall for a campus before they ever book.</p>
+          <p data-dc-tpl="168" class="n-k">Watch-outs</p>
+          <ul data-dc-tpl="169" class="n-ul">
+            <li data-dc-tpl="170">Needs a real shoot: four short films and stills at blue hour. Placeholders are marked.</li>
+            <li data-dc-tpl="171">Dark UI must keep text at 4.5:1; body copy is cream at full opacity, not grey.</li>
+            <li data-dc-tpl="172">Keep information pages (fees, FAQ, calendar) light and plain underneath the cinematic front door.</li>
+          </ul>
+          <p data-dc-tpl="173" class="n-k">Effort</p>
+          <p data-dc-tpl="174" class="n-p">Medium-high. Light IA change, heavy on production. Highest potential lift for tour bookings.</p>
+        </div>
+      </div>
+    </div>
+      </div>
+      <div data-dc-tpl="129" class="fr" data-screen-label="1c REAL Kids" style="left: 0px; top: 12030px;">
+        <div data-dc-tpl="130" class="fr-label" data-drags-parent="1">1c · REAL KIDS · desktop home · phone home · rationale</div>
+        <div class="sc-host" data-sc-name="ConceptC" data-dc-tpl="131">
+      
+      <div data-dc-tpl="4" class="c-row">
+        <div data-dc-tpl="5" class="c-desk" data-screen-label="1c desktop home">
+          <header data-dc-tpl="6" class="c-nav">
+            <div data-dc-tpl="7" class="c-brand"><img data-dc-tpl="8" class="c-crest" src="../assets/RG_logo_shield-big_1.svg" alt="Rotherglen crest"><span data-dc-tpl="9" class="c-word">Rotherglen</span></div>
+            <nav data-dc-tpl="10" class="c-links"><span data-dc-tpl="11">This week</span><span data-dc-tpl="12">The REAL kid</span><span data-dc-tpl="13">Campuses</span><span data-dc-tpl="14">Admissions</span><span data-dc-tpl="15">Tuesday Talks</span></nav>
+            <span data-dc-tpl="16" class="c-btn c-btn-red">Apply</span>
+          </header>
+          <section data-dc-tpl="17" class="c-hero">
+            <div data-dc-tpl="18">
+              <div data-dc-tpl="19" class="c-real"><b data-dc-tpl="20">R</b><span data-dc-tpl="21">espectful of themselves, inclusive of others</span><b data-dc-tpl="22">E</b><span data-dc-tpl="23">ngaged in learning, athletics and the arts</span><b data-dc-tpl="24">A</b><span data-dc-tpl="25">cademically motivated to achieve excellence</span><b data-dc-tpl="26">L</b><span data-dc-tpl="27">eaders who contribute locally and globally</span></div>
+              <h1 data-dc-tpl="28" class="c-h1">Meet the REAL Rotherglen kid.</h1>
+              <p data-dc-tpl="29" class="c-lede">Since 1979 we have been growing respectful, engaged, academically motivated leaders, from the Yellow School to Grade 8, in Oakville and Mississauga.</p>
+              <div data-dc-tpl="30" class="c-cta"><span data-dc-tpl="31" class="c-btn c-btn-navy">See this week at Rotherglen</span><span data-dc-tpl="32" class="c-btn c-btn-line">How to apply</span></div>
+            </div>
+            <div data-dc-tpl="33" class="c-hero-r">
+              <div data-dc-tpl="34" class="c-photo"><img data-dc-tpl="35" src="../assets/concept-3b607b9f.jpg" alt="Children jumping in front of a yellow schoolhouse"><span data-dc-tpl="36" class="c-ai">AI placeholder · reshoot at the Yellow School</span></div>
+              <span data-dc-tpl="37" class="c-stk" style="left: -14px; top: 24px; background: rgb(18, 59, 92); color: rgb(255, 255, 255); transform: rotate(-6deg);">Casa → Grade 8</span>
+              <span data-dc-tpl="38" class="c-stk" style="right: -10px; top: 60px; background: rgb(255, 255, 255); color: rgb(20, 33, 43); transform: rotate(4deg);">“the Yellow School”</span>
+              <span data-dc-tpl="39" class="c-stk" style="right: 28px; bottom: -8px; background: rgb(230, 57, 70); color: rgb(255, 255, 255); transform: rotate(-3deg);">Since 1979</span>
+            </div>
+          </section>
+          <section data-dc-tpl="40" class="c-sec">
+            <div data-dc-tpl="41" class="c-sec-h"><div data-dc-tpl="42"><span data-dc-tpl="43" class="c-kicker">This week at Rotherglen</span><h2 data-dc-tpl="44" class="c-h2">Real kids, real week.</h2></div><p data-dc-tpl="45">Pulled from the four campus Instagram feeds and the news pages, so the homepage is never older than this week. Sample posts shown.</p></div>
+            <div data-dc-tpl="46" class="c-feed">
+              <div data-dc-tpl="47" class="c-post c-img c-tall"><img data-dc-tpl="48" src="../assets/concept-77df2eb3.jpg" alt=""><span data-dc-tpl="49" class="c-tag" style="background: rgb(255, 216, 77); color: rgb(20, 33, 43);">Oakville Primary · Casa</span><div data-dc-tpl="50" class="c-post-t">What we made this week</div><div data-dc-tpl="51" class="c-post-m">AI placeholder · a real Casa project goes here</div></div>
+              <div data-dc-tpl="52" class="c-post" style="background: rgb(18, 59, 92); color: rgb(255, 255, 255);"><span data-dc-tpl="53" class="c-tag" style="background: rgb(255, 216, 77); color: rgb(20, 33, 43);">Tuesday Talks</span><div data-dc-tpl="54" class="c-post-t">Reframing anxiety and increasing resilience</div><div data-dc-tpl="55" class="c-post-m">Tuesday 29 September · Oakville Elementary · parents welcome</div></div>
+              <div data-dc-tpl="56" class="c-post" style="background: rgb(191, 227, 247);"><span data-dc-tpl="57" class="c-tag">Meadowvale</span><div data-dc-tpl="58" class="c-post-t">U10 girls soccer</div><div data-dc-tpl="59" class="c-post-m">From @rotherglen_meadowvale</div></div>
+              <div data-dc-tpl="60" class="c-post" style="background: rgb(242, 140, 40); color: rgb(20, 33, 43);"><span data-dc-tpl="61" class="c-tag" style="background: rgb(20, 33, 43);">Erin Mills</span><div data-dc-tpl="62" class="c-post-t">Orange Shirt Day</div><div data-dc-tpl="63" class="c-post-m">Every child matters · 30 September</div></div>
+              <div data-dc-tpl="64" class="c-post c-img"><img data-dc-tpl="65" src="../assets/img_callout4_low.jpg" alt=""><span data-dc-tpl="66" class="c-tag">Erin Mills</span><div data-dc-tpl="67" class="c-post-t">Summer camp 2026 is open</div><div data-dc-tpl="68" class="c-post-m">STEM and creative arts weeks</div></div>
+            </div>
+          </section>
+          <section data-dc-tpl="69" class="c-sec c-adm">
+            <div data-dc-tpl="70" class="c-sec-h"><div data-dc-tpl="71"><span data-dc-tpl="72" class="c-kicker">Admissions, made plain</span><h2 data-dc-tpl="73" class="c-h2">Five steps. No mystery.</h2></div><p data-dc-tpl="74" style="color: rgba(255, 251, 240, 0.86);">One process for all four campuses. Fees and schedules published on the site, not behind a phone call.</p></div>
+            <div data-dc-tpl="75" class="c-steps">
+              <div data-dc-tpl="76" class="c-step"><div data-dc-tpl="77" class="c-step-n">1</div><div data-dc-tpl="78" class="c-step-t">Tour or open house</div><div data-dc-tpl="79" class="c-step-m">Book a personal tour any week, or join the Fall Open House on 24 October.</div></div>
+              <div data-dc-tpl="80" class="c-step"><div data-dc-tpl="81" class="c-step-n">2</div><div data-dc-tpl="82" class="c-step-t">Apply online</div><div data-dc-tpl="83" class="c-step-m">Report cards, a confidential school report and the $300 application fee.</div></div>
+              <div data-dc-tpl="84" class="c-step"><div data-dc-tpl="85" class="c-step-n">3</div><div data-dc-tpl="86" class="c-step-t">Meet us</div><div data-dc-tpl="87" class="c-step-m">An in-person literacy and numeracy assessment for Grades 1 to 8.</div></div>
+              <div data-dc-tpl="88" class="c-step"><div data-dc-tpl="89" class="c-step-n">4</div><div data-dc-tpl="90" class="c-step-t">Decision</div><div data-dc-tpl="91" class="c-step-m">An offer of admission or a place on the waitlist, in writing.</div></div>
+              <div data-dc-tpl="92" class="c-step"><div data-dc-tpl="93" class="c-step-n">5</div><div data-dc-tpl="94" class="c-step-t">Register</div><div data-dc-tpl="95" class="c-step-m">Return the registration package and tuition payment to hold the spot.</div></div>
+            </div>
+            <div data-dc-tpl="96" class="c-adm-l"><span data-dc-tpl="97">Fees and schedules →</span><span data-dc-tpl="98">Before and after school care →</span><span data-dc-tpl="99">FAQ →</span></div>
+          </section>
+          <section data-dc-tpl="100" class="c-sec c-talk">
+            <div data-dc-tpl="101"><span data-dc-tpl="102" class="c-kicker">Tuesday Talks</span><h2 data-dc-tpl="103" class="c-h2">Parents learn here too.</h2><p data-dc-tpl="104">A monthly speaker series on raising kids, open to every Rotherglen family and to families thinking about joining.</p></div>
+            <div data-dc-tpl="105" class="c-talk-card"><span data-dc-tpl="106" class="c-kicker">Next talk</span><b data-dc-tpl="107">Reframing Anxiety and Increasing Resilience</b><span data-dc-tpl="108">Tuesday 29 September · Oakville Elementary Campus</span></div>
+          </section>
+          <section data-dc-tpl="109" class="c-sec">
+            <div data-dc-tpl="110" class="c-sec-h"><div data-dc-tpl="111"><span data-dc-tpl="112" class="c-kicker">Say hello</span><h2 data-dc-tpl="113" class="c-h2">A real person at every campus.</h2></div></div>
+            <div data-dc-tpl="114" class="c-hello">
+              <div data-dc-tpl="115" class="c-hi"><b data-dc-tpl="116">Oakville Primary</b><small data-dc-tpl="117">JK to Grade 1</small><span data-dc-tpl="118">Mary Williamson<br data-dc-tpl="119">905 338 3528<br data-dc-tpl="120">primary@rotherglen.com</span></div>
+              <div data-dc-tpl="121" class="c-hi"><b data-dc-tpl="122">Oakville Elementary</b><small data-dc-tpl="123">Grades 1 to 8</small><span data-dc-tpl="124">Deanna Colgan<br data-dc-tpl="125">905 849 1897 ext. 1240<br data-dc-tpl="126">dcolgan@rotherglen.com</span></div>
+              <div data-dc-tpl="127" class="c-hi"><b data-dc-tpl="128">Meadowvale</b><small data-dc-tpl="129">JK to Grade 8</small><span data-dc-tpl="130">Laura Rossi<br data-dc-tpl="131">905 565 8707<br data-dc-tpl="132">lrossi@rotherglen.com</span></div>
+              <div data-dc-tpl="133" class="c-hi"><b data-dc-tpl="134">Erin Mills</b><small data-dc-tpl="135">JK to Grade 6</small><span data-dc-tpl="136">Eileen Lanigan<br data-dc-tpl="137">905 820 9445<br data-dc-tpl="138">elanigan@rotherglen.com</span></div>
+            </div>
+          </section>
+          <footer data-dc-tpl="139" class="c-foot"><b data-dc-tpl="140">Engaged Minds · Inspired Hearts · Purposeful Lives</b><span data-dc-tpl="141">Community login · Careers · Privacy · AODA · Contact</span></footer>
+        </div>
+        <div data-dc-tpl="142" class="c-phone" data-screen-label="1c phone home">
+          <div data-dc-tpl="143" class="c-pnav"><div data-dc-tpl="144" class="c-brand"><img data-dc-tpl="145" class="c-crest" src="../assets/RG_logo_shield-big_1.svg" alt="" style="width: 32px; height: 30px;"><span data-dc-tpl="146" class="c-word">Rotherglen</span></div><div data-dc-tpl="147" class="c-burger"></div></div>
+          <div data-dc-tpl="148" class="c-phero">
+            <div data-dc-tpl="149" class="c-preal"><b data-dc-tpl="150">R</b><b data-dc-tpl="151">E</b><b data-dc-tpl="152">A</b><b data-dc-tpl="153">L</b></div>
+            <h1 data-dc-tpl="154" class="c-ph1">Meet the REAL Rotherglen kid.</h1>
+            <p data-dc-tpl="155">Respectful. Engaged. Academically motivated. Leaders. Since 1979, Casa to Grade 8.</p>
+            <img data-dc-tpl="156" class="c-pimg" src="../assets/concept-3b607b9f.jpg" alt="">
+          </div>
+          <div data-dc-tpl="157" class="c-pfeed">
+            <span data-dc-tpl="158" class="c-kicker">This week</span>
+            <div data-dc-tpl="159" class="c-post" style="background: rgb(18, 59, 92); color: rgb(255, 255, 255);"><span data-dc-tpl="160" class="c-tag" style="background: rgb(255, 216, 77); color: rgb(20, 33, 43);">Tuesday Talks</span><div data-dc-tpl="161" class="c-post-t">Reframing anxiety and increasing resilience</div></div>
+            <div data-dc-tpl="162" class="c-post c-img"><img data-dc-tpl="163" src="../assets/img_callout4_low.jpg" alt=""><span data-dc-tpl="164" class="c-tag">Erin Mills</span><div data-dc-tpl="165" class="c-post-t">Summer camp 2026 is open</div></div>
+          </div>
+        </div>
+        <div data-dc-tpl="166" class="c-notes" data-screen-label="1c rationale">
+          <span data-dc-tpl="167" class="n-tag">1c · concept</span>
+          <h3 data-dc-tpl="168" class="n-h">REAL Kids</h3>
+          <p data-dc-tpl="169" class="n-sub">Bright and honest. Yellow School sun, navy, crest red. Bricolage Grotesque with Atkinson Hyperlegible.</p>
+          <div data-dc-tpl="170" class="n-type"><span data-dc-tpl="171" style="font-family: &quot;Bricolage Grotesque&quot;, sans-serif; font-weight: 800; font-size: 15px;">Bricolage Grotesque</span><span data-dc-tpl="172">Atkinson Hyperlegible</span><span data-dc-tpl="173" style="background: rgb(255, 216, 77);">#FFD84D sun</span></div>
+          <p data-dc-tpl="174" class="n-k">The big idea</p>
+          <p data-dc-tpl="175" class="n-p">Rotherglen already has a student profile (REAL) and four lively Instagram feeds; the site hides both. This concept leads with the kind of kid the school produces, shows this week’s real school life on the homepage, and makes admissions and fees plain. Warm, transparent, and unmistakably the Yellow School.</p>
+          <p data-dc-tpl="176" class="n-k">What changes</p>
+          <ul data-dc-tpl="177" class="n-ul">
+            <li data-dc-tpl="178">REAL becomes the hero and the site’s spine: Respectful, Engaged, Academically motivated, Leaders.</li>
+            <li data-dc-tpl="179">“This week at Rotherglen” aggregates the four campus feeds and news into one designed grid, tagged by campus.</li>
+            <li data-dc-tpl="180">Admissions shown as a five-step tracker with the $300 fee and assessment stated up front; fees published.</li>
+            <li data-dc-tpl="181">Tuesday Talks promoted as a reason for prospective parents to visit before applying.</li>
+            <li data-dc-tpl="182">“Say hello” puts a named admissions person and a direct line for each campus above the footer.</li>
+          </ul>
+          <p data-dc-tpl="183" class="n-k">Why it lifts appeal</p>
+          <p data-dc-tpl="184" class="n-p">Families choosing between independent schools reward transparency and energy. Fresh weekly content proves the school is alive; plain-language admissions removes the biggest friction on the current site.</p>
+          <p data-dc-tpl="185" class="n-k">Watch-outs</p>
+          <ul data-dc-tpl="186" class="n-ul">
+            <li data-dc-tpl="187">Needs a content owner per campus and a feed moderation step; stale feed is worse than no feed.</li>
+            <li data-dc-tpl="188">Publishing tuition is a leadership decision; the tracker still works with “fees on request”.</li>
+            <li data-dc-tpl="189">Keep the playful tone for Casa and Primary; Grade 7 to 8 pages should lean on the navy sections.</li>
+          </ul>
+          <p data-dc-tpl="190" class="n-k">Effort</p>
+          <p data-dc-tpl="191" class="n-p">Medium. Feed aggregation plus a template refresh; little new photography needed because the campus feeds supply it.</p>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div></div>
+</div></div></main>
+<script>
+(function(){
+ var v=document.getElementById('gw-view'),sz=document.getElementById('gw-size'),st=document.getElementById('gw-stage'),zl=document.getElementById('gw-z');
+ var W=4000+80,H=14960+100,s=1;
+ function apply(cx,cy){var ox=v.scrollLeft+(cx||0),oy=v.scrollTop+(cy||0),r=ox/(W*s),q=oy/(H*s);
+  st.style.transform='scale('+s+')';sz.style.width=(W*s)+'px';sz.style.height=(H*s)+'px';zl.textContent=Math.round(s*100)+'%';
+  if(cx!==undefined){v.scrollLeft=r*W*s-cx;v.scrollTop=q*H*s-cy;}}
+ function set(n,cx,cy){var old=s;s=Math.max(.05,Math.min(2,n));if(cx===undefined){cx=v.clientWidth/2;cy=v.clientHeight/2;}
+  var ox=(v.scrollLeft+cx)/old,oy=(v.scrollTop+cy)/old;st.style.transform='scale('+s+')';sz.style.width=(W*s)+'px';sz.style.height=(H*s)+'px';zl.textContent=Math.round(s*100)+'%';v.scrollLeft=ox*s-cx;v.scrollTop=oy*s-cy;}
+ function fit(){set(v.clientWidth/W,0,0);v.scrollLeft=0;v.scrollTop=0;}
+ document.getElementById('gw-fit').onclick=fit;
+ document.getElementById('gw-in').onclick=function(){set(s*1.25)};
+ document.getElementById('gw-out').onclick=function(){set(s/1.25)};
+ document.getElementById('gw-100').onclick=function(){set(1)};
+ v.addEventListener('wheel',function(e){if(e.ctrlKey||e.metaKey){e.preventDefault();var b=v.getBoundingClientRect();set(s*Math.exp(-e.deltaY*.0025),e.clientX-b.left,e.clientY-b.top);}},{passive:false});
+ var d=null;v.addEventListener('pointerdown',function(e){if(e.pointerType!=='mouse'||e.button!==0)return;d={x:e.clientX,y:e.clientY,l:v.scrollLeft,t:v.scrollTop};v.classList.add('drag');});
+ window.addEventListener('pointermove',function(e){if(!d)return;v.scrollLeft=d.l-(e.clientX-d.x);v.scrollTop=d.t-(e.clientY-d.y);});
+ window.addEventListener('pointerup',function(){d=null;v.classList.remove('drag');});
+ window.addEventListener('keydown',function(e){if(e.key==='+'||e.key==='=')set(s*1.25);else if(e.key==='-')set(s/1.25);else if(e.key==='0')fit();});
+ fit();
+})();
+</script>
+</body>
+</html>
